@@ -1,0 +1,25 @@
+
+. ssmuse-sh -d /fs/ssm/eccc/cmo/cmoi/base/20160606
+
+sleep 100
+#ulimit -a 
+
+#echo $PATH
+
+
+#echo blah 
+#return
+#echo should not see this
+
+#instrum=iasi
+
+# creation du champ newalb pour les iasi
+# a partie du fichier trial du frontend
+
+#LG_NE_FILE=${TASK_INPUT}/anl.model
+#ln -s ${LG_NE_FILE} lg_ne_file
+#${TASK_BIN}/editfst -s lg_ne_file -d sfc4airs -e -i << EOF
+# desire(-1,[SD,NE,LG])
+# desire(-1,[">>","^^","^>"])
+#EOF
+

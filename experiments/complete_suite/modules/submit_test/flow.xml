@@ -1,0 +1,24 @@
+<MODULE name="submit_test">
+    <SUBMITS sub_name="cluster1"/>
+    <SUBMITS sub_name="r_cluster2"/>
+    <SUBMITS sub_name="hare_xfer"/>
+    <TASK name="cluster1">
+        <SUBMITS sub_name="cluster2"/>
+    </TASK>
+    <TASK name="cluster2">
+        <SUBMITS sub_name="cluster2_xfer"/>
+    </TASK>
+    <TASK name="cluster2_xfer"/>
+    <TASK name="r_cluster2">
+        <SUBMITS sub_name="r_cluster1"/>
+    </TASK>
+    <TASK name="r_cluster1">
+        <SUBMITS sub_name="r_clluster2_xfer"/>
+    </TASK>
+    <TASK name="r_clluster2_xfer"/>
+    <TASK name="hare_xfer">
+        <SUBMITS sub_name="cluster_from_harexfer"/>
+    </TASK> 
+        <TASK name="cluster_from_harexfer"/>
+</MODULE>
+

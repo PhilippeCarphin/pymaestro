@@ -1,0 +1,6 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH machine="pollux" wallclock="3"/>
+     <DEPENDS_ON dep_name="/oprun/jcl/g2/g2dfxt2" exp="/home/binops/afsi/ops/.ocm/global" protocol="ocm.polling" status="end" type="node" user="afsiops"/> 
+ <ABORT_ACTION name="stop"/>
+
+</NODE_RESOURCES>

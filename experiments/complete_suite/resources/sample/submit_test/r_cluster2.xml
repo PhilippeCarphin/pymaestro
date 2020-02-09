@@ -1,0 +1,3 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+    <BATCH machine="${BACKEND}" queue="${BACKEND_DEFAULT_Q}" soumet_args="-waste 97"/>
+</NODE_RESOURCES>

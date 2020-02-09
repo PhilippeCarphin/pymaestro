@@ -1,0 +1,5 @@
+
+for i in 1 2 3 4^last;  do
+   maestro -s submit -n $SEQ_CONTAINER/npt -l "npt=$i" 
+   sleep 1
+done

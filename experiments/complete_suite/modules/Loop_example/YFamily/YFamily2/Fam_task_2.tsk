@@ -1,0 +1,7 @@
+#!/bin/ksh
+
+echo "I'm task $SEQ_NAME"
+
+nodelogger -n ${SEQ_NODE} -s infox -m "Fam_task_2 \"$SEQ_EXP_HOME\" does not exist"
+sleep 1
+

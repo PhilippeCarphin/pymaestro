@@ -1,0 +1,4 @@
+#valgrind xwind -i /home/smco500/tmp/lcbfil -l CYQB -r CYQB -d 082000
+#gdb -ex "run  -i /home/smco500/tmp/lcbfil -l CYQB -r CYQB -d 082000" -ex where -e xwind
+
+

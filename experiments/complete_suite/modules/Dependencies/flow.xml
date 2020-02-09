@@ -1,0 +1,41 @@
+<MODULE name="Dependencies">
+    <SUBMITS sub_name="task_depended_on"/>
+    <SUBMITS sub_name="downone"/>
+    <SUBMITS sub_name="loop"/>
+    <SUBMITS sub_name="wildcard_dep"/>
+    <TASK name="task_depended_on"/>
+    <FAMILY name="downone">
+        <SUBMITS sub_name="dependant_task"/>
+        <SUBMITS sub_name="downtwo"/>
+        <TASK name="dependant_task">
+            <DEPENDS_ON dep_name="../task_depended_on" type="node" status="end"/>
+        </TASK>
+        <FAMILY name="downtwo">
+            <SUBMITS sub_name="dep_container_keyword"/>
+            <SUBMITS sub_name="dep_parent_keyword"/>
+            <SUBMITS sub_name="dep_module_keyword"/>
+            <TASK name="dep_container_keyword">
+                <DEPENDS_ON dep_name="./dep_parent_keyword" type="node" status="end"/>
+            </TASK>
+            <TASK name="dep_parent_keyword">
+                <DEPENDS_ON dep_name="../../task_depended_on" type="node" status="end"/>
+            </TASK>
+            <TASK name="dep_module_keyword">
+                <DEPENDS_ON dep_name=".../task_depended_on" type="node" status="end"/>
+            </TASK>
+        </FAMILY>
+    </FAMILY>
+    <LOOP name="loop">
+        <SUBMITS sub_name="task"/>
+        <SUBMITS sub_name="innerloop"/>
+        <SUBMITS sub_name="current_index_dep"/>
+        <TASK name="task"/>
+        <LOOP name="innerloop">
+            <SUBMITS sub_name="task"/>
+            <TASK name="task"/>
+        </LOOP>
+        <TASK name="current_index_dep"/>
+    </LOOP>
+    <TASK name="wildcard_dep"/>
+</MODULE>
+

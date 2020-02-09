@@ -1,0 +1,5 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <BATCH catchup="3" machine="${FRONTEND}" queue="${FRONTEND_DEFAULT_Q}"/>
+     <DEPENDS_ON dep_name="/sample_mod/Family_1/Loop_example/YFamily/YFamily2" local_index="gem_loop=1" status="end" type="node"/> 
+  <ABORT_ACTION name="stop"/>
+</NODE_RESOURCES>

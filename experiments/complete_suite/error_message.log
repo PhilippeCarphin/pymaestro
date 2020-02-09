@@ -1,0 +1,34 @@
+can't read "rootNodeMember": no such variable
+can't read "rootNodeMember": no such variable
+    while executing
+"info exists rootnode_statsinfo($rootNodeMember)"
+    (procedure "SharedFlowNode_getDeltaFromStart" line 25)
+    invoked from within
+"SharedFlowNode_getDeltaFromStart ${exp_path} ${node} ${datestamp} ${member}"
+    (procedure "xflow_getNodeDisplayPrefText" line 42)
+    invoked from within
+"xflow_getNodeDisplayPrefText ${exp_path} ${datestamp} ${node} ${nodeExtension}"
+    (procedure "xflow_drawNode" line 98)
+    invoked from within
+"xflow_drawNode ${exp_path} ${datestamp} $canvas ${submitNode} $nodePosition"
+    (procedure "xflow_drawNode" line 156)
+    invoked from within
+"xflow_drawNode ${exp_path} ${datestamp} $canvas ${submitNode} $nodePosition"
+    (procedure "xflow_drawNode" line 156)
+    invoked from within
+"xflow_drawNode ${exp_path} ${datestamp} $canvas $rootNode 0 true"
+    (procedure "xflow_drawflow" line 17)
+    invoked from within
+"xflow_drawflow ${exp_path} ${datestamp} $canvasW false"
+    (procedure "xflow_redrawAllFlow" line 8)
+    invoked from within
+"xflow_redrawAllFlow /home/ops/afsi/dor/.suites/release_tests/sample_1.4.0 20150803120000"
+    invoked from within
+".xflow__home_ops_afsi_dor__suites_release_tests_sample_1_4_0_20150803120000.top_frame.viewb.menu.displayMenu invoke active"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel #0 [list $w invoke active]"
+    (procedure "tk::MenuInvoke" line 50)
+    invoked from within
+"tk::MenuInvoke .xflow__home_ops_afsi_dor__suites_release_tests_sample_1_4_0_20150803120000.top_frame.viewb.menu.displayMenu 1"
+    (command bound to event)

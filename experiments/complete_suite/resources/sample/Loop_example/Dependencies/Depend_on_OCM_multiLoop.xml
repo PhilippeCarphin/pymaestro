@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH machine="pollux" wallclock="3"/>
+     <DEPENDS_ON dep_name="/oprun/jcl/g1/g1mindm" exp="/home/binops/afsi/ops/.ocm/global" index="ocmloop=*" protocol="ocm.polling" status="end" type="node" user="afsiops"/> 
+</NODE_RESOURCES>

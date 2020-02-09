@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH catchup="3" machine="pollux" memory="2G" wallclock="3"/>
+   <DEPENDS_ON dep_name="/dummy_mod/my_loop/my_switch_point_2" exp="/home/ops/afsi/sul/.suites/variable_flow_2" index="my_loop=4,my_switch_point_2=12" protocol="polling" status="end" type="node" user="afsisul"/> 
+</NODE_RESOURCES>

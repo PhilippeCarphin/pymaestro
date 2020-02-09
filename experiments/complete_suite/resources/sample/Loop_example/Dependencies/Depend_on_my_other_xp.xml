@@ -1,0 +1,11 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <BATCH catchup="3" machine="pollux" wallclock="5"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t1" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t2" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t3" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t4" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t5" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t7" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t8" status="end" type="node"/>
+  <DEPENDS_ON dep_exp="/home/ops/afsi/rol/.suite_1/dom_bug" dep_name="/test/fam/t9" status="end" type="node"/>
+</NODE_RESOURCES>

@@ -1,0 +1,10 @@
+<MODULE name="ConfigModule">
+    <SUBMITS sub_name="task"/>
+    <SUBMITS sub_name="family"/>
+    <TASK name="task"/>
+    <FAMILY name="family">
+        <SUBMITS sub_name="task"/>
+        <TASK name="task"/>
+    </FAMILY>
+</MODULE>
+

@@ -1,0 +1,13 @@
+<MODULE name="Different_Hosts">
+    <SUBMITS sub_name="IBMTask"/>
+    <SUBMITS sub_name="VAR"/>
+    <SUBMITS sub_name="IBMTaskMPI"/>
+    <SUBMITS sub_name="LinuxTask"/>
+    <SUBMITS sub_name="Runmod"/>
+    <TASK name="IBMTask"/>
+    <TASK name="VAR"/>
+    <TASK name="IBMTaskMPI"/>
+    <TASK name="LinuxTask"/>
+    <TASK name="Runmod"/>
+</MODULE>
+

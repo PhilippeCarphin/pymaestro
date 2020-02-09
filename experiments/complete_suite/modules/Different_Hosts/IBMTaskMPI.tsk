@@ -1,0 +1,11 @@
+#. ssmuse-sh -d mrd/utils/16.0
+
+sleep 240
+#aprun -j 1 -n 32 -N 16 -S 8 -d 2 -cc depth env OMP_NUM_THREADS=2 & 
+#aprun -j 1 -n 1 -N 1 -d 16 -cc none env OMP_NUM_THREADS=16 
+
+
+
+
+#r.mpirun -npex 16 -npey 2 -pgm "/bin/sleep" -args 10
+#r.run_in_parallel -npex 32 -npey 1 -pgm "/bin/sleep" -args 10

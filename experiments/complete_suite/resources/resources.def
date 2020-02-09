@@ -1,0 +1,13 @@
+FRONTEND=eccc-ppp2
+BACKEND=brooks
+
+SEQ_DEFAULT_MACHINE=eccc-ppp1
+
+#SEQ_CONTAINER_METHOD=submit
+SEQ_CONTAINER_METHOD=immediate
+MY_EXP=/home/dor001/.suites/sample_1.4.0
+MY_EXP2=$SEQ_EXP_HOME
+BACKEND_XFER_Q=xfer
+FRONTEND_XFER_Q=xfer
+BACKEND_DEFAULT_Q=development
+FRONTEND_DEFAULT_Q=development

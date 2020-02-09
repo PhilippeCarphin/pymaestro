@@ -1,0 +1,976 @@
+==486676== Memcheck, a memory error detector
+==486676== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==486676== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==486676== Command: maestro -e /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 -d 20170109140000 -n /sample/Different_Hosts/LinuxTask -s begin
+==486676== 
+maestro: node=/sample/Different_Hosts/LinuxTask signal=begin flow=continue loop_args= extraArgs=(null) expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194617.514234  Command called:
+maestro -s begin -n /sample/Different_Hosts/LinuxTask -f continue -e /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 -d 20170109140000 
+20170109194617.584356  maestro() ignoreAllDeps=0 
+20170109194617.595805  SeqUtil_fixPath source:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 new:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194617.603495  maestro() flow = continue , valid 
+20170109194617.613566  maestro() using submit script=m.ord_soumet
+20170109194617.615045  SeqUtil_fixPath source:/sample/Different_Hosts/LinuxTask new:/sample/Different_Hosts/LinuxTask
+20170109194617.615778  nodeinfo.nodeinfo() trying to create node /sample/Different_Hosts/LinuxTask, exp /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194617.624908  SeqNode.SeqNode_createNode() started
+20170109194617.672910  SeqNode.SeqNode_createNode() done
+20170109194617.677908  nodeinfo.nodefinfo() argument datestamp 20170109140000. If (null), will run tictac to find value.
+==486676== Conditional jump or move depends on uninitialised value(s)
+==486676==    at 0x4C2E0F8: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x416E58: tictac_getDate (tictac.c:138)
+==486676==    by 0x4197CB: nodeinfo (nodeinfo.c:809)
+==486676==    by 0x40EAFA: maestro (maestro.c:3180)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+20170109194617.685102  tictac_getDate() checking validity of dateValue ... 
+==486676== Invalid read of size 1
+==486676==    at 0x522996C: strtok (strtok.S:137)
+==486676==    by 0x416EC0: tictac_getDate (tictac.c:147)
+==486676==    by 0x4197CB: nodeinfo (nodeinfo.c:809)
+==486676==    by 0x40EAFA: maestro (maestro.c:3180)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676==  Address 0x628d271 is 1 bytes inside a block of size 2 free'd
+==486676==    at 0x4C2BDEC: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x41A5A7: SeqNode_setCpuMultiplier (SeqNode.c:266)
+==486676==    by 0x41BCB9: SeqNode_init (SeqNode.c:695)
+==486676==    by 0x41CCF9: SeqNode_createNode (SeqNode.c:995)
+==486676==    by 0x419720: nodeinfo (nodeinfo.c:802)
+==486676==    by 0x40EAFA: maestro (maestro.c:3180)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== Invalid read of size 1
+==486676==    at 0x522999C: strtok (strtok.S:163)
+==486676==    by 0x416EC0: tictac_getDate (tictac.c:147)
+==486676==    by 0x4197CB: nodeinfo (nodeinfo.c:809)
+==486676==    by 0x40EAFA: maestro (maestro.c:3180)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676==  Address 0x628d271 is 1 bytes inside a block of size 2 free'd
+==486676==    at 0x4C2BDEC: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x41A5A7: SeqNode_setCpuMultiplier (SeqNode.c:266)
+==486676==    by 0x41BCB9: SeqNode_init (SeqNode.c:695)
+==486676==    by 0x41CCF9: SeqNode_createNode (SeqNode.c:995)
+==486676==    by 0x419720: nodeinfo (nodeinfo.c:802)
+==486676==    by 0x40EAFA: maestro (maestro.c:3180)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+20170109194617.701448  Flow_newVisitor() begin
+20170109194618.78089  Flow_newVisitor() end
+20170109194618.79501  Flow_parsePath() begin nodePath=/sample/Different_Hosts/LinuxTask
+20170109194618.86940  Flow_doNodeQuery() begin
+20170109194618.89214  Flow_doNodeQuery(): run the normal query:(/*[@name='sample'])
+20170109194618.89814  XmlUtils_getnodeset(): xpath query: (/*[@name='sample'])
+20170109194618.230407  nodeinfo.getNodeType() node name: MODULE
+20170109194618.232042  nodeinfo.getNodeType() type=3
+20170109194618.233558  Flow_doNodeQuery() end
+20170109194618.235057  Flow_changeModule(): begin : module=sample
+20170109194618.237816  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/sample/flow.xml
+20170109194618.257785  Flow_changeXmlFile(): end
+20170109194618.258673  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170109194618.262548  Flow_changeModule() end
+20170109194618.263868  Flow_updatePaths() begin
+20170109194618.268586  Flow_updatePaths() end
+20170109194618.269651  Flow_checkWorkUnit begin
+20170109194618.270264  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170109194618.271790  XmlUtils_getnodeset(): No result
+20170109194618.272715  Flow_checkWorkUnit end
+20170109194618.274215  Flow_doNodeQuery() begin
+20170109194618.275077  Flow_doNodeQuery(): run the normal query:(child::*[@name='Different_Hosts'])
+20170109194618.275208  XmlUtils_getnodeset(): xpath query: (child::*[@name='Different_Hosts'])
+20170109194618.297190  nodeinfo.getNodeType() node name: MODULE
+20170109194618.297333  nodeinfo.getNodeType() type=3
+20170109194618.297454  Flow_doNodeQuery() end
+20170109194618.297567  Flow_changeModule(): begin : module=Different_Hosts
+20170109194618.297713  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/Different_Hosts/flow.xml
+20170109194618.303804  Flow_changeXmlFile(): end
+20170109194618.303944  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170109194618.304231  Flow_changeModule() end
+20170109194618.304346  Flow_updatePaths() begin
+20170109194618.304523  Flow_updatePaths() end
+20170109194618.304652  Flow_checkWorkUnit begin
+20170109194618.304762  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170109194618.305021  XmlUtils_getnodeset(): No result
+20170109194618.305133  Flow_checkWorkUnit end
+20170109194618.305450  Flow_doNodeQuery() begin
+20170109194618.305592  Flow_doNodeQuery(): run the normal query:(child::*[@name='LinuxTask'])
+20170109194618.305703  XmlUtils_getnodeset(): xpath query: (child::*[@name='LinuxTask'])
+20170109194618.306878  nodeinfo.getNodeType() node name: TASK
+20170109194618.307940  nodeinfo.getNodeType() type=1
+20170109194618.308073  Flow_doNodeQuery() end
+20170109194618.308182  Flow_updatePaths() begin
+20170109194618.310088  Flow_updatePaths() end
+20170109194618.310980  Flow_parsePath() end
+20170109194618.312022  Flow_setPathData() begin
+20170109194618.312677  Flow_setPathToModule() begin
+20170109194618.315958  Flow_setPathToModule() end
+20170109194618.317362  Flow_setSuiteName() begin
+20170109194618.320186  Flow_setSuiteName() end
+20170109194618.322002  nodeinfo.getFlowInfo() *********** Node Information **********
+20170109194618.322682  nodeinfo.getFlowInfo() node path:sample/Different_Hosts/LinuxTask
+20170109194618.323353  nodeinfo.getFlowInfo() container=/sample/Different_Hosts
+20170109194618.324021  nodeinfo.getFlowInfo() intramodule_container=/Different_Hosts
+20170109194618.324701  nodeinfo.getFlowInfo() pathToModule=/sample/Different_Hosts
+20170109194618.325363  nodeinfo.getFlowInfo() taskPath=/Different_Hosts/LinuxTask
+20170109194618.325936  Flow_setPathData() end
+20170109194618.326626  Flow_parseSpecifics() begin
+20170109194618.327230  XmlUtils_getnodeset(): xpath query: (@*)
+20170109194618.329718  nodeinfo.parseNodeSpecifics() called node_type=Task
+20170109194618.330492  nodeinfo.parseNodeSpecifics() nodeset cardinal=1
+20170109194618.332806  Flow_parseSpecifics() end
+20170109194618.333722  Flow_parseDependencies begin
+20170109194618.334596  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170109194618.334938  XmlUtils_getnodeset(): No result
+20170109194618.335715  Flow_parseDependencies end
+20170109194618.336636  Flow_parseSubmits begin
+20170109194618.337212  nodeinfo.getFlowInfo() *********** submits **********
+20170109194618.337777  XmlUtils_getnodeset(): xpath query: (child::SUBMITS)
+20170109194618.338103  XmlUtils_getnodeset(): No result
+20170109194618.338703  nodeinfo.parseSubmits() called
+20170109194618.339940  Flow_parseSubmits return FLOW_SUCCESS
+20170109194618.340771  Flow_parseSiblings begin
+20170109194618.341347  nodeinfo.getFlowInfo() *********** node siblings **********
+20170109194618.343905  XmlUtils_getnodeset(): xpath query: (preceding-sibling::*[@name])
+20170109194618.366073  nodeinfo.getFlowInfo() *********** preceding siblings found**********
+20170109194618.366681  nodeinfo.parseNodeSiblings() called
+20170109194618.370566  nodeinfo.parseNodeSiblings() sibling:IBMTask
+20170109194618.371601  nodeinfo.parseNodeSiblings() sibling:VAR
+20170109194618.372140  nodeinfo.parseNodeSiblings() sibling:IBMTaskMPI
+20170109194618.373424  XmlUtils_getnodeset(): xpath query: (following-sibling::*[@name])
+20170109194618.376028  XmlUtils_getnodeset(): No result
+20170109194618.376795  nodeinfo.parseNodeSiblings() called
+20170109194618.377734  Flow_parseSiblings return FLOW_SUCCESS
+20170109194618.378584  Flow_deleteVisitor() begin
+20170109194618.404286  Flow_deleteVisitor() end
+20170109194618.405268  getNodeResources() begin
+20170109194618.406054  newResourceVisitor() begin, nodePath=/sample/Different_Hosts/LinuxTask expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194618.406996  defFilename() begin
+20170109194618.408448  defFilename() end
+20170109194618.409718  xmlResourceFilename() begin
+20170109194618.412799  xmlResourceFilename() end : returning /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/sample/Different_Hosts/LinuxTask.xml
+20170109194618.414010  Resource_createContext() begin
+20170109194618.435510  Resource_createContext() current node: NODE_RESOURCES
+20170109194618.436413  Resource_createContext() found node: NODE_RESOURCES
+20170109194618.450128  XmlUtils_resolve(): performing definition replacements in string "${FRONTEND}"
+20170109194619.62494  SeqUtil_getdef(): looking for definition of FRONTEND in /home/dor001/.suites/overrides.def
+20170109194619.63911  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.64305  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.64800  SeqUtil_getdef(): looking for definition of FRONTEND in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.66886  getmappedfile(): Mapped file /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def into memory using file descriptor 4 
+20170109194619.77030  SeqUtil_parsedef(): found definition FRONTEND=eccc-gpsc2 in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.77802  XmlUtils_resolve(): replacing FRONTEND with definition value "eccc-gpsc2"
+20170109194619.84987  Resource_createContext() end
+20170109194619.85825  newResourceVisitor() end
+20170109194619.86241  Resource_parseNodeDFS() begin
+20170109194619.86607  Resource_parseNodeDFS_internal() begin, depth = 0
+20170109194619.87479  XmlUtils_getnodeset(): xpath query: (child::VALIDITY)
+20170109194619.87672  XmlUtils_getnodeset(): No result
+20170109194619.88087  do_all() begin
+20170109194619.88421  getBatchAttributes() begin
+20170109194619.88718  XmlUtils_getnodeset(): xpath query: (child::BATCH/@*)
+20170109194619.89889  nodeinfo.parseBatchResources() called
+20170109194619.90216  nodeinfo.parseBatchResources() nodeset->nodeNr=8
+20170109194619.90536  nodeinfo.parseBatchResources() nodePtr->name=machine
+20170109194619.90792  nodeinfo.parseBatchResources() value=eccc-gpsc2
+20170109194619.91454  nodeinfo.parseBatchResources() nodePtr->name=memory
+20170109194619.91502  nodeinfo.parseBatchResources() value=5G
+20170109194619.92164  nodeinfo.parseBatchResources() nodePtr->name=mpi
+20170109194619.92212  nodeinfo.parseBatchResources() value=1
+20170109194619.92671  nodeinfo.parseBatchResources() nodePtr->name=wallclock
+20170109194619.92720  nodeinfo.parseBatchResources() value=5
+20170109194619.93303  nodeinfo.parseBatchResources() nodePtr->name=catchup
+20170109194619.93350  nodeinfo.parseBatchResources() value=4
+20170109194619.93812  nodeinfo.parseBatchResources() nodePtr->name=cpu
+20170109194619.93865  nodeinfo.parseBatchResources() value=1
+20170109194619.94355  nodeinfo.parseBatchResources() nodePtr->name=cpu_multiplier
+20170109194619.94402  nodeinfo.parseBatchResources() value=2
+20170109194619.94795  nodeinfo.parseBatchResources() nodePtr->name=soumet_args
+20170109194619.94841  nodeinfo.parseBatchResources() value=-shell /bin/bash
+20170109194619.96620  getBatchAttributes() end
+20170109194619.96888  getDependencies() begin
+20170109194619.97105  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170109194619.97238  XmlUtils_getnodeset(): No result
+20170109194619.97572  getDependencies() end
+20170109194619.97844  getAbortActions() begin
+20170109194619.98127  XmlUtils_getnodeset(): xpath query: (child::ABORT_ACTION/@*)
+20170109194619.98654  nodeinfo.parseAbortActions() called
+20170109194619.98981  nodeinfo.parseAbortActions() nodeset->nodeNr=1
+20170109194619.99299  nodeinfo.parseAbortActions() nodePtr->name=name
+20170109194619.99556  nodeinfo.parseAbortActions() value=rerun
+20170109194619.100454  getAbortActions() end
+20170109194619.100744  do_all() end
+20170109194619.101689  Resource_parseNodeDFS_internal() end
+20170109194619.101993  Resource_parseNodeDFS() end
+20170109194619.102265  Resource_setWorkerData() begin
+20170109194619.102751  Resource_setWorkerData() end
+20170109194619.103015  validateMachine() begin
+20170109194619.103389  validateMachine() end
+20170109194619.103641  Resource_setShell() begin
+20170109194619.111241  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/overrides.def
+20170109194619.112310  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.112360  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.112406  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.112667  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170109194619.115921  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/default_resources.def
+20170109194619.116918  getmappedfile(): Mapped file /home/dor001/.suites/default_resources.def into memory using file descriptor 4 
+20170109194619.118814  Resource_setShell() end
+20170109194619.119069  deleteResourceVisitor() begin
+20170109194619.120660  deleteResourceVisitor() end
+20170109194619.120940  getNodeResources() end
+20170109194619.121718  maestro() nodeinfo done, loop_args=
+20170109194619.124844  List is empty.
+20170109194619.127081  SeqNode_printLoops():
+20170109194619.127849  SeqNode_printLoops() end
+20170109194619.128741  SeqLoops_validateLoopArgs() loop pointer not found
+20170109194619.131342  maestro() using DATESTAMP=20170109140000
+20170109194619.132043  maestro() node from nodeinfo=/sample/Different_Hosts/LinuxTask
+20170109194619.132744  maestro() node task_path from nodeinfo=/Different_Hosts/LinuxTask
+20170109194619.142227  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.suites/overrides.def
+20170109194619.143012  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.143150  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.143273  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.maestrorc
+20170109194619.144436  getmappedfile(): Mapped file /home/dor001/.maestrorc into memory using file descriptor 4 
+20170109194619.146826  SeqUtil_parsedef(): found definition SEQ_LOGGING_MECH=server in /home/dor001/.maestrorc
+logging mechanism set to:server
+maestro L2D2 server parameters are: <pid=260126  host=eccc-ppp1 ip=10.103.67.172 port=5903>
+20170109194619.282401  ##Server Connection Open And Login Accepted Signal:begin ##
+mserver mode selected
+20170109194619.296919  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts return:0
+20170109194619.302164  maestro() node from nodeinfo before go_begin=/sample/Different_Hosts/LinuxTask, loopargs=, extension= 
+20170109194619.303223  maestro.go_begin() node=/sample/Different_Hosts/LinuxTask signal=begin flow=continue loopargs=
+20170109194619.304004  
+**************** SEQ "begin" "continue" "/sample/Different_Hosts/LinuxTask" Action Summary *******************
+20170109194619.305985  maestro.setBeginState() on node:/sample/Different_Hosts/LinuxTask extension: 
+20170109194619.311180  maestro.clearAllOtherStates() originator=maestro.setBeginState() node=/sample/Different_Hosts/LinuxTask
+20170109194619.315597  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.begin return:0
+20170109194619.317620  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.end return:1
+20170109194619.319467  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.abort.stop return:1
+20170109194619.320949  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.submit return:1
+20170109194619.322392  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.waiting return:1
+20170109194619.327905  nodelogger job:/sample/Different_Hosts/LinuxTask signal:begin message:host=usr-svc-sci-cnt035 job_ID= loop_ext: datestamp:20170109140000 exp:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.348269  
+================= NODELOGGER: TRYING TO USE CONNECTION FROM MAESTRO PROCESS IF SERVER IS UP signal:begin================== 
+20170109194619.349135  
+================= NODELOGGER: OK,HAVE A CONNECTION FROM MAESTRO PROCESS ================== 
+20170109194619.352214  
+NODELOGGER node:/sample/Different_Hosts/LinuxTask type:begin message:host=usr-svc-sci-cnt035 job_ID=
+20170109194619.370913  maestro.setBeginState() checking for lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.begin
+20170109194619.373978  setBeginState()  created lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/LinuxTask.begin 
+20170109194619.381199  submitDependencies() in system call mode
+20170109194619.381904  maestro.submitDependencies() executing for LinuxTask
+20170109194619.383167  SeqLoops_getExtFromLoopArgs: (null)
+20170109194619.385467  maestro.submitDependencies() looking for waited file=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/depends/20170109140000//sample/Different_Hosts/LinuxTask.waited_begin
+20170109194619.386413  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/depends/20170109140000//sample/Different_Hosts/LinuxTask.waited_begin return:1
+20170109194619.387843  maestro.submitDependencies() looking for waited file=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/remote_depends/20170109140000//sample/Different_Hosts/LinuxTask.waited_begin
+20170109194619.388415  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/remote_depends/20170109140000//sample/Different_Hosts/LinuxTask.waited_begin return:1
+20170109194619.390973  go_begin():Node LinuxTask has a container /sample/Different_Hosts
+20170109194619.392410  processContainerBegin():_nodeDataPtr->loopArgs : 
+20170109194619.392992  List is empty.
+20170109194619.393672  processContainerBegin():_nodeDataPtr->nodeName : LinuxTask
+20170109194619.394342  processContainerBegin():_nodeDataPtr->name : /sample/Different_Hosts/LinuxTask
+20170109194619.395340  processContainerBegin(): _nodeDataPtr->type : Task
+20170109194619.396848  processContainerBegin() container=/sample/Different_Hosts extension=
+20170109194619.400105  catchup_get(): loading xml file:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/catchup.xml
+20170109194619.429171  catchup_get(): xml query:/CATCHUP/@value
+20170109194619.429756  XmlUtils_getnodeset(): xpath query: /CATCHUP/@value
+20170109194619.430762  catchup_get(): xml nodeName=value
+20170109194619.435571  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/IBMTask.abort.stop return:0
+20170109194619.436863  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/VAR.abort.stop return:0
+20170109194619.437467  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts/IBMTaskMPI.abort.stop return:0
+20170109194619.438347  processContainerBegin(): Entered if( abortedSibling == 0 )
+20170109194619.439517  ********** processContainerBegin() calling maestro -s beginx -n /sample/Different_Hosts with loop args=
+maestro: node=/sample/Different_Hosts signal=beginx flow=continue loop_args= extraArgs=(null) expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.440226  Command called:
+maestro -s beginx -n /sample/Different_Hosts -f continue -e /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 -d 20170109140000 
+20170109194619.440351  maestro() ignoreAllDeps=0 
+20170109194619.440542  SeqUtil_fixPath source:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 new:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.441273  maestro() flow = continue , valid 
+20170109194619.442263  maestro() using submit script=m.ord_soumet
+20170109194619.442445  SeqUtil_fixPath source:/sample/Different_Hosts new:/sample/Different_Hosts
+20170109194619.442571  nodeinfo.nodeinfo() trying to create node /sample/Different_Hosts, exp /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.442771  SeqNode.SeqNode_createNode() started
+20170109194619.443208  SeqNode.SeqNode_createNode() done
+20170109194619.443459  nodeinfo.nodefinfo() argument datestamp 20170109140000. If (null), will run tictac to find value.
+20170109194619.444199  tictac_getDate() checking validity of dateValue ... 
+20170109194619.444604  Flow_newVisitor() begin
+20170109194619.456198  Flow_newVisitor() end
+20170109194619.456339  Flow_parsePath() begin nodePath=/sample/Different_Hosts
+20170109194619.456490  Flow_doNodeQuery() begin
+20170109194619.456644  Flow_doNodeQuery(): run the normal query:(/*[@name='sample'])
+20170109194619.456759  XmlUtils_getnodeset(): xpath query: (/*[@name='sample'])
+20170109194619.457345  nodeinfo.getNodeType() node name: MODULE
+20170109194619.457472  nodeinfo.getNodeType() type=3
+20170109194619.457591  Flow_doNodeQuery() end
+20170109194619.457703  Flow_changeModule(): begin : module=sample
+20170109194619.457849  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/sample/flow.xml
+20170109194619.469494  Flow_changeXmlFile(): end
+20170109194619.469635  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170109194619.469939  Flow_changeModule() end
+20170109194619.470058  Flow_updatePaths() begin
+20170109194619.470246  Flow_updatePaths() end
+20170109194619.470353  Flow_checkWorkUnit begin
+20170109194619.470460  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170109194619.470735  XmlUtils_getnodeset(): No result
+20170109194619.470853  Flow_checkWorkUnit end
+20170109194619.470962  Flow_doNodeQuery() begin
+20170109194619.471093  Flow_doNodeQuery(): run the normal query:(child::*[@name='Different_Hosts'])
+20170109194619.471203  XmlUtils_getnodeset(): xpath query: (child::*[@name='Different_Hosts'])
+20170109194619.473935  nodeinfo.getNodeType() node name: MODULE
+20170109194619.474063  nodeinfo.getNodeType() type=3
+20170109194619.474180  Flow_doNodeQuery() end
+20170109194619.474302  Flow_changeModule(): begin : module=Different_Hosts
+20170109194619.474449  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/Different_Hosts/flow.xml
+20170109194619.480450  Flow_changeXmlFile(): end
+20170109194619.480607  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170109194619.480906  Flow_changeModule() end
+20170109194619.481022  Flow_updatePaths() begin
+20170109194619.481691  Flow_updatePaths() end
+20170109194619.481811  Flow_checkWorkUnit begin
+20170109194619.481920  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170109194619.482189  XmlUtils_getnodeset(): No result
+20170109194619.482302  Flow_checkWorkUnit end
+20170109194619.482408  Flow_parsePath() end
+20170109194619.482510  Flow_setPathData() begin
+20170109194619.482613  Flow_setPathToModule() begin
+20170109194619.482763  Flow_setPathToModule() end
+20170109194619.482890  Flow_setSuiteName() begin
+20170109194619.483109  Flow_setSuiteName() end
+20170109194619.483246  nodeinfo.getFlowInfo() *********** Node Information **********
+20170109194619.483360  nodeinfo.getFlowInfo() node path:sample/Different_Hosts
+20170109194619.483468  nodeinfo.getFlowInfo() container=/sample
+20170109194619.483574  nodeinfo.getFlowInfo() intramodule_container=/sample
+20170109194619.483682  nodeinfo.getFlowInfo() pathToModule=/Different_Hosts
+20170109194619.483789  nodeinfo.getFlowInfo() taskPath=/sample
+20170109194619.483890  Flow_setPathData() end
+20170109194619.483992  Flow_parseSpecifics() begin
+20170109194619.484098  XmlUtils_getnodeset(): xpath query: (@*)
+20170109194619.484666  nodeinfo.parseNodeSpecifics() called node_type=Module
+20170109194619.484793  nodeinfo.parseNodeSpecifics() nodeset cardinal=1
+20170109194619.484917  Flow_parseSpecifics() end
+20170109194619.485026  Flow_parseDependencies begin
+20170109194619.486356  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170109194619.486681  XmlUtils_getnodeset(): No result
+20170109194619.486798  Flow_parseDependencies end
+20170109194619.486901  Flow_parseSubmits begin
+20170109194619.487003  nodeinfo.getFlowInfo() *********** submits **********
+20170109194619.487112  XmlUtils_getnodeset(): xpath query: (child::SUBMITS)
+20170109194619.487450  nodeinfo.parseSubmits() called
+20170109194619.488736  nodeinfo.parseSubmits() submits:IBMTask
+20170109194619.489387  nodeinfo.parseSubmits() property:sub_name
+20170109194619.492677  nodeinfo.parseSubmits() submits:VAR
+20170109194619.492811  nodeinfo.parseSubmits() property:sub_name
+20170109194619.492979  nodeinfo.parseSubmits() submits:IBMTaskMPI
+20170109194619.493102  nodeinfo.parseSubmits() property:sub_name
+20170109194619.493262  nodeinfo.parseSubmits() submits:LinuxTask
+20170109194619.493371  nodeinfo.parseSubmits() property:sub_name
+20170109194619.493541  Flow_parseSubmits return FLOW_SUCCESS
+20170109194619.493650  Flow_parseSiblings begin
+20170109194619.493753  nodeinfo.getFlowInfo() *********** node siblings **********
+20170109194619.494541  XmlUtils_getnodeset(): xpath query: (preceding-sibling::*[@name])
+20170109194619.496277  XmlUtils_getnodeset(): No result
+20170109194619.496406  nodeinfo.parseNodeSiblings() called
+20170109194619.496538  XmlUtils_getnodeset(): xpath query: (following-sibling::*[@name])
+20170109194619.498069  nodeinfo.getFlowInfo() *********** following siblings found**********
+20170109194619.498194  nodeinfo.parseNodeSiblings() called
+20170109194619.498334  nodeinfo.parseNodeSiblings() sibling:Dependencies
+20170109194619.498466  nodeinfo.parseNodeSiblings() sibling:MoreDependencies
+20170109194619.498593  nodeinfo.parseNodeSiblings() sibling:npasstest
+20170109194619.498719  nodeinfo.parseNodeSiblings() sibling:work_unit
+20170109194619.498857  nodeinfo.parseNodeSiblings() sibling:worker
+20170109194619.498985  nodeinfo.parseNodeSiblings() sibling:Loop_example
+20170109194619.499120  nodeinfo.parseNodeSiblings() sibling:switch_hour
+20170109194619.499294  nodeinfo.parseNodeSiblings() sibling:switchmod
+20170109194619.499424  nodeinfo.parseNodeSiblings() sibling:deploop
+20170109194619.499550  nodeinfo.parseNodeSiblings() sibling:depswitch
+20170109194619.499687  nodeinfo.parseNodeSiblings() sibling:submit_test
+20170109194619.499815  Flow_parseSiblings return FLOW_SUCCESS
+20170109194619.499922  Flow_deleteVisitor() begin
+20170109194619.503027  Flow_deleteVisitor() end
+20170109194619.503143  getNodeResources() begin
+20170109194619.503261  newResourceVisitor() begin, nodePath=/sample/Different_Hosts expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.503385  defFilename() begin
+20170109194619.503522  defFilename() end
+20170109194619.503627  xmlResourceFilename() begin
+20170109194619.504287  xmlResourceFilename() end : returning /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/sample/Different_Hosts/container.xml
+20170109194619.504410  Resource_createContext() begin
+20170109194619.505612  Resource_createContext() end
+20170109194619.506214  newResourceVisitor() end
+20170109194619.506332  Resource_parseNodeDFS() begin
+20170109194619.506903  Resource_parseNodeDFS() end
+20170109194619.507021  Resource_setWorkerData() begin
+20170109194619.507125  Resource_setWorkerData() end
+20170109194619.507227  validateMachine() begin
+20170109194619.515254  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_MACHINE in /home/dor001/.suites/overrides.def
+20170109194619.516046  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.516184  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.516309  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_MACHINE in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.516436  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170109194619.516722  SeqUtil_parsedef(): found definition SEQ_DEFAULT_MACHINE=eccc-gpsc2 in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.517702  validateMachine() end
+20170109194619.517820  Resource_setShell() begin
+20170109194619.526373  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/overrides.def
+20170109194619.527001  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.527130  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.527254  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.527380  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170109194619.527686  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/default_resources.def
+20170109194619.527813  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170109194619.528018  Resource_setShell() end
+20170109194619.528129  deleteResourceVisitor() begin
+20170109194619.528254  deleteResourceVisitor() end
+20170109194619.528359  getNodeResources() end
+20170109194619.528476  maestro() nodeinfo done, loop_args=
+20170109194619.528597  List is empty.
+20170109194619.528706  SeqNode_printLoops():
+20170109194619.528807  SeqNode_printLoops() end
+20170109194619.528910  SeqLoops_validateLoopArgs() loop pointer not found
+20170109194619.529022  maestro() using DATESTAMP=20170109140000
+20170109194619.529131  maestro() node from nodeinfo=/sample/Different_Hosts
+20170109194619.529238  maestro() node task_path from nodeinfo=/sample
+20170109194619.536594  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.suites/overrides.def
+20170109194619.537460  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.537597  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.537719  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.maestrorc
+20170109194619.537852  getmappedfile(): File /home/dor001/.maestrorc was found in mmapped files
+20170109194619.539525  SeqUtil_parsedef(): found definition SEQ_LOGGING_MECH=server in /home/dor001/.maestrorc
+20170109194619.544402  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample return:0
+20170109194619.544986  maestro() node from nodeinfo before go_begin=/sample/Different_Hosts, loopargs=, extension= 
+20170109194619.545149  maestro.go_begin() node=/sample/Different_Hosts signal=beginx flow=continue loopargs=
+20170109194619.545279  
+**************** SEQ "beginx" "continue" "/sample/Different_Hosts" Action Summary *******************
+20170109194619.545417  maestro.setBeginState() on node:/sample/Different_Hosts extension: 
+20170109194619.545583  maestro.clearAllOtherStates() originator=maestro.setBeginState() node=/sample/Different_Hosts
+20170109194619.546793  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.begin return:0
+20170109194619.547373  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.end return:1
+20170109194619.547933  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.abort.stop return:1
+20170109194619.548477  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.submit return:1
+20170109194619.549042  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.waiting return:1
+20170109194619.550730  maestro.isFileExists_svr()from setBeginState() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.begin return:1
+20170109194619.551500  maestro.setBeginState() checking for lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.begin
+20170109194619.552014  setBeginState()  created lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Different_Hosts.begin 
+20170109194619.552207  submitDependencies() in system call mode
+20170109194619.552328  maestro.submitDependencies() executing for Different_Hosts
+20170109194619.552438  SeqLoops_getExtFromLoopArgs: (null)
+20170109194619.552635  maestro.submitDependencies() looking for waited file=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/depends/20170109140000//sample/Different_Hosts.waited_begin
+20170109194619.553173  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/depends/20170109140000//sample/Different_Hosts.waited_begin return:1
+20170109194619.553339  maestro.submitDependencies() looking for waited file=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/remote_depends/20170109140000//sample/Different_Hosts.waited_begin
+20170109194619.553864  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/remote_depends/20170109140000//sample/Different_Hosts.waited_begin return:1
+20170109194619.554009  go_begin():Node Different_Hosts has a container /sample
+20170109194619.554119  processContainerBegin():_nodeDataPtr->loopArgs : 
+20170109194619.554221  List is empty.
+20170109194619.554338  processContainerBegin():_nodeDataPtr->nodeName : Different_Hosts
+20170109194619.554448  processContainerBegin():_nodeDataPtr->name : /sample/Different_Hosts
+20170109194619.554557  processContainerBegin(): _nodeDataPtr->type : Module
+20170109194619.554671  processContainerBegin() container=/sample extension=
+20170109194619.554882  catchup_get(): loading xml file:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/catchup.xml
+20170109194619.564235  catchup_get(): xml query:/CATCHUP/@value
+20170109194619.564384  XmlUtils_getnodeset(): xpath query: /CATCHUP/@value
+20170109194619.564736  catchup_get(): xml nodeName=value
+20170109194619.565408  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Dependencies.abort.stop return:0
+20170109194619.565961  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/MoreDependencies.abort.stop return:0
+20170109194619.566500  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/npasstest.abort.stop return:0
+20170109194619.567064  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit.abort.stop return:0
+20170109194619.567632  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/worker.abort.stop return:0
+20170109194619.568202  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/Loop_example.abort.stop return:0
+20170109194619.568773  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/switch_hour.abort.stop return:0
+20170109194619.569344  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/switchmod.abort.stop return:0
+20170109194619.569905  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/deploop.abort.stop return:0
+20170109194619.570440  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/depswitch.abort.stop return:0
+20170109194619.570979  maestro.isFileExists_svr()from processContainerBegin() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/submit_test.abort.stop return:0
+20170109194619.571097  processContainerBegin(): Entered if( abortedSibling == 0 )
+20170109194619.571231  ********** processContainerBegin() calling maestro -s beginx -n /sample with loop args=
+maestro: node=/sample signal=beginx flow=continue loop_args= extraArgs=(null) expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.571454  Command called:
+maestro -s beginx -n /sample -f continue -e /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 -d 20170109140000 
+20170109194619.571568  maestro() ignoreAllDeps=0 
+20170109194619.571748  SeqUtil_fixPath source:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 new:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.572388  maestro() flow = continue , valid 
+20170109194619.572599  maestro() using submit script=m.ord_soumet
+20170109194619.572759  SeqUtil_fixPath source:/sample new:/sample
+20170109194619.572880  nodeinfo.nodeinfo() trying to create node /sample, exp /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.573033  SeqNode.SeqNode_createNode() started
+20170109194619.573445  SeqNode.SeqNode_createNode() done
+20170109194619.573632  nodeinfo.nodefinfo() argument datestamp 20170109140000. If (null), will run tictac to find value.
+20170109194619.574233  tictac_getDate() checking validity of dateValue ... 
+20170109194619.574561  Flow_newVisitor() begin
+20170109194619.586304  Flow_newVisitor() end
+20170109194619.586445  Flow_parsePath() begin nodePath=/sample
+20170109194619.586581  Flow_doNodeQuery() begin
+20170109194619.586716  Flow_doNodeQuery(): run the normal query:(/*[@name='sample'])
+20170109194619.586974  XmlUtils_getnodeset(): xpath query: (/*[@name='sample'])
+20170109194619.587474  nodeinfo.getNodeType() node name: MODULE
+20170109194619.587600  nodeinfo.getNodeType() type=3
+20170109194619.587727  Flow_doNodeQuery() end
+20170109194619.587840  Flow_changeModule(): begin : module=sample
+20170109194619.587983  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/sample/flow.xml
+20170109194619.599246  Flow_changeXmlFile(): end
+20170109194619.599390  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170109194619.599674  Flow_changeModule() end
+20170109194619.599790  Flow_updatePaths() begin
+20170109194619.599920  Flow_updatePaths() end
+20170109194619.600026  Flow_checkWorkUnit begin
+20170109194619.600133  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170109194619.600394  XmlUtils_getnodeset(): No result
+20170109194619.600507  Flow_checkWorkUnit end
+20170109194619.600632  Flow_parsePath() end
+20170109194619.600739  Flow_setPathData() begin
+20170109194619.600842  Flow_setPathToModule() begin
+20170109194619.601568  Flow_setPathToModule() end
+20170109194619.601873  Flow_setSuiteName() begin
+20170109194619.602091  Flow_setSuiteName() end
+20170109194619.602393  nodeinfo.getFlowInfo() *********** Node Information **********
+20170109194619.602513  nodeinfo.getFlowInfo() node path:sample
+20170109194619.602620  nodeinfo.getFlowInfo() container=
+20170109194619.602727  nodeinfo.getFlowInfo() intramodule_container=(null)
+20170109194619.602834  nodeinfo.getFlowInfo() pathToModule=/sample
+20170109194619.602940  nodeinfo.getFlowInfo() taskPath=(null)
+20170109194619.603042  Flow_setPathData() end
+20170109194619.603144  Flow_parseSpecifics() begin
+20170109194619.603251  XmlUtils_getnodeset(): xpath query: (@*)
+20170109194619.603513  nodeinfo.parseNodeSpecifics() called node_type=Module
+20170109194619.603634  nodeinfo.parseNodeSpecifics() nodeset cardinal=1
+20170109194619.603752  Flow_parseSpecifics() end
+20170109194619.603856  Flow_parseDependencies begin
+20170109194619.603966  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170109194619.604287  XmlUtils_getnodeset(): No result
+20170109194619.604412  Flow_parseDependencies end
+20170109194619.604514  Flow_parseSubmits begin
+20170109194619.604638  nodeinfo.getFlowInfo() *********** submits **********
+20170109194619.604749  XmlUtils_getnodeset(): xpath query: (child::SUBMITS)
+20170109194619.605105  nodeinfo.parseSubmits() called
+20170109194619.605225  nodeinfo.parseSubmits() submits:Different_Hosts
+20170109194619.605332  nodeinfo.parseSubmits() property:sub_name
+20170109194619.605494  nodeinfo.parseSubmits() submits:Dependencies
+20170109194619.605604  nodeinfo.parseSubmits() property:sub_name
+20170109194619.605811  nodeinfo.parseSubmits() submits:MoreDependencies
+20170109194619.605925  nodeinfo.parseSubmits() property:sub_name
+20170109194619.606082  nodeinfo.parseSubmits() submits:npasstest
+20170109194619.606191  nodeinfo.parseSubmits() property:sub_name
+20170109194619.606345  nodeinfo.parseSubmits() submits:work_unit
+20170109194619.606454  nodeinfo.parseSubmits() property:sub_name
+20170109194619.606607  nodeinfo.parseSubmits() submits:worker
+20170109194619.606716  nodeinfo.parseSubmits() property:sub_name
+20170109194619.606870  nodeinfo.parseSubmits() submits:Loop_example
+20170109194619.606980  nodeinfo.parseSubmits() property:sub_name
+20170109194619.607133  nodeinfo.parseSubmits() submits:switch_hour
+20170109194619.607243  nodeinfo.parseSubmits() property:sub_name
+20170109194619.607396  nodeinfo.parseSubmits() submits:switchmod
+20170109194619.607506  nodeinfo.parseSubmits() property:sub_name
+20170109194619.607659  nodeinfo.parseSubmits() submits:deploop
+20170109194619.607769  nodeinfo.parseSubmits() property:sub_name
+20170109194619.607921  nodeinfo.parseSubmits() submits:depswitch
+20170109194619.608030  nodeinfo.parseSubmits() property:sub_name
+20170109194619.608183  nodeinfo.parseSubmits() submits:submit_test
+20170109194619.608293  nodeinfo.parseSubmits() property:sub_name
+20170109194619.608452  Flow_parseSubmits return FLOW_SUCCESS
+20170109194619.608621  Flow_parseSiblings begin
+20170109194619.608739  nodeinfo.getFlowInfo() *********** node siblings **********
+20170109194619.608889  XmlUtils_getnodeset(): xpath query: (preceding-sibling::*[@name])
+20170109194619.609205  XmlUtils_getnodeset(): No result
+20170109194619.609318  nodeinfo.parseNodeSiblings() called
+20170109194619.609446  XmlUtils_getnodeset(): xpath query: (following-sibling::*[@name])
+20170109194619.609746  XmlUtils_getnodeset(): No result
+20170109194619.609859  nodeinfo.parseNodeSiblings() called
+20170109194619.609969  Flow_parseSiblings return FLOW_SUCCESS
+20170109194619.610074  Flow_deleteVisitor() begin
+20170109194619.612935  Flow_deleteVisitor() end
+20170109194619.613050  getNodeResources() begin
+20170109194619.613166  newResourceVisitor() begin, nodePath=/sample expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170109194619.613289  defFilename() begin
+20170109194619.613425  defFilename() end
+20170109194619.613528  xmlResourceFilename() begin
+20170109194619.613705  xmlResourceFilename() end : returning /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/sample/container.xml
+20170109194619.613815  Resource_createContext() begin
+20170109194619.613965  Resource_createContext() end
+20170109194619.614073  newResourceVisitor() end
+20170109194619.614175  Resource_parseNodeDFS() begin
+20170109194619.614276  Resource_parseNodeDFS() end
+20170109194619.614378  Resource_setWorkerData() begin
+20170109194619.614479  Resource_setWorkerData() end
+20170109194619.614579  validateMachine() begin
+20170109194619.621828  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_MACHINE in /home/dor001/.suites/overrides.def
+20170109194619.622642  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.622773  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.622897  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_MACHINE in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.623024  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170109194619.623291  SeqUtil_parsedef(): found definition SEQ_DEFAULT_MACHINE=eccc-gpsc2 in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.623624  validateMachine() end
+20170109194619.623737  Resource_setShell() begin
+20170109194619.630726  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/overrides.def
+20170109194619.631439  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.631575  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.631699  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170109194619.631825  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170109194619.632129  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/default_resources.def
+20170109194619.632254  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170109194619.632463  Resource_setShell() end
+20170109194619.632592  deleteResourceVisitor() begin
+20170109194619.632715  deleteResourceVisitor() end
+20170109194619.632819  getNodeResources() end
+20170109194619.632936  maestro() nodeinfo done, loop_args=
+20170109194619.633040  List is empty.
+20170109194619.633143  SeqNode_printLoops():
+20170109194619.633244  SeqNode_printLoops() end
+20170109194619.633346  SeqLoops_validateLoopArgs() loop pointer not found
+20170109194619.633458  maestro() using DATESTAMP=20170109140000
+20170109194619.633565  maestro() node from nodeinfo=/sample
+20170109194619.633672  maestro() node task_path from nodeinfo=
+20170109194619.640535  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.suites/overrides.def
+20170109194619.641240  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170109194619.641377  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170109194619.641499  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.maestrorc
+20170109194619.641621  getmappedfile(): File /home/dor001/.maestrorc was found in mmapped files
+20170109194619.643088  SeqUtil_parsedef(): found definition SEQ_LOGGING_MECH=server in /home/dor001/.maestrorc
+20170109194619.647782  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000/ return:0
+20170109194619.647973  maestro() node from nodeinfo before go_begin=/sample, loopargs=, extension= 
+20170109194619.648131  maestro.go_begin() node=/sample signal=beginx flow=continue loopargs=
+20170109194619.648256  
+**************** SEQ "beginx" "continue" "/sample" Action Summary *******************
+20170109194619.648386  maestro.setBeginState() on node:/sample extension: 
+20170109194619.648547  maestro.clearAllOtherStates() originator=maestro.setBeginState() node=/sample
+20170109194619.649647  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.begin return:0
+20170109194619.650339  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.end return:1
+20170109194619.650948  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.abort.stop return:1
+20170109194619.651516  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.submit return:1
+20170109194619.652066  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.waiting return:1
+20170109194619.652619  maestro.isFileExists_svr()from setBeginState() filename:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.begin return:1
+20170109194619.652750  maestro.setBeginState() checking for lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.begin
+20170109194619.653241  setBeginState()  created lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample.begin 
+20170109194619.653424  submitDependencies() in system call mode
+20170109194619.653543  maestro.submitDependencies() executing for sample
+20170109194619.653651  SeqLoops_getExtFromLoopArgs: (null)
+20170109194619.653818  maestro.submitDependencies() looking for waited file=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/depends/20170109140000//sample.waited_begin
+20170109194619.654402  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/depends/20170109140000//sample.waited_begin return:1
+20170109194619.654563  maestro.submitDependencies() looking for waited file=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/remote_depends/20170109140000//sample.waited_begin
+20170109194619.655072  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/remote_depends/20170109140000//sample.waited_begin return:1
+20170109194619.655942  go_begin():Node sample does not have a container
+20170109194619.656763  
+**************** SEQ "beginx" "continue" "/sample" Action ENDS *******************
+20170109194619.671370  maestro() returning 0
+20170109194619.672482  maestro.processContainerBegin() abortedSibling value=0
+20170109194619.673648  
+**************** SEQ "beginx" "continue" "/sample/Different_Hosts" Action ENDS *******************
+20170109194619.673945  maestro() returning 0
+20170109194619.674067  maestro.processContainerBegin() abortedSibling value=0
+20170109194619.674193  
+**************** SEQ "begin" "continue" "/sample/Different_Hosts/LinuxTask" Action ENDS *******************
+20170109194619.676297  ##Server Connection Closed Signal:begin ##
+20170109194619.677773  maestro() returning 0
+maestro_main exiting with code 0
+==486676== 
+==486676== HEAP SUMMARY:
+==486676==     in use at exit: 33,997 bytes in 229 blocks
+==486676==   total heap usage: 7,416 allocs, 7,187 frees, 1,544,007 bytes allocated
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 1 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x40E745: maestro (maestro.c:3121)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 2 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x40F30E: maestro (maestro.c:3295)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 3 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x404CD5: go_begin (maestro.c:592)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 4 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4247CA: SeqUtil_stringAppend (SeqUtil.c:595)
+==486676==    by 0x425A36: SeqUtil_striplast (SeqUtil.c:964)
+==486676==    by 0x41D90D: SeqNode_extension (SeqNode.c:1226)
+==486676==    by 0x4051C6: setBeginState (maestro.c:690)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 5 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x4056FD: processContainerBegin (maestro.c:785)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 6 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x405948: processContainerBegin (maestro.c:817)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 7 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x40E745: maestro (maestro.c:3121)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 8 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x40F30E: maestro (maestro.c:3295)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 9 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x404CD5: go_begin (maestro.c:592)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 10 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4247CA: SeqUtil_stringAppend (SeqUtil.c:595)
+==486676==    by 0x425A36: SeqUtil_striplast (SeqUtil.c:964)
+==486676==    by 0x41D90D: SeqNode_extension (SeqNode.c:1226)
+==486676==    by 0x4051C6: setBeginState (maestro.c:690)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 11 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x4056FD: processContainerBegin (maestro.c:785)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 12 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x405948: processContainerBegin (maestro.c:817)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 13 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x40E745: maestro (maestro.c:3121)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 14 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x40F30E: maestro (maestro.c:3295)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 15 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x41FF52: SeqLoops_getLoopArgs (SeqLoopsUtil.c:928)
+==486676==    by 0x404CD5: go_begin (maestro.c:592)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 1 bytes in 1 blocks are definitely lost in loss record 16 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4247CA: SeqUtil_stringAppend (SeqUtil.c:595)
+==486676==    by 0x425A36: SeqUtil_striplast (SeqUtil.c:964)
+==486676==    by 0x41D90D: SeqNode_extension (SeqNode.c:1226)
+==486676==    by 0x4051C6: setBeginState (maestro.c:690)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676== 
+==486676== 8 bytes in 1 blocks are definitely lost in loss record 57 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x405184: setBeginState (maestro.c:687)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 23 bytes in 1 blocks are definitely lost in loss record 89 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x6D07564: ???
+==486676==    by 0x6D07BD2: ???
+==486676==    by 0x6ADA04B: ???
+==486676==    by 0x6ADA4D3: ???
+==486676==    by 0x6ABE55A: ???
+==486676==    by 0x6ABEADE: ???
+==486676==    by 0x689396E: ???
+==486676==    by 0x6894BA6: ???
+==486676==    by 0x6896112: ???
+==486676==    by 0x68967E8: ???
+==486676==    by 0x525E1BB: getpwuid_r@@GLIBC_2.2.5 (getXXbyYY_r.c:266)
+==486676== 
+==486676== 24 bytes in 1 blocks are definitely lost in loss record 91 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x40E9AA: maestro (maestro.c:3156)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 24 bytes in 1 blocks are definitely lost in loss record 92 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x405184: setBeginState (maestro.c:687)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 34 bytes in 1 blocks are definitely lost in loss record 96 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x40E9AA: maestro (maestro.c:3156)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 34 bytes in 1 blocks are definitely lost in loss record 97 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x424831: SeqUtil_stringAppend (SeqUtil.c:602)
+==486676==    by 0x405184: setBeginState (maestro.c:687)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 34 bytes in 1 blocks are definitely lost in loss record 98 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x5226729: strdup (strdup.c:42)
+==486676==    by 0x414BBE: nodelogger (nodelogger.c:139)
+==486676==    by 0x42AC91: nodebegin (runcontrollib.c:122)
+==486676==    by 0x405315: setBeginState (maestro.c:708)
+==486676==    by 0x404D8B: go_begin (maestro.c:604)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 606 (176 direct, 430 indirect) bytes in 1 blocks are definitely lost in loss record 127 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4E8B6D4: xmlNewDoc (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4F35E98: xmlSAX2StartDocument (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4E845E5: xmlParseDocument (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4E848F1: xmlSAXParseFileWithData (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4217F1: XmlUtils_getdoc (XmlUtils.c:28)
+==486676==    by 0x42ECEE: catchup_get (expcatchup.c:65)
+==486676==    by 0x405743: processContainerBegin (maestro.c:791)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 606 (176 direct, 430 indirect) bytes in 1 blocks are definitely lost in loss record 128 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4E8B6D4: xmlNewDoc (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4F35E98: xmlSAX2StartDocument (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4E845E5: xmlParseDocument (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4E848F1: xmlSAXParseFileWithData (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x4217F1: XmlUtils_getdoc (XmlUtils.c:28)
+==486676==    by 0x42ECEE: catchup_get (expcatchup.c:65)
+==486676==    by 0x405743: processContainerBegin (maestro.c:791)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676== 
+==486676== 3,600 bytes in 90 blocks are definitely lost in loss record 130 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x689BA7D: ???
+==486676==    by 0x689C2C3: ???
+==486676==    by 0x689C3DC: ???
+==486676==    by 0x6893AB8: ???
+==486676==    by 0x6894BA6: ???
+==486676==    by 0x6896112: ???
+==486676==    by 0x68967E8: ???
+==486676==    by 0x525E1BB: getpwuid_r@@GLIBC_2.2.5 (getXXbyYY_r.c:266)
+==486676==    by 0x525DA65: getpwuid (getXXbyYY.c:116)
+==486676==    by 0x424E2A: SeqUtil_getdef (SeqUtil.c:723)
+==486676==    by 0x42580B: SeqUtil_keysub (SeqUtil.c:923)
+==486676== 
+==486676== 13,004 (352 direct, 12,652 indirect) bytes in 1 blocks are definitely lost in loss record 133 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4ECF026: xmlXPathNewContext (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x42ED2B: catchup_get (expcatchup.c:70)
+==486676==    by 0x405743: processContainerBegin (maestro.c:791)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x4059C7: processContainerBegin (maestro.c:818)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== 13,052 (352 direct, 12,700 indirect) bytes in 1 blocks are definitely lost in loss record 134 of 134
+==486676==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==486676==    by 0x4ECF026: xmlXPathNewContext (in /usr/lib/x86_64-linux-gnu/libxml2.so.2.9.1)
+==486676==    by 0x42ED2B: catchup_get (expcatchup.c:70)
+==486676==    by 0x405743: processContainerBegin (maestro.c:791)
+==486676==    by 0x4050F1: go_begin (maestro.c:663)
+==486676==    by 0x40F359: maestro (maestro.c:3296)
+==486676==    by 0x403642: main (maestro_main.c:210)
+==486676== 
+==486676== LEAK SUMMARY:
+==486676==    definitely lost: 4,853 bytes in 117 blocks
+==486676==    indirectly lost: 26,212 bytes in 81 blocks
+==486676==      possibly lost: 0 bytes in 0 blocks
+==486676==    still reachable: 2,932 bytes in 31 blocks
+==486676==         suppressed: 0 bytes in 0 blocks
+==486676== Reachable blocks (those to which a pointer was found) are not shown.
+==486676== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==486676== 
+==486676== For counts of detected and suppressed errors, rerun with: -v
+==486676== Use --track-origins=yes to see where uninitialised values come from
+==486676== ERROR SUMMARY: 37 errors from 31 contexts (suppressed: 0 from 0)

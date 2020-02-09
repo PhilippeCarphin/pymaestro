@@ -1,0 +1,18 @@
+<MODULE name="intraloopDependencies">
+    <SUBMITS sub_name="dependee"/>
+    <SUBMITS sub_name="dependant"/>
+    <SUBMITS sub_name="deploop2"/>
+    <TASK name="dependee"/>
+    <TASK name="dependant">
+        <DEPENDS_ON dep_name="./dependee" type="node" status="end"/>
+    </TASK>
+    <LOOP name="deploop2">
+        <SUBMITS sub_name="dependee"/>
+        <SUBMITS sub_name="dependant"/>
+        <TASK name="dependee"/>
+        <TASK name="dependant">
+           <DEPENDS_ON dep_name="./dependee" local_index="deploop2=CURRENT_INDEX" index="deploop2=CURRENT_INDEX" type="node" status="end"/>
+        </TASK>
+    </LOOP>
+</MODULE>
+

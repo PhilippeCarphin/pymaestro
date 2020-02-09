@@ -1,0 +1,19 @@
+<MODULE name="module2">
+    <SUBMITS sub_name="dhour_switch"/>
+    <SWITCH name="dhour_switch" type="datestamp_hour">
+        <SWITCH_ITEM name="00">
+            <SUBMITS sub_name="loop"/>
+            <LOOP name="loop">
+                <SUBMITS sub_name="family"/>
+                <FAMILY name="family">
+                    <SUBMITS sub_name="task"/>
+                    <TASK name="task">
+                        <SUBMITS sub_name="npasstask" type="user"/>
+                    </TASK>
+                    <NPASS_TASK name="npasstask"/>
+                </FAMILY>
+            </LOOP>
+        </SWITCH_ITEM>
+    </SWITCH>
+</MODULE>
+

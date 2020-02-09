@@ -1,0 +1,470 @@
+maestro_main calling maestro with SEQ_EXP_HOME=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170116195045.694306  Command called:
+maestro -s submit -n /sample/work_unit/t2 -f continue -e /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 
+20170116195045.696161  maestro() ignoreAllDeps=0 
+20170116195045.696171  SeqUtil_fixPath source:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0 new:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170116195045.696770  maestro() flow = continue , valid 
+20170116195045.696781  maestro() using submit script=ord_soumet
+20170116195045.696793  SeqUtil_fixPath source:/sample/work_unit/t2 new:/sample/work_unit/t2
+20170116195045.696796  nodeinfo.nodeinfo() trying to create node /sample/work_unit/t2, exp /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170116195045.696800  SeqNode.SeqNode_createNode() started
+20170116195045.696816  SeqNode.SeqNode_createNode() done
+20170116195045.696820  nodeinfo.nodefinfo() argument datestamp 20170109140000. If (null), will run tictac to find value.
+20170116195045.697251  tictac_getDate() checking validity of dateValue ... 
+20170116195045.697262  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.697265  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.697267  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.697269  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.697271  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.697275  Flow_newVisitor() begin
+20170116195045.703938  Flow_newVisitor() end
+20170116195045.703945  Flow_parsePath() begin
+20170116195045.703950  Flow_doNodeQuery() begin
+20170116195045.703952  Flow_doNodeQuery(): run the normal query:(/*[@name='sample'])
+20170116195045.703956  XmlUtils_getnodeset(): xpath query: (/*[@name='sample'])
+20170116195045.703988  nodeinfo.getNodeType() node name: MODULE
+20170116195045.703992  nodeinfo.getNodeType() type=3
+20170116195045.703994  Flow_doNodeQuery() end
+20170116195045.703998  Flow_updatePaths() begin
+20170116195045.704000  Flow_updatePaths() end
+20170116195045.704002  Flow_changeModule(): begin : module=sample
+20170116195045.704005  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/sample/flow.xml
+20170116195045.710862  Flow_changeXmlFile(): end
+20170116195045.710888  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170116195045.710916  Flow_changeModule() end
+20170116195045.710923  Flow_checkWorkUnit begin
+20170116195045.710928  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170116195045.710939  XmlUtils_getnodeset(): No result
+20170116195045.710945  Flow_checkWorkUnit end
+20170116195045.710951  Flow_doNodeQuery() begin
+20170116195045.710957  Flow_doNodeQuery(): run the normal query:(child::*[@name='work_unit'])
+20170116195045.710962  XmlUtils_getnodeset(): xpath query: (child::*[@name='work_unit'])
+20170116195045.711024  nodeinfo.getNodeType() node name: FAMILY
+20170116195045.711033  nodeinfo.getNodeType() type=0
+20170116195045.711039  Flow_doNodeQuery() end
+20170116195045.711044  Flow_updatePaths() begin
+20170116195045.711052  Flow_updatePaths() end
+20170116195045.711057  Flow_checkWorkUnit begin
+20170116195045.711061  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170116195045.711071  Attribute 'work_unit' found
+20170116195045.719806  nodeinfo.parseWorkerPath query: (/NODE_RESOURCES/WORKER/@*)
+20170116195045.719828  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/WORKER/@*)
+20170116195045.719856  nodeinfo.parseWorkerPath() nodePtr->name=path
+20170116195045.719863  nodeinfo.parseWorkerPath() value=/sample/worker
+20170116195045.719901  Flow_checkWorkUnit end
+20170116195045.719908  Flow_doNodeQuery() begin
+20170116195045.719914  Flow_doNodeQuery(): run the normal query:(child::*[@name='t2'])
+20170116195045.719919  XmlUtils_getnodeset(): xpath query: (child::*[@name='t2'])
+20170116195045.719949  nodeinfo.getNodeType() node name: TASK
+20170116195045.719957  nodeinfo.getNodeType() type=1
+20170116195045.719962  Flow_doNodeQuery() end
+20170116195045.719977  Flow_updatePaths() begin
+20170116195045.719984  Flow_updatePaths() end
+20170116195045.719989  Flow_parsePath() end
+20170116195045.719994  Flow_setPathData() begin20170116195045.719999  Flow_setPathToModule() begin
+20170116195045.720012  Flow_setPathToModule() end
+20170116195045.720018  Flow_setSuiteName() begin
+20170116195045.720027  Flow_setSuiteName() end
+20170116195045.720033  nodeinfo.getFlowInfo() *********** Node Information **********
+20170116195045.720038  nodeinfo.getFlowInfo() node path:sample/work_unit/t2
+20170116195045.720043  nodeinfo.getFlowInfo() container=/sample/work_unit
+20170116195045.720048  nodeinfo.getFlowInfo() intramodule_container=/sample/work_unit
+20170116195045.720053  nodeinfo.getFlowInfo() pathToModule=/sample
+20170116195045.720057  nodeinfo.getFlowInfo() taskPath=/sample/work_unit/t2
+20170116195045.720062  Flow_setPathData() end20170116195045.720067  Flow_parseSpecifics() begin
+20170116195045.720072  XmlUtils_getnodeset(): xpath query: (@*)
+20170116195045.720083  nodeinfo.parseNodeSpecifics() called node_type=Task
+20170116195045.720089  nodeinfo.parseNodeSpecifics() nodeset cardinal=1
+20170116195045.720094  Flow_parseSpecifics() end
+20170116195045.720099  Flow_parseDependencies begin
+20170116195045.720104  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170116195045.720114  XmlUtils_getnodeset(): No result
+20170116195045.720120  Flow_parseDependencies end
+20170116195045.720125  Flow_parseSubmits begin
+20170116195045.720130  nodeinfo.getFlowInfo() *********** submits **********
+20170116195045.720134  XmlUtils_getnodeset(): xpath query: (child::SUBMITS)
+20170116195045.720143  XmlUtils_getnodeset(): No result
+20170116195045.720149  nodeinfo.parseSubmits() called
+20170116195045.720154  Flow_parseSubmits return FLOW_SUCCESS
+20170116195045.720159  Flow_parseSiblings begin
+20170116195045.720163  nodeinfo.getFlowInfo() *********** node siblings **********
+20170116195045.720169  XmlUtils_getnodeset(): xpath query: (preceding-sibling::*[@name])
+20170116195045.720193  nodeinfo.getFlowInfo() *********** preceding siblings found**********
+20170116195045.720199  nodeinfo.parseNodeSiblings() called
+20170116195045.720205  nodeinfo.parseNodeSiblings() sibling:t1
+20170116195045.720210  nodeinfo.parseNodeSiblings() sibling:t3
+20170116195045.720216  XmlUtils_getnodeset(): xpath query: (following-sibling::*[@name])
+20170116195045.720227  XmlUtils_getnodeset(): No result
+20170116195045.720233  nodeinfo.parseNodeSiblings() called
+20170116195045.720238  Flow_parseSiblings return FLOW_SUCCESS
+20170116195045.720243  Flow_deleteVisitor() begin
+20170116195045.720304  Flow_deleteVisitor() end
+20170116195045.720313  SeqUtil_fixPath source:/sample/work_unit/t2 new:/sample/work_unit/t2
+20170116195045.720319  getNodeResources _nodePath=/sample/work_unit/t2 type=1
+20170116195045.720325  getNodeResources looking for xml file /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources//sample/work_unit/t2.xml
+20170116195045.725362  getNodeResources query: (/NODE_RESOURCES)
+20170116195045.725383  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES)
+20170116195045.725398  getNodeResources query: (/NODE_RESOURCES/BATCH/@*)
+20170116195045.725405  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/BATCH/@*)
+20170116195045.725416  XmlUtils_getnodeset(): No result
+20170116195045.725423  getNodeResources query: (/NODE_RESOURCES/child::DEPENDS_ON)
+20170116195045.725428  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/child::DEPENDS_ON)
+20170116195045.725439  XmlUtils_getnodeset(): No result
+20170116195045.725445  getNodeResources query: (/NODE_RESOURCES/ABORT_ACTION/@*)
+20170116195045.725451  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/ABORT_ACTION/@*)
+20170116195045.725460  XmlUtils_getnodeset(): No result
+20170116195045.775189  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /home/dor001/.suites/overrides.def
+20170116195045.775900  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.775934  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.775947  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.777215  getmappedfile(): Mapped file /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def into memory using file descriptor 4 
+20170116195045.777278  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /home/dor001/.suites/default_resources.def
+20170116195045.778313  getmappedfile(): Mapped file /home/dor001/.suites/default_resources.def into memory using file descriptor 4 
+20170116195045.778357  nodeinfo.parseBatchResources() Resetting resources to worker's values
+20170116195045.778369  SeqUtil_fixPath source:/sample/worker new:/sample/worker
+20170116195045.778375  nodeinfo.nodeinfo() trying to create node /sample/worker, exp /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170116195045.778380  SeqNode.SeqNode_createNode() started
+20170116195045.778399  SeqNode.SeqNode_createNode() done
+20170116195045.778407  nodeinfo.nodefinfo() argument datestamp (null). If (null), will run tictac to find value.
+20170116195045.780232  tictac_getDate() checking validity of dateValue ... 
+20170116195045.780248  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.780255  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.780261  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.780267  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.780273  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.780281  Flow_newVisitor() begin
+20170116195045.784974  Flow_newVisitor() end
+20170116195045.784998  Flow_parsePath() begin
+20170116195045.785006  Flow_doNodeQuery() begin
+20170116195045.785012  Flow_doNodeQuery(): run the normal query:(/*[@name='sample'])
+20170116195045.785017  XmlUtils_getnodeset(): xpath query: (/*[@name='sample'])
+20170116195045.785047  nodeinfo.getNodeType() node name: MODULE
+20170116195045.785055  nodeinfo.getNodeType() type=3
+20170116195045.785060  Flow_doNodeQuery() end
+20170116195045.785066  Flow_updatePaths() begin
+20170116195045.785073  Flow_updatePaths() end
+20170116195045.785078  Flow_changeModule(): begin : module=sample
+20170116195045.785084  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/sample/flow.xml
+20170116195045.789259  Flow_changeXmlFile(): end
+20170116195045.789280  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170116195045.789300  Flow_changeModule() end
+20170116195045.789307  Flow_checkWorkUnit begin
+20170116195045.789312  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170116195045.789323  XmlUtils_getnodeset(): No result
+20170116195045.789329  Flow_checkWorkUnit end
+20170116195045.789335  Flow_doNodeQuery() begin
+20170116195045.789340  Flow_doNodeQuery(): run the normal query:(child::*[@name='worker'])
+20170116195045.789345  XmlUtils_getnodeset(): xpath query: (child::*[@name='worker'])
+20170116195045.789400  nodeinfo.getNodeType() node name: TASK
+20170116195045.789408  nodeinfo.getNodeType() type=1
+20170116195045.789413  Flow_doNodeQuery() end
+20170116195045.789418  Flow_updatePaths() begin
+20170116195045.789424  Flow_updatePaths() end
+20170116195045.789430  Flow_parsePath() end
+20170116195045.789435  Flow_setPathData() begin20170116195045.789439  Flow_setPathToModule() begin
+20170116195045.789445  Flow_setPathToModule() end
+20170116195045.789450  Flow_setSuiteName() begin
+20170116195045.789459  Flow_setSuiteName() end
+20170116195045.789464  nodeinfo.getFlowInfo() *********** Node Information **********
+20170116195045.789469  nodeinfo.getFlowInfo() node path:sample/worker
+20170116195045.789474  nodeinfo.getFlowInfo() container=/sample
+20170116195045.789479  nodeinfo.getFlowInfo() intramodule_container=(null)
+20170116195045.789483  nodeinfo.getFlowInfo() pathToModule=/sample/sample
+20170116195045.789497  nodeinfo.getFlowInfo() taskPath=/sample/worker
+20170116195045.789502  Flow_setPathData() end20170116195045.789507  Flow_parseSpecifics() begin
+20170116195045.789512  XmlUtils_getnodeset(): xpath query: (@*)
+20170116195045.789522  nodeinfo.parseNodeSpecifics() called node_type=Task
+20170116195045.789528  nodeinfo.parseNodeSpecifics() nodeset cardinal=1
+20170116195045.789533  Flow_parseSpecifics() end
+20170116195045.789538  Flow_parseDependencies begin
+20170116195045.789543  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170116195045.789553  XmlUtils_getnodeset(): No result
+20170116195045.789559  Flow_parseDependencies end
+20170116195045.789564  Flow_parseSubmits begin
+20170116195045.789568  nodeinfo.getFlowInfo() *********** submits **********
+20170116195045.789573  XmlUtils_getnodeset(): xpath query: (child::SUBMITS)
+20170116195045.789582  XmlUtils_getnodeset(): No result
+20170116195045.789587  nodeinfo.parseSubmits() called
+20170116195045.789592  Flow_parseSubmits return FLOW_SUCCESS
+20170116195045.789597  Flow_parseSiblings begin
+20170116195045.789601  nodeinfo.getFlowInfo() *********** node siblings **********
+20170116195045.789607  XmlUtils_getnodeset(): xpath query: (preceding-sibling::*[@name])
+20170116195045.789638  nodeinfo.getFlowInfo() *********** preceding siblings found**********
+20170116195045.789644  nodeinfo.parseNodeSiblings() called
+20170116195045.789650  nodeinfo.parseNodeSiblings() sibling:Different_Hosts
+20170116195045.789656  nodeinfo.parseNodeSiblings() sibling:Dependencies
+20170116195045.789661  nodeinfo.parseNodeSiblings() sibling:MoreDependencies
+20170116195045.789667  nodeinfo.parseNodeSiblings() sibling:npasstest
+20170116195045.789672  nodeinfo.parseNodeSiblings() sibling:work_unit
+20170116195045.789678  XmlUtils_getnodeset(): xpath query: (following-sibling::*[@name])
+20170116195045.789697  nodeinfo.getFlowInfo() *********** following siblings found**********
+20170116195045.789703  nodeinfo.parseNodeSiblings() called
+20170116195045.789709  nodeinfo.parseNodeSiblings() sibling:Loop_example
+20170116195045.789715  nodeinfo.parseNodeSiblings() sibling:switch_hour
+20170116195045.789720  nodeinfo.parseNodeSiblings() sibling:switchmod
+20170116195045.789726  nodeinfo.parseNodeSiblings() sibling:deploop
+20170116195045.789731  nodeinfo.parseNodeSiblings() sibling:depswitch
+20170116195045.789737  nodeinfo.parseNodeSiblings() sibling:submit_test
+20170116195045.789742  Flow_parseSiblings return FLOW_SUCCESS
+20170116195045.789747  Flow_deleteVisitor() begin
+20170116195045.789807  Flow_deleteVisitor() end
+20170116195045.789815  SeqUtil_fixPath source:/sample/worker new:/sample/worker
+20170116195045.789821  getNodeResources _nodePath=/sample/worker type=1
+20170116195045.789828  getNodeResources looking for xml file /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources//sample/worker.xml
+20170116195045.793755  XmlUtils_resolve(): performing definition replacements in string "${FRONTEND}"
+20170116195045.796967  SeqUtil_getdef(): looking for definition of FRONTEND in /home/dor001/.suites/overrides.def
+20170116195045.797866  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.797889  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.797896  SeqUtil_getdef(): looking for definition of FRONTEND in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.797902  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.797913  SeqUtil_parsedef(): found definition FRONTEND=eccc-gpsc2 in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.797921  XmlUtils_resolve(): replacing FRONTEND with definition value "eccc-gpsc2"
+20170116195045.797954  getNodeResources query: (/NODE_RESOURCES)
+20170116195045.797961  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES)
+20170116195045.797982  getNodeResources query: (/NODE_RESOURCES/BATCH/@*)
+20170116195045.797996  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/BATCH/@*)
+20170116195045.798012  nodeinfo.parseBatchResources() called
+20170116195045.798018  nodeinfo.parseBatchResources() nodeset->nodeNr=5
+20170116195045.798023  nodeinfo.parseBatchResources() nodePtr->name=machine
+20170116195045.798028  nodeinfo.parseBatchResources() value=eccc-gpsc2
+20170116195045.798034  nodeinfo.parseBatchResources() nodePtr->name=memory
+20170116195045.798038  nodeinfo.parseBatchResources() value=1G
+20170116195045.798044  nodeinfo.parseBatchResources() nodePtr->name=wallclock
+20170116195045.798049  nodeinfo.parseBatchResources() value=6
+20170116195045.798055  nodeinfo.parseBatchResources() nodePtr->name=catchup
+20170116195045.798060  nodeinfo.parseBatchResources() value=4
+20170116195045.798065  nodeinfo.parseBatchResources() nodePtr->name=cpu
+20170116195045.798069  nodeinfo.parseBatchResources() value=1
+20170116195045.798077  getNodeResources query: (/NODE_RESOURCES/child::DEPENDS_ON)
+20170116195045.798082  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/child::DEPENDS_ON)
+20170116195045.798094  XmlUtils_getnodeset(): No result
+20170116195045.798100  getNodeResources query: (/NODE_RESOURCES/ABORT_ACTION/@*)
+20170116195045.798105  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/ABORT_ACTION/@*)
+20170116195045.798115  XmlUtils_getnodeset(): No result
+20170116195045.811076  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /home/dor001/.suites/overrides.def
+20170116195045.811787  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.811795  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.811798  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.811801  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.811808  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /home/dor001/.suites/default_resources.def
+20170116195045.811811  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170116195045.814565  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/overrides.def
+20170116195045.815101  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.815110  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.815113  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.815115  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.815121  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/default_resources.def
+20170116195045.815124  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170116195045.815134  maestro() nodeinfo done, loop_args=
+20170116195045.815137  List is empty.
+20170116195045.815143  SeqNode_printLoops():
+20170116195045.815145  SeqNode_printLoops() end
+20170116195045.815147  SeqLoops_validateLoopArgs() loop pointer not found
+20170116195045.815150  maestro() using DATESTAMP=20170109140000
+20170116195045.815151  maestro() node from nodeinfo=/sample/work_unit/t2
+20170116195045.815153  maestro() node task_path from nodeinfo=/sample/work_unit/t2
+20170116195045.818304  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.suites/overrides.def
+20170116195045.818761  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.818767  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.818770  SeqUtil_getdef(): looking for definition of SEQ_LOGGING_MECH in /home/dor001/.maestrorc
+20170116195045.819515  getmappedfile(): Mapped file /home/dor001/.maestrorc into memory using file descriptor 4 
+20170116195045.819546  SeqUtil_parsedef(): found definition SEQ_LOGGING_MECH=server in /home/dor001/.maestrorc
+maestro L2D2 server parameters are: <pid=15134  host=maestro1 ip=142.135.23.54 port=5926>
+@@@@@@@@@@@@@@@@@@@@@@ Using mserver locking mecanism @@@@@@@@@@@@@@@@@@@@@@
+20170116195045.836331  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit return:0
+20170116195045.836345  maestro() ignoreAllDepso2=0 
+20170116195045.836355  maestro.go_submit() node=/sample/work_unit/t2 signal=submit flow=continue ignoreAllDeps=0
+ 20170116195045.836358  
+**************** SEQ "submit" "continue" "/sample/work_unit/t2" Action Summary *******************
+20170116195045.842723  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/output//sample/work_unit return:0
+20170116195045.842753  catchup_get(): loading xml file:/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/catchup.xml
+20170116195045.848917  catchup_get(): xml query:/CATCHUP/@value
+20170116195045.848924  XmlUtils_getnodeset(): xpath query: /CATCHUP/@value
+20170116195045.848932  catchup_get(): xml nodeName=value
+20170116195045.848936  node catchup= 4 , exp catchup = 8 , discretionary catchup = 9  
+20170116195045.848945  maestro.validateDependencies() returning isWaiting=0
+20170116195045.848953  maestro.clearAllOtherStates() originator=maestro.setSubmitState() node=/sample/work_unit/t2
+20170116195045.849619  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit/t2.begin return:1
+20170116195045.850025  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit/t2.end return:1
+20170116195045.850425  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit/t2.abort.stop return:1
+20170116195045.851626  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit/t2.submit return:0
+20170116195045.851995  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit/t2.waiting return:1
+20170116195045.852325  setSubmitState()  created lockfile /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/work_unit/t2.submit 
+20170116195045.852335  nodesubmit.Message=Machine=eccc-gpsc2 Queue=null CPU=1 (x1 CPU Multiplier as 1 MPIxOMP) Memory=1G Wallclock Limit=5 mpi=0 Submit method:Manual or cron submitted from host usr-svc-sci-cnt035 soumetArgs=""20170116195045.852341  nodelogger job:/sample/work_unit/t2 signal:submit message:Machine=eccc-gpsc2 Queue=null CPU=1 (x1 CPU Multiplier as 1 MPIxOMP) Memory=1G Wallclock Limit=5 mpi=0 Submit method:Manual or cron submitted from host usr-svc-sci-cnt035 soumetArgs="" loop_ext: datestamp:20170109140000
+20170116195045.858348  
+================= NODELOGGER: TRYING TO USE CONNECTION FROM MAESTRO PROCESS IF SERVER IS UP signal:submit================== 
+20170116195045.858372  
+================= NODELOGGER: OK,HAVE A CONNECTION FROM MAESTRO PROCESS ================== 
+20170116195045.858390  
+NODELOGGER node:/sample/work_unit/t2 type:submit message:Machine=eccc-gpsc2 Queue=null CPU=1 (x1 CPU Multiplier as 1 MPIxOMP) Memory=1G Wallclock Limit=5 mpi=0 Submit method:Manual or cron submitted from host usr-svc-sci-cnt035 soumetArgs=""
+20170116195045.870609  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/tmpfile//sample/work_unit return:0
+20170116195045.872304  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/tmpfile//sample/work_unit/t2.253554.cfg return:1
+20170116195045.879628  SeqLoops_getContainerArgs(): Called for node /sample/work_unit/t2 and _loop_args :
+20170116195045.879657  List is empty.
+20170116195045.879665  _nodeDataPtr->name : /sample/work_unit/t2
+20170116195045.879670  _nodeDataPtr->container : /sample/work_unit
+20170116195045.879677  SeqLoops_getContainerArgs(): returning loopArgs : 
+20170116195045.879682  List is empty.
+20170116195045.885059  SeqUtil_getdef(): looking for definition of SEQ_JOBNAME_PREFIX in /home/dor001/.suites/overrides.def
+20170116195045.885702  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.885725  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.885732  SeqUtil_getdef(): looking for definition of SEQ_JOBNAME_PREFIX in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.885738  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.885754  SeqUtil_getdef(): looking for definition of SEQ_JOBNAME_PREFIX in /home/dor001/.suites/default_resources.def
+20170116195045.885760  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170116195045.895775  maestro.SeqUtil_mkdir_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/tmpfile/20170109140000/work_unit_depot//sample/worker//sample/work_unit return:0
+20170116195045.896389  maestro.removeFile_svr() removing /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/tmpfile/20170109140000/work_unit_depot//sample/worker//sample/work_unit/t2.tar return:1
+20170116195045.896866  maestro.removeFile_svr() removing /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/tmpfile/20170109140000/work_unit_depot//sample/worker//sample/work_unit/t2.tmp.tar return:1
+20170116195045.897500  maestro.removeFile_svr() removing /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/tmpfile/20170109140000/work_unit_depot//sample/worker//sample/work_unit/t2.tar.ready return:1
+20170116195045.897535  SeqUtil_fixPath source:/sample/worker new:/sample/worker
+20170116195045.897542  nodeinfo.nodeinfo() trying to create node /sample/worker, exp /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+20170116195045.897548  SeqNode.SeqNode_createNode() started
+20170116195045.898469  SeqNode.SeqNode_createNode() done
+20170116195045.898488  nodeinfo.nodefinfo() argument datestamp 20170109140000. If (null), will run tictac to find value.
+20170116195045.900370  tictac_getDate() checking validity of dateValue ... 
+20170116195045.900386  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.900394  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.900400  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.900405  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.900411  maestro.checkValidDatestamp() setting date to=20170109140000
+20170116195045.900420  Flow_newVisitor() begin
+20170116195045.904769  Flow_newVisitor() end
+20170116195045.904793  Flow_parsePath() begin
+20170116195045.904801  Flow_doNodeQuery() begin
+20170116195045.904807  Flow_doNodeQuery(): run the normal query:(/*[@name='sample'])
+20170116195045.904812  XmlUtils_getnodeset(): xpath query: (/*[@name='sample'])
+20170116195045.904847  nodeinfo.getNodeType() node name: MODULE
+20170116195045.904863  nodeinfo.getNodeType() type=3
+20170116195045.904869  Flow_doNodeQuery() end
+20170116195045.904874  Flow_updatePaths() begin
+20170116195045.904881  Flow_updatePaths() end
+20170116195045.904886  Flow_changeModule(): begin : module=sample
+20170116195045.904892  Flow_changeXmlFile(): begin : xmlFilename=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/modules/sample/flow.xml
+20170116195045.910414  Flow_changeXmlFile(): end
+20170116195045.910436  XmlUtils_getnodeset(): xpath query: (/MODULE)
+20170116195045.910457  Flow_changeModule() end
+20170116195045.910463  Flow_checkWorkUnit begin
+20170116195045.910468  XmlUtils_getnodeset(): xpath query: (@work_unit)
+20170116195045.910488  XmlUtils_getnodeset(): No result
+20170116195045.910495  Flow_checkWorkUnit end
+20170116195045.910501  Flow_doNodeQuery() begin
+20170116195045.910506  Flow_doNodeQuery(): run the normal query:(child::*[@name='worker'])
+20170116195045.910511  XmlUtils_getnodeset(): xpath query: (child::*[@name='worker'])
+20170116195045.910567  nodeinfo.getNodeType() node name: TASK
+20170116195045.910575  nodeinfo.getNodeType() type=1
+20170116195045.910580  Flow_doNodeQuery() end
+20170116195045.910585  Flow_updatePaths() begin
+20170116195045.910591  Flow_updatePaths() end
+20170116195045.910596  Flow_parsePath() end
+20170116195045.910600  Flow_setPathData() begin20170116195045.910605  Flow_setPathToModule() begin
+20170116195045.910611  Flow_setPathToModule() end
+20170116195045.910617  Flow_setSuiteName() begin
+20170116195045.910625  Flow_setSuiteName() end
+20170116195045.910630  nodeinfo.getFlowInfo() *********** Node Information **********
+20170116195045.910635  nodeinfo.getFlowInfo() node path:sample/worker
+20170116195045.910639  nodeinfo.getFlowInfo() container=/sample
+20170116195045.910644  nodeinfo.getFlowInfo() intramodule_container=(null)
+20170116195045.910649  nodeinfo.getFlowInfo() pathToModule=/sample/sample
+20170116195045.910653  nodeinfo.getFlowInfo() taskPath=/sample/worker
+20170116195045.910658  Flow_setPathData() end20170116195045.910662  Flow_parseSpecifics() begin
+20170116195045.910667  XmlUtils_getnodeset(): xpath query: (@*)
+20170116195045.910676  nodeinfo.parseNodeSpecifics() called node_type=Task
+20170116195045.910682  nodeinfo.parseNodeSpecifics() nodeset cardinal=1
+20170116195045.910687  Flow_parseSpecifics() end
+20170116195045.910692  Flow_parseDependencies begin
+20170116195045.910696  XmlUtils_getnodeset(): xpath query: (child::DEPENDS_ON)
+20170116195045.910707  XmlUtils_getnodeset(): No result
+20170116195045.910712  Flow_parseDependencies end
+20170116195045.910717  Flow_parseSubmits begin
+20170116195045.910722  nodeinfo.getFlowInfo() *********** submits **********
+20170116195045.910726  XmlUtils_getnodeset(): xpath query: (child::SUBMITS)
+20170116195045.910735  XmlUtils_getnodeset(): No result
+20170116195045.910741  nodeinfo.parseSubmits() called
+20170116195045.910754  Flow_parseSubmits return FLOW_SUCCESS
+20170116195045.910759  Flow_parseSiblings begin
+20170116195045.910763  nodeinfo.getFlowInfo() *********** node siblings **********
+20170116195045.910769  XmlUtils_getnodeset(): xpath query: (preceding-sibling::*[@name])
+20170116195045.910800  nodeinfo.getFlowInfo() *********** preceding siblings found**********
+20170116195045.910806  nodeinfo.parseNodeSiblings() called
+20170116195045.910812  nodeinfo.parseNodeSiblings() sibling:Different_Hosts
+20170116195045.910817  nodeinfo.parseNodeSiblings() sibling:Dependencies
+20170116195045.910823  nodeinfo.parseNodeSiblings() sibling:MoreDependencies
+20170116195045.910829  nodeinfo.parseNodeSiblings() sibling:npasstest
+20170116195045.910834  nodeinfo.parseNodeSiblings() sibling:work_unit
+20170116195045.910840  XmlUtils_getnodeset(): xpath query: (following-sibling::*[@name])
+20170116195045.910858  nodeinfo.getFlowInfo() *********** following siblings found**********
+20170116195045.910864  nodeinfo.parseNodeSiblings() called
+20170116195045.910870  nodeinfo.parseNodeSiblings() sibling:Loop_example
+20170116195045.910875  nodeinfo.parseNodeSiblings() sibling:switch_hour
+20170116195045.910881  nodeinfo.parseNodeSiblings() sibling:switchmod
+20170116195045.910887  nodeinfo.parseNodeSiblings() sibling:deploop
+20170116195045.910892  nodeinfo.parseNodeSiblings() sibling:depswitch
+20170116195045.910898  nodeinfo.parseNodeSiblings() sibling:submit_test
+20170116195045.910903  Flow_parseSiblings return FLOW_SUCCESS
+20170116195045.910908  Flow_deleteVisitor() begin
+20170116195045.910968  Flow_deleteVisitor() end
+20170116195045.910977  SeqUtil_fixPath source:/sample/worker new:/sample/worker
+20170116195045.910982  getNodeResources _nodePath=/sample/worker type=1
+20170116195045.910989  getNodeResources looking for xml file /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources//sample/worker.xml
+20170116195045.914900  XmlUtils_resolve(): performing definition replacements in string "${FRONTEND}"
+20170116195045.918411  SeqUtil_getdef(): looking for definition of FRONTEND in /home/dor001/.suites/overrides.def
+20170116195045.919087  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.919110  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.919117  SeqUtil_getdef(): looking for definition of FRONTEND in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.919124  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.919135  SeqUtil_parsedef(): found definition FRONTEND=eccc-gpsc2 in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.919143  XmlUtils_resolve(): replacing FRONTEND with definition value "eccc-gpsc2"
+20170116195045.919157  getNodeResources query: (/NODE_RESOURCES)
+20170116195045.919163  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES)
+20170116195045.919183  getNodeResources query: (/NODE_RESOURCES/BATCH/@*)
+20170116195045.919190  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/BATCH/@*)
+20170116195045.919204  nodeinfo.parseBatchResources() called
+20170116195045.919211  nodeinfo.parseBatchResources() nodeset->nodeNr=5
+20170116195045.919216  nodeinfo.parseBatchResources() nodePtr->name=machine
+20170116195045.919221  nodeinfo.parseBatchResources() value=eccc-gpsc2
+20170116195045.919226  nodeinfo.parseBatchResources() nodePtr->name=memory
+20170116195045.919230  nodeinfo.parseBatchResources() value=1G
+20170116195045.919236  nodeinfo.parseBatchResources() nodePtr->name=wallclock
+20170116195045.919241  nodeinfo.parseBatchResources() value=6
+20170116195045.919246  nodeinfo.parseBatchResources() nodePtr->name=catchup
+20170116195045.919251  nodeinfo.parseBatchResources() value=4
+20170116195045.919256  nodeinfo.parseBatchResources() nodePtr->name=cpu
+20170116195045.919261  nodeinfo.parseBatchResources() value=1
+20170116195045.919268  getNodeResources query: (/NODE_RESOURCES/child::DEPENDS_ON)
+20170116195045.919273  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/child::DEPENDS_ON)
+20170116195045.919285  XmlUtils_getnodeset(): No result
+20170116195045.919291  getNodeResources query: (/NODE_RESOURCES/ABORT_ACTION/@*)
+20170116195045.919296  XmlUtils_getnodeset(): xpath query: (/NODE_RESOURCES/ABORT_ACTION/@*)
+20170116195045.919306  XmlUtils_getnodeset(): No result
+20170116195045.922830  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /home/dor001/.suites/overrides.def
+20170116195045.923473  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.923489  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.923496  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.923502  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.923518  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_ABORT_ACTION in /home/dor001/.suites/default_resources.def
+20170116195045.923524  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170116195045.926657  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/overrides.def
+20170116195045.927253  SeqUtil_getmappedfile(): Could not open file /home/dor001/.suites/overrides.def for definition lookup 
+20170116195045.927400  SeqUtil_parsdef failed to open/map file /home/dor001/.suites/overrides.def 
+20170116195045.927410  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def
+20170116195045.927426  getmappedfile(): File /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/resources/resources.def was found in mmapped files
+20170116195045.927442  SeqUtil_getdef(): looking for definition of SEQ_DEFAULT_SHELL in /home/dor001/.suites/default_resources.def
+20170116195045.927448  getmappedfile(): File /home/dor001/.suites/default_resources.def was found in mmapped files
+20170116195045.927459  SeqNode_printLoops():
+20170116195045.927465  SeqNode_printLoops() end
+20170116195045.927470  SeqLoops_validateLoopArgs() loop pointer not found
+20170116195045.927477  maestro.go_submit() checking for worker's extension: 
+20170116195045.927485  maestro.go_submit() checking for worker status /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/worker.end or /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/worker.abort.stop20170116195045.928238  maestro.access_svr(): /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0/sequencing/status/20170109140000//sample/worker.end return:0
+20170116195045.928261   Running maestro -s submit on /sample/worker
+20170116195045.928276  Command called:
+maestro -s submit -n /sample/worker -f continue -e eccc-gpsc2 
+20170116195045.928282  maestro() ignoreAllDeps=0 
+20170116195045.928291  SeqUtil_fixPath source:eccc-gpsc2 new:/eccc-gpsc2
+SEQ_EXP_HOME /eccc-gpsc2 is an invalid link or directory!
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+maestro: node=/sample/work_unit/t2 signal=submit flow=continue loop_args= extraArgs=(null) expHome=/fs/vnas_Heccc/cmo/cmoi/dor001/.suites/sample_1.4.0
+#########Server Connection Open And Login Accepted Signal:submit #########
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+maestro: node=/sample/worker signal=submit flow=continue loop_args= extraArgs=(null) expHome=eccc-gpsc2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! APPLICATION ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Program exiting with status 1!

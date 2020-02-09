@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <DEPENDS_ON dep_name="r1start" exp="/home/binops/afsi/ops/.ocm/regional" protocol="ocmpolling" status="end" type="node" user="afsiops"/>
+
+</NODE_RESOURCES>

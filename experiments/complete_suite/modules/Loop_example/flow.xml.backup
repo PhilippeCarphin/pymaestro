@@ -1,0 +1,19 @@
+
+<MODULE name="Loop_example" version_number="1.0" date="1 Juillet 2009">
+        <SUBMITS sub_name="outer_Loop"/>
+      	<LOOP name="outer_Loop" start="1" step="1" end="4">
+	      <SUBMITS sub_name="A_Loop_Task"/>
+	      <SUBMITS sub_name="inner_Loop"/>
+	      <SUBMITS sub_name="loop_nptask"/>
+	      <TASK name="A_Loop_Task">
+	         <DEPENDS_ON type="task" dep_name="/sample_mod/Family_1/Loop_example/outer_Loop/loop_nptask" status="end" local_index="outer_Loop=1" index="outer_Loop=1,loop_nptask=0001"/>
+              </TASK>
+	      <NPASS_TASK name="loop_nptask"/>
+	      <LOOP name="inner_Loop" start="1" step="1" end="3">
+	            <SUBMITS sub_name="Another_Loop_Task"/>
+		    <TASK name="Another_Loop_Task"/>
+              </LOOP>
+	</LOOP>
+</MODULE>
+
+

@@ -1,0 +1,9 @@
+#!/bin/ksh
+
+i=0
+while [ $i -ne 100 ];do
+    nodelogger -n ${SEQ_NODE} -s infox  ${SEQ_LOOP_ARGS}  -m "loop=$i \"$SEQ_NODE\" has logged info ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    ((i=i+1))
+done
+
+sleep 2

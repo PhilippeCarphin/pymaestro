@@ -1,0 +1,3 @@
+<NODE_RESOURCES>
+   <BATCH catchup="3" cpu="36" machine="${FRONTEND}" memory="3G" mpi="0" soumet_args="-waste 100" wallclock="60" />
+</NODE_RESOURCES>

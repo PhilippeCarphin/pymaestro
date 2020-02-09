@@ -1,0 +1,6 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <!-- batch resource definition
+  supported attributes: machine, queue, memory, mpi, wallclock, catchup, cpu, soumet_args
+  -->
+  <BATCH machine="${FRONTEND}" queue="${FRONTEND_DEFAULT_Q}" soumet_args="-waste 97"/> 
+</NODE_RESOURCES>

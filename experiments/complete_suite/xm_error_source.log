@@ -1,0 +1,22 @@
+couldn't execute "default": no such file or directory
+couldn't execute "default": no such file or directory
+    while executing
+"exec default /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/bugreports/smallexp/modules/test/task.tsk &"
+    ("eval" body line 1)
+    invoked from within
+"eval exec ${textViewer} ${_file} &"
+    (procedure "ModuleFlowView_goEditor" line 13)
+    invoked from within
+"ModuleFlowView_goEditor ${sourceFile}"
+    (procedure "ModuleFlowControl_sourceSelected" line 30)
+    invoked from within
+"ModuleFlowControl_sourceSelected /fs/vnas_Heccc/cmo/cmoi/dor001/.suites/bugreports/smallexp mnode_2265099624_/test/task"
+    invoked from within
+".popupMenu invoke active"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel #0 [list $w invoke active]"
+    (procedure "tk::MenuInvoke" line 50)
+    invoked from within
+"tk::MenuInvoke .popupMenu 1"
+    (command bound to event)

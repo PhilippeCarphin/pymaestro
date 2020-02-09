@@ -1,0 +1,6 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <!-- batch resource definition
+  supported attributes: machine, queue, memory, mpi, wallclock, catchup, cpu, soumet_args
+  -->
+  <LOOP end="2" set="1" start="0" step="2"/>
+</NODE_RESOURCES>

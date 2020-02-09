@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <BATCH catchup="3" machine="${FRONTEND}" queue="${FRONTEND_DEFAULT_Q}" wallclock="2"/>
+  <ABORT_ACTION name="stop"/>
+</NODE_RESOURCES>

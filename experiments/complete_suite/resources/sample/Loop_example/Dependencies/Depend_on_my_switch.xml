@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH catchup="3" machine="pollux" memory="2G" wallclock="3"/>
+   <DEPENDS_ON dep_name="/dummy_mod/newmod/myswitch_renamed/f2/inner_switch" exp="/home/ops/afsi/rol/.suite_1/dummy_suite_4" index="myswitch_renamed=*,inner_switch=00" status="end" type="node"/> 
+</NODE_RESOURCES>

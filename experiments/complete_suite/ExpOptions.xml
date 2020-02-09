@@ -1,0 +1,14 @@
+<!--
+The following tags are used for testing of new xflow_overview for version 1.3:
+shortName: used for labelling boxes in the overview
+hour: in the Exp tag, this is used to get info based on each run hour
+TimingInfo: for each run hour, replaces the ExpTimings file
+SupportInfo: for whole exp or each run hour, replaces SupportExec and SupportStatus
+
+--> 
+<ExpOptions displayName="text-exp" shortName="text-exp">
+   <SupportInfo executing="Yes" status="Experimental - Day support only."/>
+   <Exp hour="00">
+      <TimingInfo ref_start="8:00" ref_end="8:30"/>
+   </Exp>
+</ExpOptions>

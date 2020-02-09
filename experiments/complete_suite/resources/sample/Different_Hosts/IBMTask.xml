@@ -1,0 +1,5 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+    <BATCH catchup="4" cpu="1" machine="${BACKEND}" memory="3500M" mpi="0" queue="${BACKEND_DEFAULT_Q}" soumet_args="-waste 100" wallclock="1"/>
+    <DEPENDS_ON dep_name="./IBMTaskMPI" exp="${MY_EXP}" status="end" type="node"/>
+
+</NODE_RESOURCES>

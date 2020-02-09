@@ -1,0 +1,4 @@
+<NODE_RESOURCES>
+    <BATCH machine="${BACKEND}" cpu="36" memory="1G" wallclock="5"/>
+</NODE_RESOURCES>
+

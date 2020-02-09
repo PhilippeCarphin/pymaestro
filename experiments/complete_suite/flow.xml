@@ -1,0 +1,254 @@
+<?xml version="1.0" ?>
+<MODULE name="sample">
+    <SUBMITS sub_name="Different_Hosts"/>
+    <SUBMITS sub_name="Dependencies"/>
+    <SUBMITS sub_name="MoreDependencies"/>
+    <SUBMITS sub_name="npasstest"/>
+    <SUBMITS sub_name="work_unit"/>
+    <SUBMITS sub_name="worker"/>
+    <SUBMITS sub_name="Loop_example"/>
+    <SUBMITS sub_name="switch_hour"/>
+    <SUBMITS sub_name="switchmod"/>
+    <SUBMITS sub_name="deploop"/>
+    <SUBMITS sub_name="depswitch"/>
+    <MODULE name="Different_Hosts">
+    <SUBMITS sub_name="IBMTask"/>
+    <SUBMITS sub_name="VAR"/>
+    <SUBMITS sub_name="IBMTaskMPI"/>
+    <SUBMITS sub_name="LinuxTask"/>
+    <TASK name="IBMTask"/>
+    <TASK name="VAR"/>
+    <TASK name="IBMTaskMPI"/>
+    <TASK name="LinuxTask"/>
+</MODULE>
+<MODULE name="Dependencies">
+    <SUBMITS sub_name="task_depended_on"/>
+    <SUBMITS sub_name="downone"/>
+    <SUBMITS sub_name="loop"/>
+    <SUBMITS sub_name="wildcard_dep"/>
+    <TASK name="task_depended_on"/>
+    <FAMILY name="downone">
+        <SUBMITS sub_name="dependant_task"/>
+        <SUBMITS sub_name="downtwo"/>
+        <TASK name="dependant_task">
+            <DEPENDS_ON dep_name="../task_depended_on" status="end" type="node"/>
+        </TASK>
+        <FAMILY name="downtwo">
+            <SUBMITS sub_name="dep_container_keyword"/>
+            <SUBMITS sub_name="dep_parent_keyword"/>
+            <SUBMITS sub_name="dep_module_keyword"/>
+            <TASK name="dep_container_keyword">
+                <DEPENDS_ON dep_name="./dep_parent_keyword" status="end" type="node"/>
+            </TASK>
+            <TASK name="dep_parent_keyword">
+                <DEPENDS_ON dep_name="../../task_depended_on" status="end" type="node"/>
+            </TASK>
+            <TASK name="dep_module_keyword">
+                <DEPENDS_ON dep_name=".../task_depended_on" status="end" type="node"/>
+            </TASK>
+        </FAMILY>
+    </FAMILY>
+    <LOOP name="loop">
+        <SUBMITS sub_name="task"/>
+        <SUBMITS sub_name="innerloop"/>
+        <SUBMITS sub_name="current_index_dep"/>
+        <TASK name="task"/>
+        <LOOP name="innerloop">
+            <SUBMITS sub_name="task"/>
+            <TASK name="task"/>
+        </LOOP>
+        <TASK name="current_index_dep"/>
+    </LOOP>
+    <TASK name="wildcard_dep"/>
+</MODULE>
+<FAMILY name="MoreDependencies">
+    <SUBMITS sub_name="dependee"/>
+    <SUBMITS sub_name="dependant1"/>
+    <SUBMITS sub_name="dependant2"/>
+    <SUBMITS sub_name="r1gemdmdep"/>
+    <SUBMITS sub_name="e1opsdep"/>
+    <SUBMITS sub_name="g2minntloop2dep"/>
+    <SUBMITS sub_name="deponcontainer"/>
+    <TASK name="dependee"/>
+    <TASK name="dependant1"/>
+    <TASK name="dependant2"/>
+    <TASK name="r1gemdmdep"/>
+    <TASK name="e1opsdep"/>
+    <TASK name="g2minntloop2dep"/>
+    <TASK name="deponcontainer"/>
+</FAMILY>
+    <FAMILY name="npasstest">
+        <SUBMITS sub_name="launchertask"/>
+        <TASK name="launchertask">
+            <SUBMITS sub_name="npt" type="user"/>
+        </TASK>
+        <NPASS_TASK name="npt"/>
+    </FAMILY>
+    <FAMILY name="work_unit" work_unit="1">
+        <SUBMITS sub_name="t1"/>
+        <SUBMITS sub_name="t2"/>
+        <TASK name="t1">
+            <SUBMITS sub_name="t3"/>
+        </TASK>
+        <TASK name="t3"/>
+        <TASK name="t2"/>
+    </FAMILY>
+    <TASK name="worker"/>
+    <MODULE name="Loop_example">
+    <SUBMITS sub_name="gem_loop"/>
+    <SUBMITS sub_name="Dependencies"/>
+    <SUBMITS sub_name="YFamily"/>
+    <LOOP name="gem_loop">
+        <SUBMITS sub_name="A_Loop_Task_1"/>
+        <SUBMITS sub_name="A_Loop_Task_0"/>
+        <SUBMITS sub_name="A_Loop_Task_2"/>
+        <SUBMITS sub_name="A_Loop_Task_3"/>
+        <SUBMITS sub_name="A_Loop_Task_5"/>
+        <SUBMITS sub_name="A_Loop_Task_6"/>
+        <SUBMITS sub_name="A_Loop_Task_7"/>
+        <SUBMITS sub_name="A_Loop_Task_8"/>
+        <SUBMITS sub_name="A_Loop_Task_9"/>
+        <SUBMITS sub_name="A_Loop_Task_11"/>
+        <SUBMITS sub_name="A_Loop_Task_22"/>
+        <SUBMITS sub_name="A_Loop_Task_33"/>
+        <SUBMITS sub_name="A_Loop_Task_44"/>
+        <SUBMITS sub_name="A_Loop_Task_55"/>
+        <SUBMITS sub_name="A_Loop_Task_66"/>
+        <SUBMITS sub_name="A_Loop_Task_77"/>
+        <SUBMITS sub_name="A_Loop_Task_88"/>
+        <SUBMITS sub_name="A_Loop_Task_99"/>
+        <TASK name="A_Loop_Task_1"/>
+        <TASK name="A_Loop_Task_0"/>
+        <TASK name="A_Loop_Task_2">
+            <SUBMITS sub_name="A_Task_22"/>
+        </TASK>
+        <TASK name="A_Task_22"/>
+        <TASK name="A_Loop_Task_3"/>
+        <TASK name="A_Loop_Task_5"/>
+        <TASK name="A_Loop_Task_6"/>
+        <TASK name="A_Loop_Task_7"/>
+        <TASK name="A_Loop_Task_8"/>
+        <TASK name="A_Loop_Task_9"/>
+        <TASK name="A_Loop_Task_11"/>
+        <TASK name="A_Loop_Task_22"/>
+        <TASK name="A_Loop_Task_33"/>
+        <TASK name="A_Loop_Task_44"/>
+        <TASK name="A_Loop_Task_55"/>
+        <TASK name="A_Loop_Task_66"/>
+        <TASK name="A_Loop_Task_77"/>
+        <TASK name="A_Loop_Task_88"/>
+        <TASK name="A_Loop_Task_99"/>
+    </LOOP>
+    <FAMILY name="Dependencies">
+        <SUBMITS sub_name="Trigger"/>
+        <SUBMITS sub_name="Depend_on_maestro_afsiops"/>
+        <SUBMITS sub_name="Depend_on_my_own_exp"/>
+        <SUBMITS sub_name="Depend_on_a_user_switch"/>
+        <SUBMITS sub_name="Depend_on_my_switch"/>
+        <SUBMITS sub_name="Trigger_fan_my_other_xp"/>
+        <TASK name="Trigger">
+            <SUBMITS sub_name="Depend_on_OCM_jobs"/>
+            <SUBMITS sub_name="Depend_on_OCM_catchup9"/>
+            <SUBMITS sub_name="Depend_on_OCM_multiLoop"/>
+        </TASK>
+        <TASK name="Depend_on_OCM_jobs"/>
+        <TASK name="Depend_on_OCM_catchup9"/>
+        <TASK name="Depend_on_OCM_multiLoop"/>
+        <TASK name="Depend_on_maestro_afsiops"/>
+        <TASK name="Depend_on_my_own_exp"/>
+        <TASK name="Depend_on_a_user_switch"/>
+        <TASK name="Depend_on_my_switch"/>
+        <TASK name="Trigger_fan_my_other_xp">
+            <SUBMITS sub_name="Depend_on_my_other_xp"/>
+        </TASK>
+        <TASK name="Depend_on_my_other_xp"/>
+    </FAMILY>
+    <FAMILY name="YFamily">
+        <SUBMITS sub_name="Fam_task_1"/>
+        <TASK name="Fam_task_1">
+            <SUBMITS sub_name="YFamily2"/>
+        </TASK>
+        <FAMILY name="YFamily2">
+            <SUBMITS sub_name="Fam_task_2"/>
+            <TASK name="Fam_task_2">
+                <SUBMITS sub_name="Family3"/>
+            </TASK>
+            <FAMILY name="Family3">
+                <SUBMITS sub_name="Fam_task_3"/>
+                <TASK name="Fam_task_3"/>
+            </FAMILY>
+        </FAMILY>
+    </FAMILY>
+</MODULE>
+    <SWITCH name="switch_hour" type="datestamp_hour">
+        <SWITCH_ITEM name="00">
+            <SUBMITS sub_name="t4"/>
+            <TASK name="t4"/>
+        </SWITCH_ITEM>
+        <SWITCH_ITEM name="12">
+            <SUBMITS sub_name="t5"/>
+            <TASK name="t5"/>
+        </SWITCH_ITEM>
+    </SWITCH>
+    <MODULE name="switchmod">
+    <SUBMITS sub_name="switch_dow"/>
+    <SUBMITS sub_name="dependant"/>
+    <SWITCH name="switch_dow" type="day_of_week">
+        <SWITCH_ITEM name="1">
+            <SUBMITS sub_name="t4"/>
+            <TASK name="t4"/>
+        </SWITCH_ITEM>
+        <SWITCH_ITEM name="2">
+            <SUBMITS sub_name="t5"/>
+            <TASK name="t5"/>
+        </SWITCH_ITEM>
+    </SWITCH>
+    <TASK name="dependant"/>
+</MODULE>
+    <LOOP name="deploop">
+        <SUBMITS sub_name="intraloopDependencies"/>
+        <MODULE name="intraloopDependencies">
+    <SUBMITS sub_name="dependee"/>
+    <SUBMITS sub_name="dependant"/>
+    <SUBMITS sub_name="deploop2"/>
+    <TASK name="dependee"/>
+    <TASK name="dependant">
+        <DEPENDS_ON dep_name="./dependee" status="end" type="node"/>
+    </TASK>
+    <LOOP name="deploop2">
+        <SUBMITS sub_name="dependee"/>
+        <SUBMITS sub_name="dependant"/>
+        <TASK name="dependee"/>
+        <TASK name="dependant">
+           <DEPENDS_ON dep_name="./dependee" index="deploop2=CURRENT_INDEX" local_index="deploop2=CURRENT_INDEX" status="end" type="node"/>
+        </TASK>
+    </LOOP>
+</MODULE>
+    </LOOP>
+    <SWITCH name="depswitch" type="datestamp_hour">
+        <SWITCH_ITEM name="00">
+            <SUBMITS sub_name="intraloopDependencies"/>
+            <MODULE name="intraloopDependencies">
+    <SUBMITS sub_name="dependee"/>
+    <SUBMITS sub_name="dependant"/>
+    <SUBMITS sub_name="deploop2"/>
+    <TASK name="dependee"/>
+    <TASK name="dependant">
+        <DEPENDS_ON dep_name="./dependee" status="end" type="node"/>
+    </TASK>
+    <LOOP name="deploop2">
+        <SUBMITS sub_name="dependee"/>
+        <SUBMITS sub_name="dependant"/>
+        <TASK name="dependee"/>
+        <TASK name="dependant">
+           <DEPENDS_ON dep_name="./dependee" index="deploop2=CURRENT_INDEX" local_index="deploop2=CURRENT_INDEX" status="end" type="node"/>
+        </TASK>
+    </LOOP>
+</MODULE>
+        </SWITCH_ITEM>
+        <SWITCH_ITEM name="12">
+            <SUBMITS sub_name="t2"/>
+            <TASK name="t2"/>
+        </SWITCH_ITEM>
+    </SWITCH>
+</MODULE>

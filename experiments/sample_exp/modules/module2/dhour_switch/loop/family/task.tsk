@@ -1,0 +1,10 @@
+
+if [[ ${SEQ_XFER} != "stop" ]] ; then
+   if [[ -n "$SEQ_CONTAINER_LOOP_ARGS" ]]; then
+      maestro -n $SEQ_CONTAINER/npasstask -s submit ${SEQ_CONTAINER_LOOP_ARGS},npasstask=1 -f ${SEQ_XFER}
+      maestro -n $SEQ_CONTAINER/npasstask -s submit ${SEQ_CONTAINER_LOOP_ARGS},npasstask=2^last -f ${SEQ_XFER}
+   else
+      maestro -n $SEQ_CONTAINER/npasstask -s submit -l npasstask=1 -f ${SEQ_XFER}
+      maestro -n $SEQ_CONTAINER/npasstask -s submit -l npasstask=2^last -f ${SEQ_XFER}
+   fi
+fi

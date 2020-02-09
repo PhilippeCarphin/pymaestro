@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH catchup="3" machine="pollux" memory="2G" wallclock="3"/>
+   <DEPENDS_ON dep_name="/enkf_mod/Forecasts/postproc_mod/echeance_loop/e1_carte_spaghat" exp="/home/binops/afsi/par/.suites/geps/forecast/e112" index="echeance_loop=*" protocol="polling" status="end" type="node" user="afsipar"/> 
+</NODE_RESOURCES>

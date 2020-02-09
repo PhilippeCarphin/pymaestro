@@ -1,0 +1,87 @@
+<MODULE name="Loop_example">
+    <SUBMITS sub_name="gem_loop"/>
+    <SUBMITS sub_name="Dependencies"/>
+    <SUBMITS sub_name="YFamily"/>
+    <LOOP name="gem_loop">
+        <SUBMITS sub_name="A_Loop_Task_1"/>
+        <SUBMITS sub_name="A_Loop_Task_0"/>
+        <SUBMITS sub_name="A_Loop_Task_2"/>
+        <SUBMITS sub_name="A_Loop_Task_3"/>
+        <SUBMITS sub_name="A_Loop_Task_5"/>
+        <SUBMITS sub_name="A_Loop_Task_6"/>
+        <SUBMITS sub_name="A_Loop_Task_7"/>
+        <SUBMITS sub_name="A_Loop_Task_8"/>
+        <SUBMITS sub_name="A_Loop_Task_9"/>
+        <SUBMITS sub_name="A_Loop_Task_11"/>
+        <SUBMITS sub_name="A_Loop_Task_22"/>
+        <SUBMITS sub_name="A_Loop_Task_33"/>
+        <SUBMITS sub_name="A_Loop_Task_44"/>
+        <SUBMITS sub_name="A_Loop_Task_55"/>
+        <SUBMITS sub_name="A_Loop_Task_66"/>
+        <SUBMITS sub_name="A_Loop_Task_77"/>
+        <SUBMITS sub_name="A_Loop_Task_88"/>
+        <SUBMITS sub_name="A_Loop_Task_99"/>
+        <TASK name="A_Loop_Task_1"/>
+        <TASK name="A_Loop_Task_0"/>
+        <TASK name="A_Loop_Task_2">
+            <SUBMITS sub_name="A_Task_22"/>
+        </TASK>
+        <TASK name="A_Task_22"/>
+        <TASK name="A_Loop_Task_3"/>
+        <TASK name="A_Loop_Task_5"/>
+        <TASK name="A_Loop_Task_6"/>
+        <TASK name="A_Loop_Task_7"/>
+        <TASK name="A_Loop_Task_8"/>
+        <TASK name="A_Loop_Task_9"/>
+        <TASK name="A_Loop_Task_11"/>
+        <TASK name="A_Loop_Task_22"/>
+        <TASK name="A_Loop_Task_33"/>
+        <TASK name="A_Loop_Task_44"/>
+        <TASK name="A_Loop_Task_55"/>
+        <TASK name="A_Loop_Task_66"/>
+        <TASK name="A_Loop_Task_77"/>
+        <TASK name="A_Loop_Task_88"/>
+        <TASK name="A_Loop_Task_99"/>
+    </LOOP>
+    <FAMILY name="Dependencies">
+        <SUBMITS sub_name="Trigger"/>
+        <SUBMITS sub_name="Depend_on_maestro_afsiops"/>
+        <SUBMITS sub_name="Depend_on_my_own_exp"/>
+        <SUBMITS sub_name="Depend_on_a_user_switch"/>
+        <SUBMITS sub_name="Depend_on_my_switch"/>
+        <SUBMITS sub_name="Trigger_fan_my_other_xp"/>
+        <TASK name="Trigger">
+            <SUBMITS sub_name="Depend_on_OCM_jobs"/>
+            <SUBMITS sub_name="Depend_on_OCM_catchup9"/>
+            <SUBMITS sub_name="Depend_on_OCM_multiLoop"/>
+        </TASK>
+        <TASK name="Depend_on_OCM_jobs"/>
+        <TASK name="Depend_on_OCM_catchup9"/>
+        <TASK name="Depend_on_OCM_multiLoop"/>
+        <TASK name="Depend_on_maestro_afsiops"/>
+        <TASK name="Depend_on_my_own_exp"/>
+        <TASK name="Depend_on_a_user_switch"/>
+        <TASK name="Depend_on_my_switch"/>
+        <TASK name="Trigger_fan_my_other_xp">
+            <SUBMITS sub_name="Depend_on_my_other_xp"/>
+        </TASK>
+        <TASK name="Depend_on_my_other_xp"/>
+    </FAMILY>
+    <FAMILY name="YFamily">
+        <SUBMITS sub_name="Fam_task_1"/>
+        <TASK name="Fam_task_1">
+            <SUBMITS sub_name="YFamily2"/>
+        </TASK>
+        <FAMILY name="YFamily2">
+            <SUBMITS sub_name="Fam_task_2"/>
+            <TASK name="Fam_task_2">
+                <SUBMITS sub_name="Family3"/>
+            </TASK>
+            <FAMILY name="Family3">
+                <SUBMITS sub_name="Fam_task_3"/>
+                <TASK name="Fam_task_3"/>
+            </FAMILY>
+        </FAMILY>
+    </FAMILY>
+</MODULE>
+

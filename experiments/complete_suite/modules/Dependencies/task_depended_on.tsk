@@ -1,0 +1,6 @@
+sleep 10
+
+command -v jobst 
+echo $PATH
+alias
+jobst -u $USER

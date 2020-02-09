@@ -1,0 +1,6 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <!-- batch resource definition
+  supported attributes: machine, queue, memory, mpi, wallclock, catchup, cpu, soumet_args
+  -->
+  <BATCH catchup="4" cpu="1" machine="${BACKEND}" memory="500M" mpi="0" queue="${BACKEND_DEFAULT_Q}" wallclock="50" soumet_args="-waste 100"/>
+</NODE_RESOURCES>

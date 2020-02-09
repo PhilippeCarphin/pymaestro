@@ -1,0 +1,6 @@
+
+for iteration in `seq 1 10000` ; do 
+
+   getdef resources FRONTEND
+
+done

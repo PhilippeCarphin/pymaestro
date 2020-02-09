@@ -1,0 +1,75 @@
+
+export SECONDS=0
+
+function getfilelist_or_end {
+set -x
+delta=5
+filemissing=0
+filelist=`find $TASK_INPUT/work_unit_source/$SEQ_DATE/work_unit_depot -name *.tar`
+echo $filelist
+if [[ `echo $filelist | wc -w` -eq 0 ]] ; then
+    sleep $delta
+    counter=$(echo "scale=0; ${counter} + $delta" | bc -l)
+    if [[ ${counter%.*} -gt $worker_timeout ]] ; then 
+       finished=1
+    else
+       getfilelist_or_end
+    fi  
+fi
+}
+
+wallclock=$((`nodeinfo -n $SEQ_NODE -f res | grep wallclock | cut -f 2 -d"="` * 60 ))
+submitcounter=0
+finished=0
+while [[ $finished -ne 1 ]] ; do  
+
+## try to get a work unit
+
+ID=${JOB_ID:-${LOADL_STEP_ID%.*}}
+## get the earliest work unit
+    counter=0
+    getfilelist_or_end
+    for file in $filelist; do  
+        collision=0
+        mv $file $file.$ID || collision=1  
+        if [[ $collision -ne 1 ]] ; then  
+
+            ## untar the content 
+
+            tar -xvf $file.$ID 
+
+            head -2 GO > runcommands 
+            taskname=${file#$TASK_INPUT/work_unit_source/$SEQ_DATE/work_unit_depot/$SEQ_NODE}
+            taskname=${taskname%.tar}
+            destjob=`head -1 GO | cut -f 3 -d " "`  
+
+            nodelogger -n $SEQ_NODE -m "Running task $taskname" -s infox
+
+            ## run the moves in the GO scripts, then ssh to hostname, and run the job. 
+
+if [[ -z $JOB_ID ]] ; then 
+
+  cat >> runcommands << EOF
+            ( export LOADL_STEP_NAME=work_unit; set -x; cd;  chmod 755 $destjob ; $destjob )
+EOF
+
+else 
+  cat >> runcommands << EOF
+            ( export JOB_ID=$JOB_ID.$submitcounter; set -x;  chmod 755 $destjob ; $destjob )
+EOF
+fi
+            chmod 755 runcommands
+           ./runcommands || echo $file.$ID aborted
+           submitcounter=$(($submitcounter+1))
+
+          rm -f  $file.$ID runcommands
+        else
+           echo $file being worked on.
+        fi
+    done
+
+    if [[ $SECONDS -gt $wallclock ]]; then
+      finished=1
+    fi
+
+done

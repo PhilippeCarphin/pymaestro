@@ -1,0 +1,5 @@
+<MODULE name="module">
+    <SUBMITS sub_name="module2"/>
+    <MODULE name="module2"/>
+</MODULE>
+

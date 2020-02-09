@@ -1,0 +1,77 @@
+<MODULE name="sample">
+    <SUBMITS sub_name="Different_Hosts"/>
+    <SUBMITS sub_name="Dependencies"/>
+    <SUBMITS sub_name="MoreDependencies"/>
+    <SUBMITS sub_name="npasstest"/>
+    <SUBMITS sub_name="work_unit"/>
+    <SUBMITS sub_name="worker"/>
+    <SUBMITS sub_name="Loop_example"/>
+    <SUBMITS sub_name="switch_hour"/>
+    <SUBMITS sub_name="switchmod"/>
+    <SUBMITS sub_name="deploop"/>
+    <SUBMITS sub_name="depswitch"/>
+    <SUBMITS sub_name="submit_test"/>
+    <MODULE name="Different_Hosts"/>
+    <MODULE name="Dependencies"/>
+    <FAMILY name="MoreDependencies">
+        <SUBMITS sub_name="dependee"/>
+        <SUBMITS sub_name="dependant1"/>
+        <SUBMITS sub_name="dependant2"/>
+        <SUBMITS sub_name="r1gemdmdep"/>
+        <SUBMITS sub_name="e1opsdep"/>
+        <SUBMITS sub_name="g2minntloop2dep"/>
+        <SUBMITS sub_name="deponcontainer"/>
+        <TASK name="dependee"/>
+        <TASK name="dependant1"/>
+        <TASK name="dependant2"/>
+        <TASK name="r1gemdmdep"/>
+        <TASK name="e1opsdep"/>
+        <TASK name="g2minntloop2dep"/>
+        <TASK name="deponcontainer"/>
+    </FAMILY>
+    <FAMILY name="npasstest">
+        <SUBMITS sub_name="launchertask"/>
+        <TASK name="launchertask">
+            <SUBMITS sub_name="npt" type="user"/>
+        </TASK>
+        <NPASS_TASK name="npt"/>
+    </FAMILY>
+    <FAMILY name="work_unit" work_unit="1">
+        <SUBMITS sub_name="t1"/>
+        <SUBMITS sub_name="t2"/>
+        <TASK name="t1">
+            <SUBMITS sub_name="t3"/>
+        </TASK>
+        <TASK name="t3"/>
+        <TASK name="t2"/>
+    </FAMILY>
+    <TASK name="worker"/>
+    <MODULE name="Loop_example"/>
+    <SWITCH name="switch_hour" type="datestamp_hour">
+        <SWITCH_ITEM name="00">
+            <SUBMITS sub_name="t4"/>
+            <TASK name="t4"/>
+        </SWITCH_ITEM>
+        <SWITCH_ITEM name="12">
+            <SUBMITS sub_name="t5"/>
+            <TASK name="t5"/>
+        </SWITCH_ITEM>
+    </SWITCH>
+    <MODULE name="switchmod"/>
+    <LOOP name="deploop">
+        <SUBMITS sub_name="intraloopDependencies"/>
+        <MODULE name="intraloopDependencies"/>
+    </LOOP>
+    <SWITCH name="depswitch" type="datestamp_hour">
+        <SWITCH_ITEM name="00">
+            <SUBMITS sub_name="intraloopDependencies"/>
+            <MODULE name="intraloopDependencies"/>
+        </SWITCH_ITEM>
+        <SWITCH_ITEM name="12">
+            <SUBMITS sub_name="t2"/>
+            <TASK name="t2"/>
+        </SWITCH_ITEM>
+    </SWITCH>
+    <MODULE name="submit_test"/>
+</MODULE>
+

@@ -1,0 +1,16 @@
+<MODULE name="switchmod">
+    <SUBMITS sub_name="switch_dow"/>
+    <SUBMITS sub_name="dependant"/>
+    <SWITCH name="switch_dow" type="day_of_week">
+        <SWITCH_ITEM name="1">
+            <SUBMITS sub_name="t4"/>
+            <TASK name="t4"/>
+        </SWITCH_ITEM>
+        <SWITCH_ITEM name="2">
+            <SUBMITS sub_name="t5"/>
+            <TASK name="t5"/>
+        </SWITCH_ITEM>
+    </SWITCH>
+    <TASK name="dependant"/>
+</MODULE>
+

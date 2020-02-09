@@ -1,0 +1,7 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+  <!-- batch resource definition
+  supported attributes: machine, queue, memory, mpi, wallclock, catchup, cpu, soumet_args
+  -->
+  <BATCH catchup="4" cpu="1" machine="${FRONTEND}" memory="500M" mpi="0" queue="${FRONTEND_DEFAULT_Q}" wallclock="50"/>
+  <DEPENDS_ON dep_name="/sample/Dependencies/loop/task" index="loop=CURRENT_INDEX" local_index="loop=CURRENT_INDEX" status="end" type="node"/>
+</NODE_RESOURCES>

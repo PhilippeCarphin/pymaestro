@@ -1,0 +1,3 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH machine="eccc-ppp2" wallclock="5" memory="2G" soumet_args="-image=eccc/eccc_all_ppp_ubuntu-18.04-amd64_latest"/> 
+</NODE_RESOURCES>

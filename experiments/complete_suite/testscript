@@ -1,0 +1,60 @@
+#!/bin/ksh
+
+echo IN $0 
+
+
+
+function test {
+
+set -x 
+typeset -LZ level
+var=$1
+level=${var##*_ISBL_}
+lvl="${level%%\ *}"
+
+echo in function $var $lvl $level
+
+}
+# using env 
+
+function test_env  {
+set -x 
+typeset -LZ level
+level=${var##*_ISBL_}
+lvl="${level%%\ *}"
+
+echo in env function $var $lvl $level
+
+}
+
+function test_case  {
+set -x 
+typeset -LZ level
+case $var in 
+  *_ISBL*)
+    level=${var##*_ISBL_}
+    lvl="${level%%\ *}"
+  ;; 
+esac 
+echo in case function $var $lvl $level
+
+}
+
+for var in HGT_ISBL_0200 HGT_ISBL_0010 ; do  
+
+   typeset -LZ level
+   export var
+   level=${var##*_ISBL_}
+   lvl="${level%%\ *}"
+   
+   echo $var $lvl $level
+   test $var
+   test_env 
+   test_case
+done 
+
+
+
+
+
+

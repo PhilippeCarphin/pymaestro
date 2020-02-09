@@ -1,0 +1,4 @@
+<?xml version="1.0" ?><NODE_RESOURCES>
+ <BATCH catchup="3" machine="pollux" memory="2G" wallclock="3"/>
+   <DEPENDS_ON dep_name="/SNOW_ANL/validate_exp" exp="/home/ops/afsi/rol/.suite_1/snow_analysis_g6" status="end" type="node"/> 
+</NODE_RESOURCES>
