@@ -59,11 +59,6 @@ class FlowVisitor:
         print(f'{token_node.tag}: {token_node} (name = {name})')
         if token_node.tag == 'MODULE':
             self.follow_token_module(token)
-        elif token_node.tag == 'SUBMITS':
-            # SUBMITS tags only have a 'sub_name' attribute
-            # and are not meant to be looked at in the
-            # path parsing part.
-            raise RuntimeError("SUBMITS tags should not have a name attrib")
         elif token_node.tag == 'SWITCH':
             self.follow_token_switch(token_node, token)
         else:
