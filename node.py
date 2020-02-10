@@ -25,6 +25,12 @@ def get_node_type(tag):
 
 class PathTokenError(Exception):
     pass
+
+class FlowVisitor:
+    def __init__(self, exp_home):
+        self.xml_context = ET.parse(f'{exp_home}/EntryModule/flow.xml')
+
+
 class NodeInfoHelper:
     def __init__(self, node_path, exp_home, switch_args=None):
         self.xml_context = ET.parse(f'{exp_home}/EntryModule/flow.xml')
@@ -39,7 +45,6 @@ class NodeInfoHelper:
         self.module = None
         self.intramodule_path = None
         self.context_stack = []
-        self.on_first_node = True
 
         self.parse_path()
 
@@ -87,13 +92,20 @@ class NodeInfoHelper:
         self.current_flow_node = new_root
         self.current_node_type = 'MODULE'
 
+    def node(self):
+        """ Return the MaestroNode instance with all the info (like what nodeinfo function returns) """
+        return None
+
+def nodeinfo(exp_home, node_path, datestamp=None):
+    nh = NodeInfoHelper(node_path, exp_home)
+    return nh.node()
 
 p_good = 'module2/dhour_switch/loop/family/task'
 p_bad = 'module2/dhour_switch/lop/family/task'
 print(f"Trying with path = {p_good}")
-f = NodeInfoHelper(p_good , os.getcwd() + '/experiments/sample_exp')
+nodeinfo(os.getcwd() + '/experiments/sample_exp', p_good)
 print(f"Trying with path = {p_bad}")
 try:
-    f = NodeInfoHelper(p_bad , os.getcwd() + '/experiments/sample_exp')
+    nodeinfo(os.getcwd() + '/experiments/sample_exp', p_bad)
 except PathTokenError as e:
     print(f"ERROR: Bad token {e} in path '{p_bad}'")
