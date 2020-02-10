@@ -73,24 +73,13 @@ class FlowVisitor:
     
 
 class NodeInfoHelper:
-    def __init__(self, node_path, exp_home, switch_args=None):
-        self.xml_context = ET.parse(f'{exp_home}/EntryModule/flow.xml')
-        self.node_path = node_path
+    def __init__(self, exp_home, switch_args=None):
         self.exp_home = exp_home
-        self.datestamp = ""
-        self.switch_args = switch_args
-        self.suite_name = None
-        self.task_path = None
-        self.module = None
         self.intramodule_path = None
         self.context_stack = []
-
-        self.parse_path()
-
-
-    def parse_path(self):
-        path_tokens = self.node_path.strip('/').split('/')
-        current_node = self.xml_context.getroot()
+    def parse_path(self, node_path):
+        path_tokens = node_path.strip('/').split('/')
+        current_node = ET.parse(f'{self.exp_home}/EntryModule/flow.xml').getroot()
         for token in path_tokens:
             token_node = current_node.find(f"*[@name='{token}']")
             if token_node is None:
@@ -107,7 +96,6 @@ class NodeInfoHelper:
                 current_node = token_node
             else:
                 current_node = token_node
-
     def follow_token_switch(self, switch_xml_node, token):
         """ Just enter the first switch item for now """
         switch_type = switch_xml_node.attrib['type']
@@ -115,7 +103,6 @@ class NodeInfoHelper:
             if True:
                 self.current_flow_node = d
                 return d
-    
     def follow_token_module(self, token):
         new_xml_filename = f'{self.exp_home}/modules/{token}/flow.xml'
         new_xml_context = ET.parse(new_xml_filename)
@@ -127,8 +114,7 @@ class NodeInfoHelper:
         return None
 
 def nodeinfo(exp_home, node_path, datestamp=None):
-    nh = NodeInfoHelper(node_path, exp_home)
-    return nh.node()
+    NodeInfoHelper(exp_home).parse_path(node_path)
 
 if __name__ == "__main__":
     v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
