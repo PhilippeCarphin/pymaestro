@@ -31,6 +31,7 @@ class FlowVisitor:
         self.current_flow_node = self.xml_context.getroot()
         self.current_node_type = names_map[self.current_flow_node.tag]
         print(f'in __init__: current_node_type = {self.current_node_type}')
+        print(f'in __init__: current_flow_node = {self.current_flow_node}')
         self.suite_name = None
         self.task_path = None
         self.module = None
@@ -47,16 +48,23 @@ class FlowVisitor:
             self.follow_token(token)
 
     def follow_token(self, token):
+        token_node = self.current_flow_node.find(f"*[@name='{token}']")
+        print("result fo find(@name='{token})' " + str(token_node))
+        quit()
         for c in self.current_flow_node:
-            if c.tag == 'SWITCH_ITEM':
-                # If c is a 'SWITCH', then we go in the right
-                # switch item right away.  Therefore finding
-                # a 'c' here that is a switch item is an
-                # unrecoverable error
-                raise RuntimeError("Should never reach here")
+            if 'name' not in c.attrib:
+                # The parsing of tokens is based on the 'name'
+                # attrbutes of nodes (this excludes SUBMITS, 
+                # who have a 'sub_name' instead to exclude them
+                # from this parsing)
+                continue
+            name = c.attrib['name']
+            if name != token:
+                continue
+
             if 'name' in c.attrib and c.attrib['name'] == token:
-                name = c.attrib['name']
                 node_type = names_map[c.tag]
+                name = c.attrib['name']
                 print(f'{c.tag}: {c} (name = {name})')
                 if c.tag == 'MODULE':
                     self.follow_token_module(token)
