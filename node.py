@@ -30,8 +30,8 @@ class FlowVisitor:
         # new_flow_visitor->context->node = new_flow_visitor->context->doc->children;
         self.current_flow_node = self.xml_context.getroot()
         self.current_node_type = names_map[self.current_flow_node.tag]
-        print(f'in __init__: current_node_type = {self.current_node_type}')
-        print(f'in __init__: current_flow_node = {self.current_flow_node}')
+        # print(f'in __init__: current_node_type = {self.current_node_type}')
+        # print(f'in __init__: current_flow_node = {self.current_flow_node}')
         self.suite_name = None
         self.task_path = None
         self.module = None
@@ -44,8 +44,13 @@ class FlowVisitor:
     def parse_path(self):
         path_tokens = self.node_path.strip('/').split('/')
         for token in path_tokens:
-            print(f'following token "{token}"')
             self.follow_token(token)
+        self.do_final_stuff()
+
+    def do_final_stuff(self):
+        self.MaestroNode = None
+        print(self.current_flow_node)
+        pass
 
     def follow_token(self, token):
         token_node = self.current_flow_node.find(f"*[@name='{token}']")
@@ -54,20 +59,20 @@ class FlowVisitor:
         if name != token:
             raise RuntimeError("xml find function didn't do what I asked")
         node_type = names_map[token_node.tag]
-
-        name = token_node.attrib['name']
-        print(f'{token_node.tag}: {token_node} (name = {name})')
-        if token_node.tag == 'MODULE':
+        # print(f'{token_node.tag}: {token_node} (name = {name})')
+        if node_type is NodeType.MODULE:
             self.follow_token_module(token)
-        elif token_node.tag == 'SWITCH':
+        elif node_type is NodeType.SWITCH:
             self.follow_token_switch(token_node, token)
+        elif node_type is NodeType.LOOP:
+            self.current_flow_node = token_node
         else:
             self.current_flow_node = token_node
                
     def follow_token_switch(self, switch_xml_node, token):
         switch_type = switch_xml_node.attrib['type']
         for d in switch_xml_node:
-            print(f'|--> Switch item : {d}')
+            # print(f'|--> Switch item : {d}')
             if True:
                 self.current_flow_node = d
                 return
@@ -78,8 +83,8 @@ class FlowVisitor:
         new_root = new_xml_context.getroot()
         self.current_flow_node = new_root
         self.current_node_type = 'MODULE'
-        print(new_root)
-        print(f'MODULE : {new_root} (name = {new_root.attrib["name"]})')
+        # print(new_root)
+        # print(f'MODULE : {new_root} (name = {new_root.attrib["name"]})')
 
 
 f = FlowVisitor('module2/dhour_switch/loop/family/task', os.getcwd() + '/experiments/sample_exp')
