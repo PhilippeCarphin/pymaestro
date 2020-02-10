@@ -52,12 +52,6 @@ class FlowVisitor:
         print("result fo find(@name='{token})' " + str(token_node))
         quit()
         for c in self.current_flow_node:
-            if 'name' not in c.attrib:
-                # The parsing of tokens is based on the 'name'
-                # attrbutes of nodes (this excludes SUBMITS, 
-                # who have a 'sub_name' instead to exclude them
-                # from this parsing)
-                continue
             name = c.attrib['name']
             if name != token:
                 continue
