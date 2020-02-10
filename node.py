@@ -49,28 +49,25 @@ class FlowVisitor:
 
     def follow_token(self, token):
         token_node = self.current_flow_node.find(f"*[@name='{token}']")
-        print("result fo find(@name='{token})' " + str(token_node))
-        quit()
-        for c in self.current_flow_node:
-            name = c.attrib['name']
-            if name != token:
-                continue
+        # print("result fo find(@name='{token})' " + str(token_node))
+        name = token_node.attrib['name']
+        if name != token:
+            raise RuntimeError("xml find function didn't do what I asked")
+        node_type = names_map[token_node.tag]
 
-            if 'name' in c.attrib and c.attrib['name'] == token:
-                node_type = names_map[c.tag]
-                name = c.attrib['name']
-                print(f'{c.tag}: {c} (name = {name})')
-                if c.tag == 'MODULE':
-                    self.follow_token_module(token)
-                elif c.tag == 'SUBMITS':
-                    # SUBMITS tags only have a 'sub_name' attribute
-                    # and are not meant to be looked at in the
-                    # path parsing part.
-                    raise RuntimeError("SUBMITS tags should not have a name attrib")
-                elif c.tag == 'SWITCH':
-                    self.follow_token_switch(c, token)
-                else:
-                    self.current_flow_node = c
+        name = token_node.attrib['name']
+        print(f'{token_node.tag}: {token_node} (name = {name})')
+        if token_node.tag == 'MODULE':
+            self.follow_token_module(token)
+        elif token_node.tag == 'SUBMITS':
+            # SUBMITS tags only have a 'sub_name' attribute
+            # and are not meant to be looked at in the
+            # path parsing part.
+            raise RuntimeError("SUBMITS tags should not have a name attrib")
+        elif token_node.tag == 'SWITCH':
+            self.follow_token_switch(token_node, token)
+        else:
+            self.current_flow_node = token_node
                
     def follow_token_switch(self, switch_xml_node, token):
         switch_type = switch_xml_node.attrib['type']
