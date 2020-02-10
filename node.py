@@ -28,21 +28,19 @@ class PathTokenError(Exception):
 
 class FlowVisitor:
     def __init__(self, exp_home, node_function=None):
-        self.xml_context = ET.parse(f'{exp_home}/EntryModule/flow.xml')
-        self.current_flow_node = self.xml_context.getroot()
-        self.current_node_type = get_node_type(self.current_flow_node.tag)
         self.exp_home = exp_home
-        self.depth = 0
+        self.depth = -1
     def node_function(self, node, path):
         self.depth_print(f"{node} (name = '{node.attrib['name']}, path = {path})")
     def depth_print(self, message):
         print("    "* self.depth + str(message))
     def visit_flow(self):
-        self.visit_node(self.xml_context.getroot(), '')
+        first_xml_context = ET.parse(f'{self.exp_home}/EntryModule/flow.xml')
+        self.visit_node(first_xml_context.getroot(), '')
     def visit_node(self, node, path):
         self.depth += 1
+        path += "/" + node.attrib['name']
         for child in node.findall('*[@name]'):
-            path += "/" + child.attrib['name']
             node_type = get_node_type(child.tag)
             if node_type is NodeType.MODULE:
                 new_root = self.visit_module(child)
@@ -72,10 +70,6 @@ class FlowVisitor:
         new_root = new_xml_context.getroot()
         return new_root
 
-if __name__ == "__main__":
-    v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
-    v.visit_flow()
-    quit()
     
 
 class NodeInfoHelper:
@@ -85,8 +79,6 @@ class NodeInfoHelper:
         self.exp_home = exp_home
         self.datestamp = ""
         self.switch_args = switch_args
-        self.current_flow_node = self.xml_context.getroot()
-        self.current_node_type = get_node_type(self.current_flow_node.tag)
         self.suite_name = None
         self.task_path = None
         self.module = None
@@ -98,46 +90,37 @@ class NodeInfoHelper:
 
     def parse_path(self):
         path_tokens = self.node_path.strip('/').split('/')
+        current_node = self.xml_context.getroot()
         for token in path_tokens:
-            self.follow_token(token)
-        self.do_final_stuff()
+            token_node = current_node.find(f"*[@name='{token}']")
+            if token_node is None:
+                raise PathTokenError(f"'{token}'")
+            name = token_node.attrib['name']
+            if name != token:
+                raise RuntimeError("xml find function didn't do what I asked")
+            node_type = get_node_type(token_node.tag)
+            if node_type is NodeType.MODULE:
+                current_node = self.follow_token_module(token)
+            elif node_type is NodeType.SWITCH:
+                current_node = self.follow_token_switch(token_node, token)
+            elif node_type is NodeType.LOOP:
+                current_node = token_node
+            else:
+                current_node = token_node
 
-    def do_final_stuff(self):
-        self.MaestroNode = None
-        print(f'Found Node : {self.current_flow_node}')
-        pass
-
-    def follow_token(self, token):
-        token_node = self.current_flow_node.find(f"*[@name='{token}']")
-        if token_node is None:
-            raise PathTokenError(f"'{token}'")
-        name = token_node.attrib['name']
-        if name != token:
-            raise RuntimeError("xml find function didn't do what I asked")
-        node_type = get_node_type(token_node.tag)
-        if node_type is NodeType.MODULE:
-            self.follow_token_module(token)
-        elif node_type is NodeType.SWITCH:
-            self.follow_token_switch(token_node, token)
-        elif node_type is NodeType.LOOP:
-            self.current_flow_node = token_node
-        else:
-            self.current_flow_node = token_node
-               
     def follow_token_switch(self, switch_xml_node, token):
         """ Just enter the first switch item for now """
         switch_type = switch_xml_node.attrib['type']
         for d in switch_xml_node:
             if True:
                 self.current_flow_node = d
-                return
+                return d
     
     def follow_token_module(self, token):
         new_xml_filename = f'{self.exp_home}/modules/{token}/flow.xml'
         new_xml_context = ET.parse(new_xml_filename)
         new_root = new_xml_context.getroot()
-        self.current_flow_node = new_root
-        self.current_node_type = 'MODULE'
+        return new_root
 
     def node(self):
         """ Return the MaestroNode instance with all the info (like what nodeinfo function returns) """
@@ -147,12 +130,15 @@ def nodeinfo(exp_home, node_path, datestamp=None):
     nh = NodeInfoHelper(node_path, exp_home)
     return nh.node()
 
-p_good = 'module2/dhour_switch/loop/family/task'
-p_bad = 'module2/dhour_switch/lop/family/task'
-print(f"Trying with path = {p_good}")
-nodeinfo(os.getcwd() + '/experiments/sample_exp', p_good)
-print(f"Trying with path = {p_bad}")
-try:
-    nodeinfo(os.getcwd() + '/experiments/sample_exp', p_bad)
-except PathTokenError as e:
-    print(f"ERROR: Bad token {e} in path '{p_bad}'")
+if __name__ == "__main__":
+    v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
+    v.visit_flow()
+    p_good = 'module2/dhour_switch/loop/family/task'
+    p_bad = 'module2/dhour_switch/lop/family/task'
+    print(f"Trying with path = {p_good}")
+    nodeinfo(os.getcwd() + '/experiments/sample_exp', p_good)
+    print(f"Trying with path = {p_bad}")
+    try:
+        nodeinfo(os.getcwd() + '/experiments/sample_exp', p_bad)
+    except PathTokenError as e:
+        print(f"ERROR: Bad token {e} in path '{p_bad}'")
