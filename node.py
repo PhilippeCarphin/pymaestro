@@ -96,6 +96,7 @@ class NodeInfoHelper:
                 current_node = token_node
             else:
                 current_node = token_node
+        return current_node
     def follow_token_switch(self, switch_xml_node, token):
         """ Just enter the first switch item for now """
         switch_type = switch_xml_node.attrib['type']
@@ -109,22 +110,17 @@ class NodeInfoHelper:
         new_root = new_xml_context.getroot()
         return new_root
 
-    def node(self):
-        """ Return the MaestroNode instance with all the info (like what nodeinfo function returns) """
-        return None
-
-def nodeinfo(exp_home, node_path, datestamp=None):
-    NodeInfoHelper(exp_home).parse_path(node_path)
-
 if __name__ == "__main__":
     v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
     v.visit_flow()
     p_good = 'module2/dhour_switch/loop/family/task'
     p_bad = 'module2/dhour_switch/lop/family/task'
+    nodeinfo_helper = NodeInfoHelper(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
     print(f"Trying with path = {p_good}")
-    nodeinfo(os.getcwd() + '/experiments/sample_exp', p_good)
+    n = nodeinfo_helper.parse_path(p_good)
+    print(f'>> Found element {n}')
     print(f"Trying with path = {p_bad}")
     try:
-        nodeinfo(os.getcwd() + '/experiments/sample_exp', p_bad)
+        nodeinfo_helper.parse_path(p_bad)
     except PathTokenError as e:
         print(f"ERROR: Bad token {e} in path '{p_bad}'")
