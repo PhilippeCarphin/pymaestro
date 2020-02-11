@@ -72,12 +72,12 @@ class FlowVisitor:
 
     
 
-class NodeInfoHelper:
-    def __init__(self, exp_home, switch_args=None):
+class ExperimentRun:
+    def __init__(self, exp_home, datestamp=None):
         self.exp_home = exp_home
         self.intramodule_path = None
         self.context_stack = []
-    def parse_path(self, node_path):
+    def get_xml_node_from_path(self, node_path, switch_args=None):
         path_tokens = node_path.strip('/').split('/')
         current_node = ET.parse(f'{self.exp_home}/EntryModule/flow.xml').getroot()
         for token in path_tokens:
@@ -115,12 +115,12 @@ if __name__ == "__main__":
     v.visit_flow()
     p_good = 'module2/dhour_switch/loop/family/task'
     p_bad = 'module2/dhour_switch/lop/family/task'
-    nodeinfo_helper = NodeInfoHelper(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
+    exp = ExperimentRun(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
     print(f"Trying with path = {p_good}")
-    n = nodeinfo_helper.parse_path(p_good)
+    n = exp.get_xml_node_from_path(p_good)
     print(f'>> Found element {n}')
     print(f"Trying with path = {p_bad}")
     try:
-        nodeinfo_helper.parse_path(p_bad)
+        exp.get_xml_node_from_path(p_bad)
     except PathTokenError as e:
         print(f"ERROR: Bad token {e} in path '{p_bad}'")
