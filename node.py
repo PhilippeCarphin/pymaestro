@@ -80,7 +80,10 @@ class ExperimentRun:
     def get_xml_node_from_path(self, node_path, switch_args=None):
         path_tokens = node_path.strip('/').split('/')
         current_node = ET.parse(f'{self.exp_home}/EntryModule/flow.xml').getroot()
+        intramodule_path = ''
         for token in path_tokens:
+            intramodule_path += '/' + token
+            print(f'intramodule_path = {intramodule_path}')
             token_node = current_node.find(f"*[@name='{token}']")
             if token_node is None:
                 raise PathTokenError(f"'{token}'")
@@ -109,6 +112,12 @@ class ExperimentRun:
         new_xml_context = ET.parse(new_xml_filename)
         new_root = new_xml_context.getroot()
         return new_root
+    def find_node(self, node_path):
+
+
+def nodeinfo(node_path, exp_home, datestamp=None):
+    exp = ExperimentRun(exp_home, datestamp)
+    print(exp.get_xml_node_from_path(node_path))
 
 if __name__ == "__main__":
     v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
