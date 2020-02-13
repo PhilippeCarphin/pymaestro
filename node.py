@@ -176,17 +176,44 @@ class ResourceVisitor:
         resources_found = False
         if resources_found == False:
             return True
-        
-    def getForEachAttributes(self, ndp):
-        pass
-    def getBatchAttributes(self,ndp):
-        pass
+    def parseForeachTarget(self, ndp, xml_node):
+        ndp.foreach_target.node = xml_node.attrib.get('node')
+        ndp.foreach_target.index = xml_node.attrib.get('node')
+        ndp.foreach_target.exp = xml_node.attrib.get('node')
+        ndp.foreach_target.hour = xml_node.attrib.get('node')
+    def getForEachAttributes(self, ndp, xml_node):
+        self.parseForeachTarget(ndp, xml_node)
+    def parse_batch_resources(self, ndp, xml_node):
+        ndp.cpu_multiplier = xml_node.attrib.get('cpu_multiplier')
+        ndp.machine = xml_node.attrib.get('machine')
+        ndp.memory = xml_node.attrib.get('memory')
+        ndp.queue = xml_node.attrib.get('queue')
+        ndp.mpi = xml_node.attrib.get('mpi')
+        ndp.soumet_args = xml_node.attrib.get('soumet_args')
+        ndp.workq = xml_node.attrib.get('workq')
+        ndp.wallclock = xml_node.attrib.get('wallclock')
+        ndp.immediate = xml_node.attrib.get('immediate')
+        ndp.catchup = xml_node.attrib.get('catchup')
+        ndp.shell = xml_node.attrib.get('shell')
+    def getBatchAttributes(self, ndp, xml_node):
+        self.parse_batch_resources(ndp, xml_node)
+    def parse_depends(self, ndp, xml_node):
+        for dep in xml_node.findall('DEPENDS_ON'):
+            # Create a Dependency instance from the attributes of the dep xml node
+            # Append it to ndp.dependencies
+            print(dep)
     def getDependencies(self, ndp):
         pass
-    def getAbortActions(self, ndp):
+    def getAbortActions(self, ndp, xml_node):
+        for abort_action in xml_node.findall('ABORT_ACTION'):
+            ndp.abort_actions.append(abort_action.attrib['name'])
         pass
-    def getContainerLoopAttributes(self, ndp):
+    def getNodeLoopContainersAttr (self, ndp, xml_node):
+        self.visit_node_dfs_preorder(ndp, xml_node, self.get_container_loop_attributes)
         pass
+    def get_container_loop_attributes(self, ndp, xml_node):
+        for child in xml_node.find('LOOP'):
+            ndp.loops.append(child.attrib)
     def getWorkerPath(self, ndp):
         pass
     def setWorkerData(self, ndp):
@@ -199,10 +226,15 @@ class ResourceVisitor:
         pass
 
     #def parseWorkerPath( const char * pathToNode, const char * _seq_exp_home, SeqNodeDataPtr _nodeDataPtr);
-    #def getNodeLoopContainersAttr (  SeqNodeDataPtr _nodeDataPtr, const char *loopNodePath, const char *expHome );
     #def getNodeResources(SeqNodeDataPtr _nodeDataPtr, const char * expHome, const char * nodePath);
 
             
+class ForeachTarget:
+    def __init__(self):
+        self.index = ""
+        self.exp = ""
+        self.node = ""
+        self.houre = ""
 class ExperimentRunNode:
     def __init__(self, *args, **kwargs):
         self.specific_data = {}
@@ -236,7 +268,7 @@ class ExperimentRunNode:
         self.exp_home = kwargs['exp_home']
         self.shell = kwargs.get('shell', '/bin/bash')
         self.switch_answers = kwargs.get('switch_answers', []) # TODO Needs to be built up while parsing the path
-        self.foreach_target = kwargs.get('foreach_target', None) # SeqForEachTargetPtr forEachTarget;
+        self.foreach_target = ForeachTarget()
         self.dependencies = kwargs.get('dependencies', [])
         self.submits = kwargs.get('submits', [])
         self.abort_actions = kwargs.get('abort_actions', [])

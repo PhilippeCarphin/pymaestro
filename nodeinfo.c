@@ -65,57 +65,61 @@ SeqNodeType getNodeType ( const xmlChar *_node_name ) {
    return nodeType;
 }
 
-void parseBatchResources (xmlXPathObjectPtr _result, SeqNodeDataPtr _nodeDataPtr) {
+void parseBatchResources(xmlXPathObjectPtr _result, SeqNodeDataPtr _nodeDataPtr)
+{
    xmlNodeSetPtr nodeset = NULL;
    xmlNodePtr nodePtr = NULL;
    const xmlChar *nodeName = NULL;
-   char *tmpString = NULL; 
+   char *tmpString = NULL;
    char *cpuString = NULL;
 
-   int i=0;
-   SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseBatchResources() called\n" );
-   if (_result) {
+   int i = 0;
+   SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseBatchResources() called\n");
+   if (_result)
+   {
       nodeset = _result->nodesetval;
       SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseBatchResources() nodeset->nodeNr=%d\n", nodeset->nodeNr);
-      for (i=0; i < nodeset->nodeNr; i++) {
+      for (i = 0; i < nodeset->nodeNr; i++)
+      {
          nodePtr = nodeset->nodeTab[i];
          nodeName = nodePtr->name;
          SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseBatchResources() nodePtr->name=%s\n", nodePtr->name);
-         SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseBatchResources() value=%s\n", nodePtr->children->content );
-	 if ( strcmp( nodeName, "cpu" ) == 0 ) {
-            SeqNode_setCpu( _nodeDataPtr, nodePtr->children->content );
-            cpuString=strdup(nodePtr->children->content);
-	 } else if ( strcmp( nodeName, "cpu_multiplier" ) == 0 ) {
-	    SeqNode_setCpuMultiplier( _nodeDataPtr, nodePtr->children->content );
-         } else if ( strcmp( nodeName, "machine" ) == 0 ) {
-            SeqNode_setMachine( _nodeDataPtr, nodePtr->children->content );
-         } else if ( strcmp( nodeName, "queue" ) == 0 ) {
-            SeqNode_setQueue( _nodeDataPtr, nodePtr->children->content );
-         } else if ( strcmp( nodeName, "memory" ) == 0 ) {
-            SeqNode_setMemory( _nodeDataPtr, nodePtr->children->content );
-         } else if ( strcmp( nodeName, "mpi" ) == 0 ) {
-             _nodeDataPtr->mpi = atoi( nodePtr->children->content );
-             /* if cpu has already been set, and the mpi flag is on, it will need to be recalculated depending on the format it may change for npex / omp */
-             if (cpuString !=NULL && _nodeDataPtr->mpi ) SeqNode_setCpu( _nodeDataPtr, cpuString );
-         } else if ( strcmp( nodeName, "soumet_args" ) == 0 ) {
-              /* add soumet args in the following order: 1) resource file 2) args sent by command line, who will override 1*/
-             SeqUtil_stringAppend( &tmpString, nodePtr->children->content);
-             SeqUtil_stringAppend( &tmpString, " ");
-             SeqUtil_stringAppend( &tmpString, _nodeDataPtr->soumetArgs );
-             SeqNode_setSoumetArgs( _nodeDataPtr, tmpString);
-             free(tmpString);
-         } else if ( strcmp( nodeName, "workq" ) == 0 ) {
-             SeqNode_setWorkq( _nodeDataPtr, nodePtr->children->content );
-         } else if ( strcmp( nodeName, "wallclock" ) == 0 ) {
-             _nodeDataPtr->wallclock = atoi( nodePtr->children->content );
-         } else if ( strcmp( nodeName, "immediate" ) == 0 ) {
-             _nodeDataPtr->immediateMode = atoi( nodePtr->children->content );
-         } else if ( strcmp( nodeName, "catchup" ) == 0 ) {
-             _nodeDataPtr->catchup = atoi( nodePtr->children->content );
-	 } else if ( strcmp( nodeName, "shell" ) == 0 ) {
-	    SeqNode_setShell( _nodeDataPtr, nodePtr->children->content );
-	 } else {
-             raiseError("nodeinfo.parseBatchResources() ERROR: Unprocessed attribute=%s\n", nodeName);
+         SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseBatchResources() value=%s\n", nodePtr->children->content);
+         if (strcmp(nodeName, "cpu") == 0) {
+            SeqNode_setCpu(_nodeDataPtr, nodePtr->children->content);
+            cpuString = strdup(nodePtr->children->content);
+         } else if (strcmp(nodeName, "cpu_multiplier") == 0) {
+            SeqNode_setCpuMultiplier(_nodeDataPtr, nodePtr->children->content);
+         } else if (strcmp(nodeName, "machine") == 0) {
+            SeqNode_setMachine(_nodeDataPtr, nodePtr->children->content);
+         } else if (strcmp(nodeName, "queue") == 0) {
+            SeqNode_setQueue(_nodeDataPtr, nodePtr->children->content);
+         } else if (strcmp(nodeName, "memory") == 0) {
+            SeqNode_setMemory(_nodeDataPtr, nodePtr->children->content);
+         } else if (strcmp(nodeName, "mpi") == 0) {
+            _nodeDataPtr->mpi = atoi(nodePtr->children->content);
+            /* if cpu has already been set, and the mpi flag is on, it will need to be recalculated depending on the format it may change for npex / omp */
+            if (cpuString != NULL && _nodeDataPtr->mpi)
+               SeqNode_setCpu(_nodeDataPtr, cpuString);
+         } else if (strcmp(nodeName, "soumet_args") == 0) {
+            /* add soumet args in the following order: 1) resource file 2) args sent by command line, who will override 1*/
+            SeqUtil_stringAppend(&tmpString, nodePtr->children->content);
+            SeqUtil_stringAppend(&tmpString, " ");
+            SeqUtil_stringAppend(&tmpString, _nodeDataPtr->soumetArgs);
+            SeqNode_setSoumetArgs(_nodeDataPtr, tmpString);
+            free(tmpString);
+         } else if (strcmp(nodeName, "workq") == 0) {
+            SeqNode_setWorkq(_nodeDataPtr, nodePtr->children->content);
+         } else if (strcmp(nodeName, "wallclock") == 0) {
+            _nodeDataPtr->wallclock = atoi(nodePtr->children->content);
+         } else if (strcmp(nodeName, "immediate") == 0) {
+            _nodeDataPtr->immediateMode = atoi(nodePtr->children->content);
+         } else if (strcmp(nodeName, "catchup") == 0) {
+            _nodeDataPtr->catchup = atoi(nodePtr->children->content);
+         } else if (strcmp(nodeName, "shell") == 0) {
+            SeqNode_setShell(_nodeDataPtr, nodePtr->children->content);
+         } else {
+            raiseError("nodeinfo.parseBatchResources() ERROR: Unprocessed attribute=%s\n", nodeName);
          }
       }
    }
@@ -384,48 +388,22 @@ void parseDepends (xmlXPathObjectPtr _result, SeqNodeDataPtr _nodeDataPtr, int i
    int i=0;
    for (i=0; i < nodeset->nodeNr; i++) {
       xmlNodePtr nodePtr = nodeset->nodeTab[i];
-      SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseDepends()   *** depends_item=%s ***\n", nodePtr->name);
-
-      /*
-       * Design comments: This following paragraph should be in
-       * xmlDepNode_to_depDataPtr() and I have already put the basic idea there.
-       * In the interest of being seamless, I'm leaving the control flow as is.
-       *
-       * Suggestion: there should be no If here, there should be only one
-       * SeqNode_addDependency() with the struct SeqDependencyData serving for
-       * both types of dependency with a sort of "lazy polymorphism": the struct
-       * has fields for both sub-types of dependency, and functions that deal
-       * with them treat the deps differently based on the dep->type field.
-       *
-       * It's what the cool cats call runtime-type-ID (RTTI).  It's not as good
-       * as polymorphism but I'm not going to get carried away with
-       * improvements.
-       *
-       * The parts surrounded by "#if 1" should be removed.
-       */
-#if 1
       char * depType = NULL;
       depType = (char *) xmlGetProp( nodePtr, "type" );
       SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseDepends() Parsing Dependency Type:%s\n", depType);
       if ( depType == NULL ) depType=strdup("node");
 
       if ( strcmp( depType, "node" ) == 0 ) {
-#endif
-
          SeqDepDataPtr dep = xmlDepNode_to_depDataPtr(_nodeDataPtr, nodePtr, isIntraDep);
-
          SeqDep_printDep(TL_FULL_TRACE, dep);
-
          /*
           * Add the dependency to the nodeDataPtr's dependency list
           */
          SeqNode_addNodeDependency ( _nodeDataPtr, dep );
-#if 1
       } else {
          SeqUtil_TRACE(TL_FULL_TRACE, "nodeinfo.parseDepends() no dependency found.\n" );
       }
       free(depType);
-#endif
    }
 out:
    SeqUtil_TRACE(TL_FULL_TRACE, "parseDepends() end\n");
