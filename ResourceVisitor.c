@@ -38,7 +38,6 @@
 ********************************************************************************/
 ValidityDataPtr newValidityData()
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "newValidityData() begin\n");
    ValidityDataPtr val = (ValidityDataPtr ) malloc( sizeof (ValidityData) );
 
    val->dow = NULL;
@@ -48,7 +47,6 @@ ValidityDataPtr newValidityData()
    val->valid_dow = NULL;
    val->local_index = NULL;
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "newValidityData() end\n");
    return val;
 }
 
@@ -57,7 +55,6 @@ ValidityDataPtr newValidityData()
 ********************************************************************************/
 void deleteValidityData( ValidityDataPtr val )
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "deleteValidityData() begin\n");
    free((char *)val->dow);
    free((char *)val->hour);
    free((char *)val->time_delta);
@@ -65,7 +62,6 @@ void deleteValidityData( ValidityDataPtr val )
    free((char *)val->valid_dow);
    free((char *)val->local_index);
    free( val );
-   SeqUtil_TRACE(TL_FULL_TRACE, "deleteValidityData() end\n");
 }
 
 /********************************************************************************
@@ -87,7 +83,6 @@ void printValidityData(ValidityDataPtr val)
 ********************************************************************************/
 ValidityDataPtr getValidityData(xmlNodePtr validityNode)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "getValidityData() begin\n");
    if ( strcmp((const char *)validityNode->name, "VALIDITY") != 0)
       raiseError( "isValid() must receive a VALIDITY xml node\n");
    ValidityDataPtr val = newValidityData();
@@ -99,7 +94,6 @@ ValidityDataPtr getValidityData(xmlNodePtr validityNode)
    val->valid_dow =  (const char *)xmlGetProp( validityNode,(const xmlChar *) "valid_dow");
    val->local_index =  (const char *)xmlGetProp( validityNode,(const xmlChar *) "local_index");
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "getValidityData() end\n");
    return val;
 }
 
@@ -110,7 +104,6 @@ ValidityDataPtr getValidityData(xmlNodePtr validityNode)
 ********************************************************************************/
 int checkValidity(SeqNodeDataPtr _nodeDataPtr, ValidityDataPtr val )
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "checkValidity() begin\n");
    printValidityData(val);
    int retval = RESOURCE_TRUE;
    char * localArgs = SeqLoops_getLoopArgs( _nodeDataPtr->loop_args );
@@ -120,7 +113,6 @@ int checkValidity(SeqNodeDataPtr _nodeDataPtr, ValidityDataPtr val )
 
    /* Check local_index */
    if ( val->local_index != NULL && localArgs != NULL && strcmp ( val->local_index, localArgs ) != 0) {
-      SeqUtil_TRACE(TL_FULL_TRACE,"checkValidity(): local_args mismatch:local_index=%s, ndp->loop_args=%s\n", val->local_index, localArgs );
       retval = RESOURCE_FALSE;
       goto out_free;
    }
@@ -142,7 +134,6 @@ int checkValidity(SeqNodeDataPtr _nodeDataPtr, ValidityDataPtr val )
 out_free:
    free((char *)incrementedDatestamp);
    free(localArgs);
-   SeqUtil_TRACE(TL_FULL_TRACE, "checkValidity() end. Returning %d\n", retval);
    return retval;
 }
 
@@ -151,14 +142,10 @@ out_free:
 ********************************************************************************/
 int isValid(SeqNodeDataPtr _nodeDataPtr, xmlNodePtr validityNode)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "isValid() begin\n");
-   SeqUtil_TRACE(TL_FULL_TRACE, "isValid() datestamp = %s\n", _nodeDataPtr->datestamp);
-
    ValidityDataPtr validityData = getValidityData(validityNode);
 
    int isValid = checkValidity(_nodeDataPtr, validityData);
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "isValid() end returning %d\n", isValid);
    deleteValidityData(validityData);
    return isValid;
 }
@@ -173,7 +160,6 @@ int isValid(SeqNodeDataPtr _nodeDataPtr, xmlNodePtr validityNode)
 ********************************************************************************/
 ResourceVisitorPtr newResourceVisitor(SeqNodeDataPtr _nodeDataPtr, const char * _seq_exp_home, const char * nodePath, SeqNodeType nodeType)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "newResourceVisitor() begin, nodePath=%s expHome=%s\n", nodePath, _seq_exp_home);
    ResourceVisitorPtr rv = (ResourceVisitorPtr) malloc ( sizeof (ResourceVisitor) );
 
    rv->nodePath = strdup(nodePath);
@@ -193,7 +179,6 @@ ResourceVisitorPtr newResourceVisitor(SeqNodeDataPtr _nodeDataPtr, const char * 
    memset(rv->_nodeStack, '\0', RESOURCE_VISITOR_STACK_SIZE);
    rv->_stackSize = 0;
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "newResourceVisitor() end\n");
    return rv;
 }
 
@@ -202,7 +187,6 @@ ResourceVisitorPtr newResourceVisitor(SeqNodeDataPtr _nodeDataPtr, const char * 
 ********************************************************************************/
 void deleteResourceVisitor(ResourceVisitorPtr rv)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "deleteResourceVisitor() begin\n");
    free((char *)rv->nodePath);
    free((char *)rv->xmlFile);
    free((char *)rv->defFile);
@@ -211,7 +195,6 @@ void deleteResourceVisitor(ResourceVisitorPtr rv)
       xmlXPathFreeContext(rv->context);
    }
    free(rv);
-   SeqUtil_TRACE(TL_FULL_TRACE, "deleteResourceVisitor() end\n");
 }
 
 /********************************************************************************
@@ -273,7 +256,6 @@ int Resource_unsetNode(ResourceVisitorPtr rv)
 ********************************************************************************/
 const char * xmlResourceFilename(const char * _seq_exp_home, const char * nodePath, SeqNodeType nodeType )
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "xmlResourceFilename() begin\n");
    const char * xml_postfix = "/container.xml";
    const char * infix = "/resources/";
    size_t pathLength =  strlen(_seq_exp_home) + strlen(infix)
@@ -287,7 +269,6 @@ const char * xmlResourceFilename(const char * _seq_exp_home, const char * nodePa
    sprintf(xmlFile, "%s%s%s%s", _seq_exp_home, infix, nodePath, xml_postfix);
    SeqUtil_normpath(normalizedXmlFile,xmlFile);
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "xmlResourceFilename() end : returning %s\n", normalizedXmlFile);
    return (const char *) normalizedXmlFile;
 }
 
@@ -298,7 +279,6 @@ const char * xmlResourceFilename(const char * _seq_exp_home, const char * nodePa
 xmlXPathContextPtr Resource_createContext(SeqNodeDataPtr _nodeDataPtr, const char * xmlFile,
                                           const char * defFile, SeqNodeType nodeType)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_createContext() begin\n");
    xmlXPathContextPtr context = NULL;
    xmlDocPtr doc = NULL;
    xmlNodePtr currentNodePtr = NULL, nodeToDelete=NULL;
@@ -324,11 +304,9 @@ xmlXPathContextPtr Resource_createContext(SeqNodeDataPtr _nodeDataPtr, const cha
    /* place self at NODE_RES_XML_ROOT_NAME */ 
    currentNodePtr =  context->doc->children ; 
    while ( found==0 && currentNodePtr != NULL ) { 
-      SeqUtil_TRACE(TL_FULL_TRACE, "Resource_createContext() current node: %s\n", currentNodePtr->name );
       if( strcmp((const char *) currentNodePtr->name, NODE_RES_XML_ROOT_NAME ) == 0 ) {
          found=1; 
          context->node=currentNodePtr; 
-         SeqUtil_TRACE(TL_FULL_TRACE, "Resource_createContext() found node: %s\n", NODE_RES_XML_ROOT_NAME );
       } else { 
          /* Delete preceeding nodes from document so that further queries are accurate */
          nodeToDelete = currentNodePtr; 
@@ -343,7 +321,6 @@ xmlXPathContextPtr Resource_createContext(SeqNodeDataPtr _nodeDataPtr, const cha
       XmlUtils_resolve(xmlFile,context,defFile,_nodeDataPtr->expHome);
 
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_createContext() end\n");
    return context;
 }
 
@@ -355,7 +332,6 @@ out:
 ********************************************************************************/
 xmlDocPtr xml_fallbackDoc(const char * xmlFile, SeqNodeType nodeType)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "xml_fallbackDoc() begin\n");
    FILE * pxml = NULL;
    int xmlSize = 0;
 
@@ -368,7 +344,6 @@ xmlDocPtr xml_fallbackDoc(const char * xmlFile, SeqNodeType nodeType)
       const char * start_tag = "<NODE_RESOURCES>\n";
       const char * end_tag   = "</NODE_RESOURCES>\n";
       const char * loop_node = "\t<LOOP \t<LOOP start=\"0\" set=\"1\" end=\"1\" step=\"1\"/>\n";
-      SeqUtil_TRACE(TL_FULL_TRACE, "xml_fallbackDoc(): File %s is empty, writing mandatory tags\n", xmlFile);
 
       if( ! fprintf(pxml, "%s", start_tag) ){
          goto write_err;
@@ -386,7 +361,6 @@ xmlDocPtr xml_fallbackDoc(const char * xmlFile, SeqNodeType nodeType)
    }
    fclose (pxml);
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "xml_fallbackDoc() end\n");
    return XmlUtils_getdoc(xmlFile);
 
 write_err:
@@ -403,12 +377,10 @@ syntax_err:
 ********************************************************************************/
 int Resource_parseNodeDFS(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr, NodeFunction nf)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_parseNodeDFS() begin\n");
    int retval = RESOURCE_SUCCESS;
    if( rv->context != NULL ){
       retval = Resource_parseNodeDFS_internal(rv,_nodeDataPtr, rv->context->doc->children, nf, 0);
    }
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_parseNodeDFS() end\n");
    return retval;
 }
 
@@ -418,7 +390,6 @@ int Resource_parseNodeDFS(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr, No
 int Resource_parseNodeDFS_internal(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr,
                                     xmlNodePtr node, NodeFunction nf, int depth)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_parseNodeDFS_internal() begin, depth = %d\n",depth);
    int retval = RESOURCE_SUCCESS;
    if( depth > RESOURCE_MAX_RECURSION_DEPTH ){
       retval = RESOURCE_FAILURE;
@@ -444,7 +415,6 @@ int Resource_parseNodeDFS_internal(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDa
 
 out:
    xmlXPathFreeObject(validityResults);
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_parseNodeDFS_internal() end\n");
    return retval;
 }
 
@@ -464,7 +434,6 @@ out:
 int do_all(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
    int retval = RESOURCE_SUCCESS;
-   SeqUtil_TRACE(TL_FULL_TRACE, "do_all() begin\n");
    if( _nodeDataPtr->type == Loop)
       Resource_getLoopAttributes(rv,_nodeDataPtr);
 
@@ -475,7 +444,6 @@ int do_all(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
    Resource_getDependencies(rv, _nodeDataPtr);
    Resource_getAbortActions(rv, _nodeDataPtr);
 
-   SeqUtil_TRACE(TL_FULL_TRACE, "do_all() end\n");
    return retval;
 }
 
@@ -487,7 +455,6 @@ int do_all(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 int Resource_getLoopAttributes(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
    int retval = RESOURCE_SUCCESS;
-   SeqUtil_TRACE(TL_FULL_TRACE, "getLoopAttributes() begin\n");
 
    if( rv->loopResourcesFound == RESOURCE_TRUE ){
       goto out;
@@ -502,7 +469,6 @@ int Resource_getLoopAttributes(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPt
 out_free:
    xmlXPathFreeObject(result);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "getLoopAttributes() end\n");
    return retval;
 }
 
@@ -514,7 +480,6 @@ out:
 int Resource_getForEachAttributes(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
    int retval = RESOURCE_SUCCESS;
-   SeqUtil_TRACE(TL_FULL_TRACE, "getForEachAttributes() begin\n");
    if( rv->forEachResourcesFound == RESOURCE_TRUE ){
       goto out;
    }
@@ -528,7 +493,6 @@ int Resource_getForEachAttributes(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDat
 out_free:
    xmlXPathFreeObject(result);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "getForEachAttributes() end\n");
    return retval;
 }
 
@@ -539,7 +503,6 @@ out:
 int Resource_getBatchAttributes(ResourceVisitorPtr rv,SeqNodeDataPtr _nodeDataPtr)
 {
    int retval = RESOURCE_SUCCESS;
-   SeqUtil_TRACE(TL_FULL_TRACE, "getBatchAttributes() begin\n");
    if( rv->batchResourcesFound == RESOURCE_TRUE ){
       goto out;
    }
@@ -553,7 +516,6 @@ int Resource_getBatchAttributes(ResourceVisitorPtr rv,SeqNodeDataPtr _nodeDataPt
 out_free:
    xmlXPathFreeObject(result);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "getBatchAttributes() end\n");
    return retval;
 }
 
@@ -564,7 +526,6 @@ out:
 ********************************************************************************/
 int Resource_getDependencies(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "getDependencies() begin\n");
    int retval = RESOURCE_SUCCESS;
 
    xmlXPathObjectPtr result = XmlUtils_getnodeset((const xmlChar*)"(child::DEPENDS_ON)",rv->context);
@@ -574,7 +535,6 @@ int Resource_getDependencies(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 out_free:
    xmlXPathFreeObject(result);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "getDependencies() end\n");
    return retval;
 }
 
@@ -585,7 +545,6 @@ out:
 int Resource_getAbortActions(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
    int retval = RESOURCE_SUCCESS;
-   SeqUtil_TRACE(TL_FULL_TRACE, "getAbortActions() begin\n");
 
    if( rv->abortActionFound == RESOURCE_TRUE ){
       goto out;
@@ -605,7 +564,6 @@ out_free:
    free(abortValue);
    xmlXPathFreeObject(result);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "getAbortActions() end\n");
    return retval;
 }
 
@@ -615,7 +573,6 @@ out:
 ********************************************************************************/
 int Resource_getContainerLoopAttributes(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_getContainerLoopAttributes() begin\n");
    int retval = RESOURCE_SUCCESS;
    xmlXPathObjectPtr result = NULL;
    const char * fixedNodePath = SeqUtil_fixPath(rv->nodePath);
@@ -626,13 +583,11 @@ int Resource_getContainerLoopAttributes(ResourceVisitorPtr rv, SeqNodeDataPtr _n
 
    free((char *) fixedNodePath);
    xmlXPathFreeObject(result);
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_getContainerLoopAttributes() end\n");
    return retval;
 }
 
 int Resource_getWorkerPath(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_getWorkerPath() begin\n");
    int retval = RESOURCE_SUCCESS;
    char * workerPath = NULL;
 
@@ -651,7 +606,6 @@ out_free:
    free(workerPath);
    xmlXPathFreeObject(result);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_getWorkerPath() end\n");
    return retval;
 }
 
@@ -664,7 +618,6 @@ out:
 int Resource_setWorkerData(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
    int retval = RESOURCE_SUCCESS;
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_setWorkerData() begin\n");
    if( strcmp(_nodeDataPtr->workerPath,"") == 0){
       retval = RESOURCE_FAILURE;
       goto out;
@@ -675,7 +628,6 @@ int Resource_setWorkerData(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
    deleteResourceVisitor(worker_rv);
 
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_setWorkerData() end\n");
    return retval;
 }
 
@@ -684,7 +636,6 @@ out:
 ********************************************************************************/
 int Resource_validateMachine(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "validateMachine() begin\n");
    char * value = NULL;
    /* validate a machine has been provided */
    if ( strcmp(_nodeDataPtr->machine,"") == 0){
@@ -697,7 +648,6 @@ int Resource_validateMachine(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
    }
 
    free(value);
-   SeqUtil_TRACE(TL_FULL_TRACE, "validateMachine() end\n");
    return RESOURCE_SUCCESS;
 }
 
@@ -706,7 +656,6 @@ int Resource_validateMachine(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 ********************************************************************************/
 int Resource_setShell(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_setShell() begin\n");
    int retval = RESOURCE_SUCCESS;
    char * shellValue = NULL;
 
@@ -725,7 +674,6 @@ int Resource_setShell(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
 out_free:
    free(shellValue);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "Resource_setShell() end\n");
    return retval;
 }
 
@@ -738,7 +686,6 @@ out:
 ********************************************************************************/
 int getNodeResources(SeqNodeDataPtr _nodeDataPtr, const char * expHome, const char * nodePath)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "getNodeResources() begin\n");
    int retval = RESOURCE_SUCCESS;
    ResourceVisitorPtr rv = newResourceVisitor(_nodeDataPtr,expHome,nodePath,_nodeDataPtr->type);
 
@@ -751,7 +698,6 @@ int getNodeResources(SeqNodeDataPtr _nodeDataPtr, const char * expHome, const ch
 out_free:
    deleteResourceVisitor(rv);
 out:
-   SeqUtil_TRACE(TL_FULL_TRACE, "getNodeResources() end\n");
    return retval;
 }
 
@@ -761,7 +707,6 @@ out:
 ********************************************************************************/
 void getNodeLoopContainersAttr (  SeqNodeDataPtr _nodeDataPtr, const char *expHome, const char *loopNodePath)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "getNodeLoopContainersAttr() begin\n");
    ResourceVisitorPtr rv = newResourceVisitor(_nodeDataPtr,expHome,loopNodePath,Loop);
 
    if( rv->context == NULL )
@@ -771,7 +716,6 @@ void getNodeLoopContainersAttr (  SeqNodeDataPtr _nodeDataPtr, const char *expHo
 
 out_free:
    deleteResourceVisitor(rv);
-   SeqUtil_TRACE(TL_FULL_TRACE, "getNodeLoopContainersAttr() end\n");
 }
 
 
@@ -781,7 +725,6 @@ out_free:
 ********************************************************************************/
 int Resource_parseWorkerPath( const char * pathToNode, const char * _seq_exp_home, SeqNodeDataPtr _nodeDataPtr)
 {
-   SeqUtil_TRACE(TL_FULL_TRACE, "parseWorkerPath() begin\n");
    int retval = RESOURCE_SUCCESS;
    ResourceVisitorPtr rv = newResourceVisitor(_nodeDataPtr,_seq_exp_home,pathToNode,Loop);
 
@@ -799,6 +742,5 @@ int Resource_parseWorkerPath( const char * pathToNode, const char * _seq_exp_hom
 
 out_free:
    deleteResourceVisitor(rv);
-   SeqUtil_TRACE(TL_FULL_TRACE, "parseWorkerPath() end\n");
    return retval;
 }

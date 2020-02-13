@@ -53,16 +53,12 @@ typedef struct _ValidityData {
    char * local_index;
 }ValidityData;
 typedef ValidityData * ValidityDataPtr;
-
 ValidityDataPtr newValidityData();
 void deleteValidityData( ValidityDataPtr val );
 void printValidityData(ValidityDataPtr val);
 ValidityDataPtr getValidityData(xmlNodePtr validityNode);
 int checkValidity(SeqNodeDataPtr _nodeDataPtr, ValidityDataPtr val );
 int isValid(SeqNodeDataPtr _nodeDataPtr, xmlNodePtr validityNode);
-
-
-
 typedef struct _ResourceVisitor {
    const char * nodePath; /* The path of the node for which we are getting
                              resources, which may not be the path of the

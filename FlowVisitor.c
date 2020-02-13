@@ -701,6 +701,7 @@ int Flow_checkWorkUnit(FlowVisitorPtr _flow_visitor, SeqNodeDataPtr _nodeDataPtr
       goto out_free;
    }
 
+   // If, from the current xml node's exp-parent is a has a WORKER child
    Resource_parseWorkerPath(_flow_visitor->currentFlowNode, _flow_visitor->expHome, _nodeDataPtr);
 
 out_free:
