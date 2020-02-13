@@ -130,21 +130,25 @@ class ResourceVisitor:
     def __init__(self, exp_home, datestamp=None):
         self.exp_home = exp_home
         self.datestamp = datestamp
-        self.experiment_run_node = ExperimentRunNode(exp_home=exp_home, datestamp=datestamp, name=None, node_name=None, module=None, intramodule_path=None, node_function=lambda e: print(e))
     def visit_resources(self, node_path, function):
-        first_xml_context = ET.parse(f'{self.exp_home}/resources/{node_path}/container.xml')
+        ndp = experiment_run_node = ExperimentRunNode(exp_home=exp_home, datestamp=None, name=None, node_name=node_path, module=None, intramodule_path=None, node_function=lambda e: print(e))
+        xml_resource_file = f'{self.exp_home}/resources/{node_path}/container.xml'
+        if not os.path.exists(xml_resource_file):
+            self.xml_fallbackDoc(xml_resource_file, NodeType.LOOP)
+        first_xml_context = ET.parse(xml_resource_file)
         root = first_xml_context.getroot()
-        self.visit_node_dfs_preorder(root, function)
-    def visit_node_dfs_preorder(self, node, function=None, depth=0):
+        self.visit_node_dfs_preorder(ndp, root, function)
+    def visit_node_dfs_preorder(self, ndp, node, function=None, depth=0):
         # TODO : I could define a base step and a recursion step function
         #        and use that to make the two revisit functions
         function(node)
+        self.getLoopAttributes(ndp, node)
         self.visit_non_validity_children(node, function=function)
         for child in node.findall('VALIDITY'):
-            self.visit_node_dfs_preorder(child, function, depth+1)
+            self.visit_node_dfs_preorder(ndp, child, function, depth+1)
     def visit_node_dfs_postorder(self, node, function=None, depth=0):
         for child in node.findall('VALIDITY'):
-            self.visit_node_dfs_preorder(child, function, depth+1)
+            self.visit_node_dfs_postorder(child, function, depth+1)
         self.visit_non_validity_children(node, function=function)
         function(node)
     def visit_non_validity_children(self, node, function=None):
@@ -161,8 +165,18 @@ class ResourceVisitor:
             f.write(content)
         xml_tree = ET.parse(xmlFile)
         return xml_tree.getroot()
-    def getLoopAttributes(self, ndp):
-        pass
+    def parse_node_specifics(self, ndp, node_type, xml_node):
+        for child in xml_node:
+            ndp.specific_data.update(child.attrib)
+            print(child.attrib)
+        if node_type is NodeType.LOOP:
+            ndp.specific_data['TYPE'] = "DEFAULT"
+    def getLoopAttributes(self, ndp, xml_node):
+        self.parse_node_specifics(ndp, NodeType.LOOP, xml_node)
+        resources_found = False
+        if resources_found == False:
+            return True
+        
     def getForEachAttributes(self, ndp):
         pass
     def getBatchAttributes(self,ndp):
@@ -183,6 +197,7 @@ class ResourceVisitor:
         pass
     def do_all(self, ndp):
         pass
+
     #def parseWorkerPath( const char * pathToNode, const char * _seq_exp_home, SeqNodeDataPtr _nodeDataPtr);
     #def getNodeLoopContainersAttr (  SeqNodeDataPtr _nodeDataPtr, const char *loopNodePath, const char *expHome );
     #def getNodeResources(SeqNodeDataPtr _nodeDataPtr, const char * expHome, const char * nodePath);
@@ -190,6 +205,7 @@ class ResourceVisitor:
             
 class ExperimentRunNode:
     def __init__(self, *args, **kwargs):
+        self.specific_data = {}
         self.name = kwargs['name']
         self.node_name = kwargs['node_name']
         # From SeqNode_createNode
