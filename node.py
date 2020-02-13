@@ -21,6 +21,23 @@ class DependsType(enum.Enum):
     DATE_DEPENDENCY = 2
 
 class SeqDependency:
+    @classmethod
+    def from_xml_node(cls, xml_node):
+        return SeqDependency(
+            dep_type=DependsType.NODE_DEPENDENCY,
+            dep_name=xml_node.attrib.get('dep_name'),
+            exp_home=xml_node.attrib.get('exp'),
+            index=xml_node.attrib.get('index'),
+            local_index=xml_node.attrib.get('local_index'),
+            node_path=xml_node.attrib.get('path'),
+            hour=xml_node.attrib.get('hour'),
+            valid_hour=xml_node.attrib.get('valid_hour'),
+            valid_dow=xml_node.attrib.get('valid_dow'),
+            time_delta=xml_node.attrib.get('time_delta'),
+            protocol=xml_node.attrib.get('protocol', 'polling'),
+            status=xml_node.attrib.get('status', 'end')
+        )
+
     def __init__(self, *args, **kwargs):
         self.depends_type = kwargs.get('depends_type')
         self.exp_scope = kwargs.get('exp_scope', DependsType.NODE_DEPENDENCY)
@@ -38,6 +55,21 @@ class SeqDependency:
         self.valid_hour = kwargs.get('valid_hour')
         self.valid_dow = kwargs.get('valid_dow')
         self.protocol = kwargs.get('protocol')
+    
+    def validate_local_args(self):
+        return False
+        pass
+    def validate_args(self):
+        return False
+        pass
+    def get_loop_args(self, dep_args, local_args):
+        return False
+        pass
+    def validate_indices(self, dep_args, local_args):
+        self.validate_local_args()
+        self.validate_args()
+        self.index = self.get_loop_args(dep_args, local_args)
+        self.local_index = self.get_loop_args(local_args, local_args)
 
 tag_to_enum = {
     "FAMILY": NodeType.FAMILY,
