@@ -23,6 +23,7 @@ class DependsType(enum.Enum):
 class SeqDependency:
     def __init__(self, *args, **kwargs):
         self.depends_type = kwargs.get('depends_type')
+        self.exp_scope = kwargs.get('exp_scope', DependsType.NODE_DEPENDENCY)
         self.node_name = kwargs.get('node_name')
         self.node_path = kwargs.get('node_path')
         self.exp_home = kwargs.get('exp_home')
