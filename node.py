@@ -11,6 +11,33 @@ class NodeType(enum.Enum):
     NPASSTASK = 6
     FOREACH = 7
 
+class DependsScope(enum.Enum):
+    INTRA_SUITE = 1
+    INTRA_USER = 2
+    INTER_USER = 3
+
+class DependsType(enum.Enum):
+    NODE_DEPENDENCY = 1
+    DATE_DEPENDENCY = 2
+
+class SeqDependency:
+    def __init__(self, *args, **kwargs):
+        self.depends_type = kwargs.get('depends_type')
+        self.node_name = kwargs.get('node_name')
+        self.node_path = kwargs.get('node_path')
+        self.exp_home = kwargs.get('exp_home')
+        self.status = kwargs.get('status')
+        self.index = kwargs.get('index')
+        self.ext = kwargs.get('ext')
+        self.local_index = kwargs.get('local_index')
+        self.local_ext = kwargs.get('local_ext')
+        self.hour = kwargs.get('hour')
+        self.time_delts = kwargs.get('time_delts')
+        self.datestamp = kwargs.get('datestamp')
+        self.valid_hour = kwargs.get('valid_hour')
+        self.valid_dow = kwargs.get('valid_dow')
+        self.protocol = kwargs.get('protocol')
+
 tag_to_enum = {
     "FAMILY": NodeType.FAMILY,
     "MODULE": NodeType.MODULE,
@@ -202,28 +229,35 @@ class ResourceVisitor:
             # Create a Dependency instance from the attributes of the dep xml node
             # Append it to ndp.dependencies
             print(dep)
-    def getDependencies(self, ndp):
-        pass
+    def getDependencies(self, ndp, xml_node):
+        self.parse_depends(ndp, xml_node)
     def getAbortActions(self, ndp, xml_node):
         for abort_action in xml_node.findall('ABORT_ACTION'):
             ndp.abort_actions.append(abort_action.attrib['name'])
-        pass
     def getNodeLoopContainersAttr (self, ndp, xml_node):
         self.visit_node_dfs_preorder(ndp, xml_node, self.get_container_loop_attributes)
-        pass
     def get_container_loop_attributes(self, ndp, xml_node):
         for child in xml_node.find('LOOP'):
             ndp.loops.append(child.attrib)
-    def getWorkerPath(self, ndp):
-        pass
-    def setWorkerData(self, ndp):
-        pass
-    def validateMachine(self, ndp):
-        pass
-    def setShell(self, ndp):
-        pass
-    def do_all(self, ndp):
-        pass
+    def getWorkerPath(self, ndp, xml_node):
+        for worker in xml_node.find('WORKER'):
+            ndp.worker_path = worker.attrib['path']
+    def setWorkerData(self, ndp, xml_node):
+        self.visit_node_dfs_preorder(ndp, xml_node, self.getBatchAttributes)
+    def validateMachine(self, ndp, xml_node):
+        ndp.machine = 'eccc-ppp4'
+    def setShell(self, ndp, xml_node):
+        ndp.shell = '/bin/bash'
+    def do_all(self, ndp, xml_node):
+        if ndp.type is NodeType.LOOP:
+            self.getLoopAttributes(ndp, xml_node)
+        elif ndp.type is NodeType.FOREACH:
+            self.getForEachAttributes(ndp, xml_node)
+        self.getBatchAttributes(ndp, xml_node)
+        self.getDependencies(ndp, xml_node)
+        self.getAbortActions(ndp, xml_node)
+
+        
 
     #def parseWorkerPath( const char * pathToNode, const char * _seq_exp_home, SeqNodeDataPtr _nodeDataPtr);
     #def getNodeResources(SeqNodeDataPtr _nodeDataPtr, const char * expHome, const char * nodePath);
