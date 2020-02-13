@@ -127,22 +127,27 @@ class ExperimentRun:
         n = ExperimentRunNode(xml_node=xml_node, node_path=node_path, exp_run=self, intramodule_path=intramodule_path, name=None, node_name=None, module=None, datestamp=None, exp_home=self.exp_home, node_function=lambda e: print(e))
 
 class ResourceVisitor:
-    def __init__(self, exp_home, datestamp=None, node_function=None):
+    def __init__(self, exp_home, datestamp=None):
         self.exp_home = exp_home
         self.datestamp = datestamp
         self.experiment_run_node = ExperimentRunNode(exp_home=exp_home, datestamp=datestamp, name=None, node_name=None, module=None, intramodule_path=None, node_function=lambda e: print(e))
-        self.node_function = node_function
     def visit_resources(self, node_path, function):
         first_xml_context = ET.parse(f'{self.exp_home}/resources/{node_path}/container.xml')
-        self.visit_node_dfs_preorder(first_xml_context.getroot(), 0, None)
+        root = first_xml_context.getroot()
+        self.visit_node_dfs_preorder(root, function)
     def visit_node_dfs_preorder(self, node, function=None, depth=0):
-        self.node_function(node)
-        for child in node.findall('*[@name]'):
+        function(node)
+        self.visit_non_validity_children(node, function=function)
+        for child in node.findall('VALIDITY'):
             self.visit_node_dfs_preorder(child, function, depth+1)
     def visit_node_dfs_postorder(self, node, function=None, depth=0):
-        for child in node.findall('*[@name]'):
+        for child in node.findall('VALIDITY'):
             self.visit_node_dfs_preorder(child, function, depth+1)
-        self.node_function(node)
+        function(node)
+    def visit_non_validity_children(self, node, function=None):
+        for loop in node.findall('LOOP'):
+            function(loop)
+
     def xml_fallbackDoc(self, xmlFile, nodeType):
         pass
     # /* Node functions are passed to pareNodeDFS to be executed inside the right VALIDITY tags. */
@@ -223,27 +228,31 @@ class ExperimentRunNode:
         self.task_path = kwargs.get('task_path', None)
 
 
-
+# Resource_createContext
+# if ( nodeType == Loop || nodeType == ForEach ){
+#          raiseError("createResourceContext(): Cannot access mandatory resource file %s\n", xmlFile);
+#       } else {
+#          context = NULL;
+#          goto out;
+#       }
 
 if __name__ == "__main__":
-    v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
-    v.visit_flow()
     p_good = 'module2/dhour_switch/loop/family/task'
     p_bad = 'module2/dhour_switch/lop/family/task'
-    exp = ExperimentRun(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
-    exp.get_maestro_node_from_path(p_good)
-    print(f"Trying with path = {p_good}")
-    n, imp = exp.get_xml_node_from_path(p_good)
-    print(f'>> Found element {n}, [intramodule_path:{imp}]')
-    print(f"Trying with path = {p_bad}")
-    try:
-        exp.get_xml_node_from_path(p_bad)
-    except PathTokenError as e:
-        print(f"ERROR: Bad token {e} in path '{p_bad}'")
+    # v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
+    # v.visit_flow()
+    # exp = ExperimentRun(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
+    # exp.get_maestro_node_from_path(p_good)
+    # print(f"Trying with path = {p_good}")
+    # n, imp = exp.get_xml_node_from_path(p_good)
+    # print(f'>> Found element {n}, [intramodule_path:{imp}]')
+    # print(f"Trying with path = {p_bad}")
+    # try:
+    #     exp.get_xml_node_from_path(p_bad)
+    # except PathTokenError as e:
+    #     print(f"ERROR: Bad token {e} in path '{p_bad}'")
     exp_home = f'{os.getcwd()}/experiments/sample_exp'
-    rv = ResourceVisitor(exp_home, node_function=lambda n: print(n))
-    try:
-        rv.visit_node_dfs_preorder(p_good)
-    except AttributeError:
-        print("NEXT STEP: Setup the query in the visiting function")
+    node_path_with_resources = 'module/module2/dhour_switch/loop'
+    rv = ResourceVisitor(exp_home)
+    rv.visit_resources(node_path_with_resources, lambda n: print(n))
 
