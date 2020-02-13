@@ -136,6 +136,8 @@ class ResourceVisitor:
         root = first_xml_context.getroot()
         self.visit_node_dfs_preorder(root, function)
     def visit_node_dfs_preorder(self, node, function=None, depth=0):
+        # TODO : I could define a base step and a recursion step function
+        #        and use that to make the two revisit functions
         function(node)
         self.visit_non_validity_children(node, function=function)
         for child in node.findall('VALIDITY'):
@@ -143,21 +145,22 @@ class ResourceVisitor:
     def visit_node_dfs_postorder(self, node, function=None, depth=0):
         for child in node.findall('VALIDITY'):
             self.visit_node_dfs_preorder(child, function, depth+1)
+        self.visit_non_validity_children(node, function=function)
         function(node)
     def visit_non_validity_children(self, node, function=None):
         for loop in node.findall('LOOP'):
             function(loop)
 
     def xml_fallbackDoc(self, xmlFile, nodeType):
-        pass
-    # /* Node functions are passed to pareNodeDFS to be executed inside the right VALIDITY tags. */
-    # typedef  int (*NodeFunction)(ResourceVisitorPtr rv, SeqNodeDataPtr _nodeDataPtr)
-    def parseNodeDFS(self, ndp, nf):
-        pass
-    def parseNodeDFS_internal(self, ndp, node, nf, depth):
-        pass
-    def do_all(self, ndp):
-        pass
+        content = '<NODE_RESOURCES>\n'
+        
+        if nodeType is NodeType.LOOP:
+            content += '    <LOOP start="0" set="1" end="1" step="1"/>\n'
+        content += '</NODE_RESOURCES>'
+        with open(xmlFile, 'a+') as f:
+            f.write(content)
+        xml_tree = ET.parse(xmlFile)
+        return xml_tree.getroot()
     def getLoopAttributes(self, ndp):
         pass
     def getForEachAttributes(self, ndp):
@@ -177,6 +180,8 @@ class ResourceVisitor:
     def validateMachine(self, ndp):
         pass
     def setShell(self, ndp):
+        pass
+    def do_all(self, ndp):
         pass
     #def parseWorkerPath( const char * pathToNode, const char * _seq_exp_home, SeqNodeDataPtr _nodeDataPtr);
     #def getNodeLoopContainersAttr (  SeqNodeDataPtr _nodeDataPtr, const char *loopNodePath, const char *expHome );
