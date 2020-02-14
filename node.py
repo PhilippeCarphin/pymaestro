@@ -145,27 +145,33 @@ class ExperimentRun:
         intramodule_path = ''
 
         current_node = ET.parse(f'{self.exp_home}/EntryModule/flow.xml').getroot()
-        for token in path_tokens:
-            token_node = current_node.find(f"*[@name='{token}']")
-            if token_node is None:
-                raise PathTokenError(f"'{token}'")
-            name = token_node.attrib['name']
-            if name != token:
-                raise RuntimeError("xml find function didn't do what I asked")
-            node_type = get_node_type(token_node.tag)
 
-            if node_type is NodeType.MODULE:
-                intramodule_path = ''
-            else:
-                intramodule_path += '/' + token
-            if node_type is NodeType.MODULE:
-                current_node = self.follow_token_module(token)
-            elif node_type is NodeType.SWITCH:
-                current_node = self.follow_token_switch(token_node, token)
-            elif node_type is NodeType.LOOP:
-                current_node = token_node
-            else:
-                current_node = token_node
+        for token in path_tokens:
+            current_node, intramodule_path = self.parse_token(token, current_node, intramodule_path)
+        return current_node, intramodule_path
+
+
+    def parse_token(self, token, current_node, intramodule_path):
+        token_node = current_node.find(f"*[@name='{token}']")
+        if token_node is None:
+            raise PathTokenError(f"'{token}'")
+        name = token_node.attrib['name']
+        if name != token:
+            raise RuntimeError("xml find function didn't do what I asked")
+        node_type = get_node_type(token_node.tag)
+
+        if node_type is NodeType.MODULE:
+            intramodule_path = ''
+        else:
+            intramodule_path += '/' + token
+        if node_type is NodeType.MODULE:
+            current_node = self.follow_token_module(token)
+        elif node_type is NodeType.SWITCH:
+            current_node = self.follow_token_switch(token_node, token)
+        elif node_type is NodeType.LOOP:
+            current_node = token_node
+        else:
+            current_node = token_node
         return current_node, intramodule_path
 
 
@@ -359,20 +365,20 @@ class ExperimentRunNode:
 if __name__ == "__main__":
     p_good = 'module2/dhour_switch/loop/family/task'
     p_bad = 'module2/dhour_switch/lop/family/task'
-    # v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
-    # v.visit_flow()
-    # exp = ExperimentRun(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
-    # exp.get_maestro_node_from_path(p_good)
-    # print(f"Trying with path = {p_good}")
-    # n, imp = exp.get_xml_node_from_path(p_good)
-    # print(f'>> Found element {n}, [intramodule_path:{imp}]')
-    # print(f"Trying with path = {p_bad}")
+    v = FlowVisitor(os.getcwd() + '/experiments/sample_exp/')
+    v.visit_flow()
+    exp = ExperimentRun(exp_home=f'{os.getcwd()}/experiments/sample_exp/')
+    exp.get_maestro_node_from_path(p_good)
+    print(f"Trying with path = {p_good}")
+    n, imp = exp.get_xml_node_from_path(p_good)
+    print(f'>> Found element {n}, [intramodule_path:{imp}]')
+    print(f"Trying with path = {p_bad}")
     # try:
     #     exp.get_xml_node_from_path(p_bad)
     # except PathTokenError as e:
     #     print(f"ERROR: Bad token {e} in path '{p_bad}'")
-    exp_home = f'{os.getcwd()}/experiments/sample_exp'
-    node_path_with_resources = 'module/module2/dhour_switch/loop'
-    rv = ResourceVisitor(exp_home)
-    rv.visit_resources(node_path_with_resources, lambda n: print(n))
+    # exp_home = f'{os.getcwd()}/experiments/sample_exp'
+    # node_path_with_resources = 'module/module2/dhour_switch/loop'
+    # rv = ResourceVisitor(exp_home)
+    # rv.visit_resources(node_path_with_resources, lambda n: print(n))
 
