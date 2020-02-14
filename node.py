@@ -146,12 +146,37 @@ class ExperimentRun:
 
         current_node = ET.parse(f'{self.exp_home}/EntryModule/flow.xml').getroot()
 
+        ndp = ExperimentRunNode(xml_node=None, node_path=node_path, exp_run=self, intramodule_path=intramodule_path, name=None, node_name=None, module=None, datestamp=None, exp_home=self.exp_home, node_function=lambda e: print(e))
+        sub_path = ''
         for token in path_tokens:
+            sub_path += '/' + token
+            previous_node = current_node
             current_node, intramodule_path = self.parse_token(token, current_node, intramodule_path)
+            self.check_work_unit(ndp, current_node, previous_node, sub_path)
         return current_node, intramodule_path
+
+    def check_work_unit(self, ndp, xml_node, previous_xml_node, sub_path):
+        def Resource_parseWorkerPath(current_node, exp_home, ndp):
+            def get_worker_path(n):
+                if 'worker_path' in n.attrib:
+                    ndp.worker_path = n.attrib['worker_path']
+            rv = ResourceVisitor(exp_home=self.exp_home, datestamp=self.datestamp)
+            rv.visit_resources('module' + sub_path, get_worker_path, ndp=ndp)
+        # - 
+        if xml_node.tag == 'MODULE':
+            context = previous_xml_node
+        else:
+            context = xml_node
+        res = context.findall('*[@work_unit]')
+        if res:
+            print(f'Node {context} has a WORKER child')
+            Resource_parseWorkerPath(xml_node, self.exp_home, ndp)
+        else:
+            print(f'Node {context} has no child with "work_unit" attribute')
 
 
     def parse_token(self, token, current_node, intramodule_path):
+        print(f'parsing token {token}')
         token_node = current_node.find(f"*[@name='{token}']")
         if token_node is None:
             raise PathTokenError(f"'{token}'")
@@ -196,8 +221,9 @@ class ResourceVisitor:
     def __init__(self, exp_home, datestamp=None):
         self.exp_home = exp_home
         self.datestamp = datestamp
-    def visit_resources(self, node_path, function):
-        ndp = experiment_run_node = ExperimentRunNode(exp_home=exp_home, datestamp=None, name=None, node_name=node_path, module=None, intramodule_path=None, node_function=lambda e: print(e))
+    def visit_resources(self, node_path, function, ndp):
+        if not ndp:
+            ndp = ExperimentRunNode(exp_home=self.exp_home, datestamp=None, name=None, node_name=node_path, module=None, intramodule_path=None, node_function=lambda e: print(e))
         xml_resource_file = f'{self.exp_home}/resources/{node_path}/container.xml'
         if not os.path.exists(xml_resource_file):
             self.xml_fallbackDoc(xml_resource_file, NodeType.LOOP)
@@ -377,8 +403,8 @@ if __name__ == "__main__":
     #     exp.get_xml_node_from_path(p_bad)
     # except PathTokenError as e:
     #     print(f"ERROR: Bad token {e} in path '{p_bad}'")
-    # exp_home = f'{os.getcwd()}/experiments/sample_exp'
-    # node_path_with_resources = 'module/module2/dhour_switch/loop'
-    # rv = ResourceVisitor(exp_home)
-    # rv.visit_resources(node_path_with_resources, lambda n: print(n))
+    exp_home = f'{os.getcwd()}/experiments/sample_exp'
+    node_path_with_resources = 'module/module2/dhour_switch/loop'
+    rv = ResourceVisitor(exp_home)
+    rv.visit_resources(node_path_with_resources, lambda n: print(n), None)
 

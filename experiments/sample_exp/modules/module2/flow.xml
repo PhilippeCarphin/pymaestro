@@ -6,6 +6,7 @@
             <LOOP name="loop">
                 <SUBMITS sub_name="family"/>
                 <FAMILY name="family">
+                    <WORKER work_unit="work_unit_for_this_node"/>
                     <SUBMITS sub_name="task"/>
                     <TASK name="task">
                         <SUBMITS sub_name="npasstask" type="user"/>
