@@ -169,7 +169,7 @@ class ExperimentRun:
             context = xml_node
         res = context.findall('*[@work_unit]')
         if res:
-            ndp.parse_worker_path(self.exp_home, sub_path, self.datestamp)
+            ndp.parse_worker_path(sub_path)
 
 
     def parse_token(self, token, current_node, intramodule_path):
@@ -379,11 +379,11 @@ class ExperimentRunNode:
         # Same as intramodule_path
         self.task_path = kwargs.get('task_path', None)
 
-    def parse_worker_path(self, exp_home, node_path, datestamp):
+    def parse_worker_path(self, node_path):
         def get_worker_path(n):
             if 'worker_path' in n.attrib:
                 self.worker_path = n.attrib['worker_path']
-        rv = ResourceVisitor(exp_home=exp_home, datestamp=datestamp)
+        rv = ResourceVisitor(exp_home=self.exp_home, datestamp=self.datestamp)
         # The 'module' will only work with 'sample_exp' because it has an EntryModule called 'module'
         # This is a detail I will worry about later
         rv.visit_resources('module' + node_path, get_worker_path, None)
