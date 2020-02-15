@@ -1,3 +1,4 @@
 <NODE_RESOURCES>
+    <UNKNOWN_TAG worker_path="worker_path_found_in_UNKNOWN_TAG_of_resource_file_for_/module/module2/dhour_switch/loop/family/"/>
     <LOOP start="0" set="1" end="1" step="1"/>
 </NODE_RESOURCES>
