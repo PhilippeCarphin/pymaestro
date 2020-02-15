@@ -138,10 +138,11 @@ class ExperimentRun:
 
     Certain nodes 'exist' or do not 'exist' depending on the datestamp.
     """
-    def __init__(self, exp_home, datestamp=None):
+    def __init__(self, exp_home, datestamp=None, switch_args=None):
         self.exp_home = exp_home
         self.datestamp = datestamp
-    def get_xml_node_from_path(self, node_path, switch_args=None):
+        self.switch_args = switch_args
+    def get_xml_node_from_path(self, node_path):
         path_tokens = node_path.strip('/').split('/')
         intramodule_path = ''
 
@@ -152,9 +153,22 @@ class ExperimentRun:
         for token in path_tokens:
             sub_path += '/' + token
             previous_node = current_node
-            current_node, intramodule_path = self.parse_token(token, current_node, intramodule_path)
-            self.check_work_unit(ndp, current_node, previous_node, sub_path)
+            current_node, intramodule_path, current_node_type = self.parse_token(token, current_node, intramodule_path)
+            if current_node_type not in [NodeType.TASK, NodeType.NPASSTASK]:
+                self.check_work_unit(ndp, current_node, previous_node, sub_path)
+            if current_node_type is NodeType.SWITCH:
+                last = False
+                switch_value = "TBD"
+                if last:
+                    ndp.add_spedific_data("VALUE", switch_value)
+                else:
+                    ndp.add_specific_data("SWITCH_TYPE", switch_value)
+                    ndp.add_switch(1,2)
+                
 
+        # SeqNode_addSpecificData(_nodeDataPtr, "VALUE", switchValue);
+        # /* PHIL: do this outside of the while instead of using isLast */
+        # _nodeDataPtr->type = Switch; OMG The is last bs was for that
 
         print(f'>> Found element {current_node}, [intramodule_path:{intramodule_path}]\n\tndp.worker_path={ndp.worker_path}')
         return current_node, intramodule_path
@@ -194,7 +208,7 @@ class ExperimentRun:
             current_node = token_node
         else:
             current_node = token_node
-        return current_node, intramodule_path
+        return current_node, intramodule_path, node_type
 
 
     def follow_token_switch(self, switch_xml_node, token):
@@ -378,7 +392,13 @@ class ExperimentRunNode:
         self.loop_extension = kwargs.get('loop_extension', '')
         # Same as intramodule_path
         self.task_path = kwargs.get('task_path', None)
+        self.switch_types = []
 
+    def add_specific_data(self, key, value):
+        self.data[key] = value
+    def add_switch(self, switch_type, switch_value):
+        self.switch_types.append(switch_type)
+        self.switch_answers.append(switch_value)
     def parse_worker_path(self, node_path):
         def get_worker_path(n):
             if 'worker_path' in n.attrib:
