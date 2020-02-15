@@ -4,9 +4,10 @@
         <SWITCH_ITEM name="00">
             <SUBMITS sub_name="loop"/>
             <LOOP name="loop">
+                <WORKER work_unit="work_unit_for_this_loop"/>
                 <SUBMITS sub_name="family"/>
                 <FAMILY name="family">
-                    <WORKER work_unit="work_unit_for_this_node" worker_path="worker_path for this node"/>
+                    <WORKER work_unit="work_unit_for_this_family"/>
                     <SUBMITS sub_name="task"/>
                     <TASK name="task">
                         <SUBMITS sub_name="npasstask" type="user"/>
