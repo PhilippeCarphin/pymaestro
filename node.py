@@ -20,15 +20,6 @@ class DependsType(enum.Enum):
     NODE_DEPENDENCY = 1
     DATE_DEPENDENCY = 2
 
-""" Output parameter NDP """
-def parse_worker_path(current_node, exp_home, ndp, node_path, datestamp):
-    def get_worker_path(n):
-        if 'worker_path' in n.attrib:
-            ndp.worker_path = n.attrib['worker_path']
-    rv = ResourceVisitor(exp_home=exp_home, datestamp=datestamp)
-    # The 'module' will only work with 'sample_exp' because it has an EntryModule called 'module'
-    # This is a detail I will worry about later
-    rv.visit_resources('module' + node_path, get_worker_path, None)
 
 class SeqDependency:
     @classmethod
@@ -177,7 +168,7 @@ class ExperimentRun:
             context = xml_node
         res = context.findall('*[@work_unit]')
         if res:
-            parse_worker_path(context, self.exp_home, ndp, sub_path, self.datestamp)
+            ndp.parse_worker_path(context, self.exp_home, sub_path, self.datestamp)
 
 
     def parse_token(self, token, current_node, intramodule_path):
@@ -386,6 +377,15 @@ class ExperimentRunNode:
         self.loop_extension = kwargs.get('loop_extension', '')
         # Same as intramodule_path
         self.task_path = kwargs.get('task_path', None)
+
+    def parse_worker_path(self, current_node, exp_home, node_path, datestamp):
+        def get_worker_path(n):
+            if 'worker_path' in n.attrib:
+                self.worker_path = n.attrib['worker_path']
+        rv = ResourceVisitor(exp_home=exp_home, datestamp=datestamp)
+        # The 'module' will only work with 'sample_exp' because it has an EntryModule called 'module'
+        # This is a detail I will worry about later
+        rv.visit_resources('module' + node_path, get_worker_path, None)
 
 
 # Resource_createContext
