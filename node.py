@@ -154,6 +154,7 @@ class ExperimentRun:
             current_node, intramodule_path = self.parse_token(token, current_node, intramodule_path)
             self.check_work_unit(ndp, current_node, previous_node, sub_path)
 
+        print(f'>> Found element {current_node}, [intramodule_path:{intramodule_path}]\n\tndp.worker_path={ndp.worker_path}')
         return current_node, intramodule_path
 
     def check_work_unit(self, ndp, xml_node, previous_xml_node, sub_path):
@@ -400,7 +401,6 @@ if __name__ == "__main__":
     print("================================================================")
     print(f"Trying with path = {p_good}")
     n, imp = exp.get_xml_node_from_path(p_good)
-    print(f'>> Found element {n}, [intramodule_path:{imp}]')
     # print(f"Trying with path = {p_bad}")
     # try:
     #     exp.get_xml_node_from_path(p_bad)
