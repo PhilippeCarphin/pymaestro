@@ -157,23 +157,23 @@ class ExperimentRun:
         print(f'>> Found element {current_node}, [intramodule_path:{intramodule_path}]\n\tndp.worker_path={ndp.worker_path}')
         return current_node, intramodule_path
 
+    def parse_worker_path(self, current_node, exp_home, ndp, sub_path):
+        def get_worker_path(n):
+            if 'worker_path' in n.attrib:
+                ndp.worker_path = n.attrib['worker_path']
+        rv = ResourceVisitor(exp_home=self.exp_home, datestamp=self.datestamp)
+        rv.visit_resources('module' + sub_path, get_worker_path, None)
     def check_work_unit(self, ndp, xml_node, previous_xml_node, sub_path):
         # NOTE: This, though it is part of FlowVisitor, uses ResourceVisitor
         # and goes into the a resource XML file.  
         # print(f'check_work_unit xml_node = {xml_node}')
-        def parse_worker_path(current_node, exp_home, ndp):
-            def get_worker_path(n):
-                if 'worker_path' in n.attrib:
-                    ndp.worker_path = n.attrib['worker_path']
-            rv = ResourceVisitor(exp_home=self.exp_home, datestamp=self.datestamp)
-            rv.visit_resources('module' + sub_path, get_worker_path, None)
         if xml_node.tag == 'MODULE':
             context = previous_xml_node
         else:
             context = xml_node
         res = context.findall('*[@work_unit]')
         if res:
-            parse_worker_path(context, self.exp_home, ndp)
+            self.parse_worker_path(context, self.exp_home, ndp, sub_path)
 
 
     def parse_token(self, token, current_node, intramodule_path):
