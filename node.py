@@ -20,6 +20,16 @@ class DependsType(enum.Enum):
     NODE_DEPENDENCY = 1
     DATE_DEPENDENCY = 2
 
+""" Output parameter NDP """
+def parse_worker_path(current_node, exp_home, ndp, node_path, datestamp):
+    def get_worker_path(n):
+        if 'worker_path' in n.attrib:
+            ndp.worker_path = n.attrib['worker_path']
+    rv = ResourceVisitor(exp_home=exp_home, datestamp=datestamp)
+    # The 'module' will only work with 'sample_exp' because it has an EntryModule called 'module'
+    # This is a detail I will worry about later
+    rv.visit_resources('module' + node_path, get_worker_path, None)
+
 class SeqDependency:
     @classmethod
     def from_xml_node(cls, xml_node):
@@ -157,12 +167,6 @@ class ExperimentRun:
         print(f'>> Found element {current_node}, [intramodule_path:{intramodule_path}]\n\tndp.worker_path={ndp.worker_path}')
         return current_node, intramodule_path
 
-    def parse_worker_path(self, current_node, exp_home, ndp, sub_path):
-        def get_worker_path(n):
-            if 'worker_path' in n.attrib:
-                ndp.worker_path = n.attrib['worker_path']
-        rv = ResourceVisitor(exp_home=self.exp_home, datestamp=self.datestamp)
-        rv.visit_resources('module' + sub_path, get_worker_path, None)
     def check_work_unit(self, ndp, xml_node, previous_xml_node, sub_path):
         # NOTE: This, though it is part of FlowVisitor, uses ResourceVisitor
         # and goes into the a resource XML file.  
@@ -173,7 +177,7 @@ class ExperimentRun:
             context = xml_node
         res = context.findall('*[@work_unit]')
         if res:
-            self.parse_worker_path(context, self.exp_home, ndp, sub_path)
+            parse_worker_path(context, self.exp_home, ndp, sub_path, self.datestamp)
 
 
     def parse_token(self, token, current_node, intramodule_path):
