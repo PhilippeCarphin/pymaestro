@@ -161,11 +161,8 @@ class ExperimentRun:
         # and goes into the a resource XML file.  
         # print(f'check_work_unit xml_node = {xml_node}')
         def parse_worker_path(current_node, exp_home, ndp):
-            print(f'parse_worker_path(current_node) : current_node={current_node}')
             def get_worker_path(n):
-                # print(f'visiting n = {n}')
                 if 'worker_path' in n.attrib:
-                    print(f'setting worker_path of ndp to {n.attrib["worker_path"]}')
                     ndp.worker_path = n.attrib['worker_path']
             rv = ResourceVisitor(exp_home=self.exp_home, datestamp=self.datestamp)
             rv.visit_resources('module' + sub_path, get_worker_path, None)
@@ -175,11 +172,7 @@ class ExperimentRun:
             context = xml_node
         res = context.findall('*[@work_unit]')
         if res:
-            # print(f'Node {context} has a WORKER child')
             parse_worker_path(context, self.exp_home, ndp)
-        else:
-            # print(f'Node {context} has no child with "work_unit" attribute')
-            pass
 
 
     def parse_token(self, token, current_node, intramodule_path):
