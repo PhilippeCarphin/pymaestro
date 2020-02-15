@@ -155,6 +155,7 @@ class ExperimentRun:
             current_node, intramodule_path = self.parse_token(token, current_node, intramodule_path)
             self.check_work_unit(ndp, current_node, previous_node, sub_path)
 
+
         print(f'>> Found element {current_node}, [intramodule_path:{intramodule_path}]\n\tndp.worker_path={ndp.worker_path}')
         return current_node, intramodule_path
 
@@ -168,7 +169,7 @@ class ExperimentRun:
             context = xml_node
         res = context.findall('*[@work_unit]')
         if res:
-            ndp.parse_worker_path(context, self.exp_home, sub_path, self.datestamp)
+            ndp.parse_worker_path(self.exp_home, sub_path, self.datestamp)
 
 
     def parse_token(self, token, current_node, intramodule_path):
@@ -378,7 +379,7 @@ class ExperimentRunNode:
         # Same as intramodule_path
         self.task_path = kwargs.get('task_path', None)
 
-    def parse_worker_path(self, current_node, exp_home, node_path, datestamp):
+    def parse_worker_path(self, exp_home, node_path, datestamp):
         def get_worker_path(n):
             if 'worker_path' in n.attrib:
                 self.worker_path = n.attrib['worker_path']
