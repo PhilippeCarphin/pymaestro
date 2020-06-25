@@ -56,7 +56,7 @@ class SeqDependency:
         self.valid_hour = kwargs.get('valid_hour')
         self.valid_dow = kwargs.get('valid_dow')
         self.protocol = kwargs.get('protocol')
-    
+
     def validate_local_args(self):
         return False
         pass
@@ -131,7 +131,7 @@ class FlowVisitor:
         new_root = new_xml_context.getroot()
         return new_root
 
-    
+
 
 class ExperimentRun:
     """ The 'ExperimentRun' is an experiment 'at' a particular datestamp.
@@ -164,7 +164,7 @@ class ExperimentRun:
                 else:
                     ndp.add_specific_data("SWITCH_TYPE", switch_value)
                     ndp.add_switch(1,2)
-                
+
 
         # SeqNode_addSpecificData(_nodeDataPtr, "VALUE", switchValue);
         # /* PHIL: do this outside of the while instead of using isLast */
@@ -175,7 +175,7 @@ class ExperimentRun:
 
     def check_work_unit(self, ndp, xml_node, previous_xml_node, sub_path):
         # NOTE: This, though it is part of FlowVisitor, uses ResourceVisitor
-        # and goes into the a resource XML file.  
+        # and goes into the a resource XML file.
         # print(f'check_work_unit xml_node = {xml_node}')
         if xml_node.tag == 'MODULE':
             context = previous_xml_node
@@ -223,7 +223,7 @@ class ExperimentRun:
         new_xml_context = ET.parse(new_xml_filename)
         new_root = new_xml_context.getroot()
         return new_root
-    
+
     def get_maestro_node_from_path(self, node_path):
         xml_node, intramodule_path = self.get_xml_node_from_path(node_path)
         n = ExperimentRunNode(xml_node=xml_node, node_path=node_path, exp_run=self, intramodule_path=intramodule_path, name=None, node_name=None, module=None, datestamp=None, exp_home=self.exp_home, node_function=lambda e: None)
@@ -262,7 +262,7 @@ class ResourceVisitor:
 
     def xml_fallbackDoc(self, xmlFile, nodeType):
         content = '<NODE_RESOURCES>\n'
-        
+
         if nodeType is NodeType.LOOP:
             content += '    <LOOP start="0" set="1" end="1" step="1"/>\n'
         content += '</NODE_RESOURCES>'
@@ -336,12 +336,12 @@ class ResourceVisitor:
         self.getDependencies(ndp, xml_node)
         self.getAbortActions(ndp, xml_node)
 
-        
+
 
     #def parseWorkerPath( const char * pathToNode, const char * _seq_exp_home, SeqNodeDataPtr _nodeDataPtr);
     #def getNodeResources(SeqNodeDataPtr _nodeDataPtr, const char * expHome, const char * nodePath);
 
-            
+
 class ForeachTarget:
     def __init__(self):
         self.index = ""
